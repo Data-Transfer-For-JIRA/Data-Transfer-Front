@@ -41,6 +41,7 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
   useEffect(() => {
     async function axiosGetPaging() {
       let result;
+      let proList;
       if (search !== '') {
         result = await UseGetAxiosSearch(serviceType, urlset.getSerchURL, search, pageIndex, pageSize);
         setGetViewList(result);
@@ -50,6 +51,11 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
         setGetViewList(result);
       }
       if (result !== undefined) setPageInfo({ totalPage: result.totalPages, numberOfElement: result.numberOfElements });
+      
+      if (getViewList!=null) {
+        proList = getViewList;
+      }
+      
     }
     axiosGetPaging();
   }, [pageIndex, search, serviceType])
@@ -61,7 +67,10 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
         <p>{JSON.stringify(postProjectList)}</p>
         <Table getViewList={getViewList} setPostProjectList={setPostProjectList} postProjectList={postProjectList} />
         <PageIndex pageInfo={pageInfo} pageIndex={pageIndex} setPageIndex={setPageIndex} />
-        <BtnSubmit />
+      <div className="submit-container">
+      <BtnSubmit/>
+      <p className='project-code'>{JSON.stringify(postProjectList)}</p>   
+      </div>
       </form>
     </div >
   )

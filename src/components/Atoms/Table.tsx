@@ -2,6 +2,7 @@ import './Table.css';
 import { returnJsonType } from '../../Common/Types';
 import React, { SetStateAction } from 'react';
 
+
 type propsType = {
   getViewList: returnJsonType | undefined;
   setPostProjectList: React.Dispatch<SetStateAction<Array<string>>>
@@ -34,18 +35,18 @@ export default function Table({ getViewList, setPostProjectList, postProjectList
             {
               getViewList.content.map((item, index) => (
                 <tr className='protr' key={item.projectCode}>
-                  <td>
-                    <input type='checkbox'
+                  <td className='protd'>
+                    <input type='checkbox' className='inputCheckbox'
                       name={`checkbox${index}`}
                       checked={postProjectList.some(e => e === item.projectCode)}
                       onChange={(e) => {
                         handleCheckBox(item.projectCode, e.target.checked)
                       }} />
                   </td>
-                  <td>
+                  <td className='protd'>
                     {`(${item.projectCode}) `}{item.projectName}
                   </td>
-                  <td>
+                  <td className='protd'>
                     {item.createdDate}
                   </td>
                 </tr>

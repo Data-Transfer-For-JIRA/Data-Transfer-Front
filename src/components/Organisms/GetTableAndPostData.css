@@ -1,5 +1,17 @@
 .table-container {
-  margin: 20px;
+  width: 100%;
+  height: 100%;
   /* testCSS */
-  background-color: #f87171;
+  background-color: #000000;
+  color: white; /* 체크 시, 프로젝트 코드 색상*/
+}
+
+.submit-container {
+  margin: auto;
+  width: 70%;
+  margin-top: 30px;
+}
+
+.project-code {
+  margin-top: 20px;
 }

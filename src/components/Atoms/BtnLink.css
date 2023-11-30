@@ -1,12 +1,17 @@
 .btn-link {
   margin-top: 1.3rem;
-  font-size: 1.2rem;
-  color: #9ca3af;
+  font-size: 1.4rem;
+  color: #ffffff;
   width: 90%;
   border-radius: 0.25rem;
 }
 
 .btn-link:hover {
-  background: #4338ca;
+  background: #002c7442;
+  color: rgb(35, 138, 255);
   cursor: pointer;
+}
+
+a {
+  text-decoration-line: none;
 }

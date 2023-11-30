@@ -3,6 +3,11 @@
    License: none (public domain)
 */
 
+/*글씨 폰트 적용_leesm_font-family : 'KNPSKkomi';
+@import url("https://webfontworld.github.io/knps/KNPSKkomi.css");
+*/
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;600;800&family=Roboto+Mono:wght@300;400&display=swap");
+
 html,
 body,
 div,
@@ -84,12 +89,12 @@ time,
 mark,
 audio,
 video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -104,39 +109,50 @@ hgroup,
 menu,
 nav,
 section {
-	display: block;
+  display: block;
 }
 
 body {
-	line-height: 1;
-	height: 100vh;
+  line-height: 1;
+  height: 100vh;
+  background-color: black;
 }
 
 ol,
 ul {
-	list-style: none;
+  list-style: none;
 }
 
 blockquote,
 q {
-	quotes: none;
+  quotes: none;
 }
 
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: '';
-	content: none;
+  content: "";
+  content: none;
 }
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  color: white;
+}
+
+button {
+  font-family: "KNPSKkomi";
 }
 
 :root {
-	--header-height: 64px;
-	--footer-height: 64px;
-	--line-border: 2px;
+  --header-height: 64px;
+  --footer-height: 64px;
+  --line-border: 2px;
+  /* font-family: "KNPSKkomi"; 폰트 적용 */
+  font-family: "Noto Sans KR", sans-serif;
 }

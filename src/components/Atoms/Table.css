@@ -1,5 +1,5 @@
 .table-area {
-  width: 100%
+  width: 100%;
 }
 
 table,
@@ -8,6 +8,7 @@ th {
   border: 1px solid #f1f5f9;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-collapse: collapse;
+  width: 50ppx;
   /*div와 표 사이 간격 제거*/
 }
 
@@ -16,35 +17,60 @@ th {
   border: 1px solid #f1f5f923;
   width: 70%;
   margin: auto;
-  margin-top: 2%;
-  margin-bottom: 3%;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 tr.protr {
-  background-color: rgba(255, 255, 255, 0.459);
-  height: 30px;
+  background-color: rgba(255, 255, 255, 0.849);
+  border: 1px solid rgb(172, 172, 172);
+  height: 42px;
+  font-size: 20px;
   color: black;
+}
+
+td.protd {
+  border: 1px solid rgb(172, 172, 172);
+}
+
+table.project-table tr.protr:hover {
+  background-color: rgba(255, 255, 255, 0.623);
 }
 
 td {
   color: black;
 }
 
-th.check_th {
-  background-color: #083078;
-  color: white;
+th {
+  height: 30px;
+}
+
+th.check-box-th {
   width: 10%;
+  background-color: #000000;
+  color: white;
+  font-size: 24px;
+  padding-top: 10px;
 }
 
-th.proname_th {
-  background-color: #083078;
-  color: white;
+th.project-name-th {
   width: 70%;
-  height: 50px;
+  background-color: #000000;
+  color: white;
+  font-size: 24px;
+  padding-top: 10px;
 }
 
-th.date_th {
-  background-color: #083078;
-  width: 20%;
+th.date-th {
+  width: 15%;
+  background-color: #000000;
+  font-size: 24px;
+  padding-top: 10px;
   color: white;
+}
+
+.inputCheckbox {
+  width: 20px;
+  height: 20px;
+  margin-top: 10.8px;
 }

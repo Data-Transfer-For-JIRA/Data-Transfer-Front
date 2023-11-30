@@ -1,9 +1,11 @@
 #searchArea {
   display: flex;
   flex-direction: row;
-  width: 70%;
-  margin: 0 auto;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  justify-content: center;
   align-items: center;
   /* testCSS */
-  background: #e11d48;
+  background: #000000;
 }

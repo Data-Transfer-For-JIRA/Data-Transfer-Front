@@ -3,8 +3,8 @@ import './BtnSubmit.css';
 type propsType = {
   children?: ReactNode
 }
-export default function BtnSubmit({ children = "제출" }: propsType) {
+export default function BtnSubmit({ children = "제 출" }: propsType) {
   return (
-    <button type='submit' className='btnHover blueColor'>{children}</button>
+    <button type='submit' className='btnHover blueColor wss-submit'>{children}</button>
   )
 }

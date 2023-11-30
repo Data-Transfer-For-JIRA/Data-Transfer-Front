@@ -31,15 +31,15 @@ export default function PageIndex({ pageInfo, pageIndex, setPageIndex }: PageInd
   }
   const pagingNumber = setIndexNumber(pageInfo.totalPage, pageIndex + 1);
   return (
-    <div className='page-number-selector'>
-      <button className='btn-previous' type='button' onClick={handleIndexMinus}>Previous</button>
+    <div className='page-number-selector pageButtonArea'>
+      <button className='btn-previous btn-paging btnHover ' type='button' onClick={handleIndexMinus}>◀</button>
       {pagingNumber.map((item, index) => (
         item === (pageIndex + 1) ?
           <button className='page-number-select' type='button' key={index} value={item - 1}>{item}</button>
           : <button className='page-number-not-select' type='button' key={index} value={item - 1}
             onClick={() => handlePageIndex(item - 1)}>{item}</button>
       ))}
-      <button className='btn-next' type='button' onClick={handleIndexplus}>Next</button>
+      <button className='btn-next btn-paging btnHover' type='button' onClick={handleIndexplus}>▶</button>
     </div>
   )
 }
