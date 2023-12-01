@@ -1,9 +1,14 @@
+.main-containter {
+  display: flex;
+}
+
 .table-container {
-  width: 100%;
+  width: 80%;
   height: 100%;
-  /* testCSS */
   background-color: #000000;
-  color: white; /* 체크 시, 프로젝트 코드 색상*/
+  color: white;
+  /* display: flex; */
+  /* 체크 시, 프로젝트 코드 색상*/
 }
 
 .submit-container {
@@ -13,5 +18,10 @@
 }
 
 .project-code {
+  color: white;
   margin-top: 20px;
+}
+
+.select-check-container {
+  width: 10%;
 }

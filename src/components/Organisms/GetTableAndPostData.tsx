@@ -4,10 +4,11 @@ import Table from '../Atoms/Table';
 import SearchForm from '../Molecules/SearchForm';
 import { returnJsonType, pageInfoType } from '../../Common/Types';
 import { urlType } from '../../Common/Types';
-import './GetTableAndPostData.css';
 import { UseGetAxiosSearch, UseGetAxiosPageing, UsePostAxiosCreateJiraProject } from '../../Common/Axios';
 import PageIndex from '../Atoms/PageIndex';
 import { setUrl } from '../../Common/UtilFunction';
+
+import './GetTableAndPostData.css';
 
 /***
  *  Outlet1) 테이블 뷰잉 
@@ -25,7 +26,7 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
   const [search, setSearch] = useState<string>('');
 
   const urlset: urlType = setUrl(serviceType);
-  const pageSize = "15";
+  const pageSize = "50";
 
   const [pageInfo, setPageInfo] = useState<pageInfoType>({ totalPage: 0, numberOfElement: 0 });
   const [pageIndex, setPageIndex] = useState(0);
@@ -38,10 +39,11 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
     console.log(postReturnData);
   }
 
+  const postBtnName = serviceType === 'trans-before' ? '프로젝트 생성요청' : '이슈 생성 요청';
+
   useEffect(() => {
     async function axiosGetPaging() {
       let result;
-      let proList;
       if (search !== '') {
         result = await UseGetAxiosSearch(serviceType, urlset.getSerchURL, search, pageIndex, pageSize);
         setGetViewList(result);
@@ -51,27 +53,25 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
         setGetViewList(result);
       }
       if (result !== undefined) setPageInfo({ totalPage: result.totalPages, numberOfElement: result.numberOfElements });
-      
-      if (getViewList!=null) {
-        proList = getViewList;
-      }
-      
     }
     axiosGetPaging();
-  }, [pageIndex, search, serviceType])
+  }, [pageIndex, search, serviceType, urlset.getSerchURL, urlset.getViewURL])
 
   return (
-    <div className='table-container'>
-      <SearchForm setPageIndex={setPageIndex} setSearch={setSearch} />
-      <form onSubmit={(e) => handleTableSubmit(e)}>
-        <p>{JSON.stringify(postProjectList)}</p>
-        <Table getViewList={getViewList} setPostProjectList={setPostProjectList} postProjectList={postProjectList} />
-        <PageIndex pageInfo={pageInfo} pageIndex={pageIndex} setPageIndex={setPageIndex} />
-      <div className="submit-container">
-      <BtnSubmit/>
-      <p className='project-code'>{JSON.stringify(postProjectList)}</p>   
+    <div className='main-containter'>
+      <div className='table-container'>
+        <SearchForm setPageIndex={setPageIndex} setSearch={setSearch} />
+        <form onSubmit={(e) => handleTableSubmit(e)}>
+          <Table getViewList={getViewList} setPostProjectList={setPostProjectList} postProjectList={postProjectList} />
+          <div style={{ width: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '15%', marginRight: '15%', marginTop: '6px' }} >
+            <PageIndex pageInfo={pageInfo} pageIndex={pageIndex} setPageIndex={setPageIndex} />
+            <BtnSubmit style={{ marginLeft: 'auto' }}>{postBtnName}</BtnSubmit>
+          </div>
+        </form>
+      </div >
+      <div className='select-check-container'>
+        <p className='project-code'>{JSON.stringify(postProjectList)}</p>
       </div>
-      </form>
-    </div >
+    </div>
   )
 }

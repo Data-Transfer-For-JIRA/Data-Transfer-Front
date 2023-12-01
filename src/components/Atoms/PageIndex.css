@@ -1,7 +1,8 @@
 .page-number-selector {
   background-color: #000000;
-  width: 70%;
-  display: flex;
+  display: inline-block;
+  /* width: 70%; */
+  /* display: flex; */
 }
 
 .page-number-not-select {
@@ -17,15 +18,7 @@
 
 /*페이징 관련 CSS*/
 .pageButtonArea {
-  display: block;
+  /* display: block; */
   text-align: center;
-  width: 100%;
-}
-
-.pageButtonArea a {
-  color: rgb(255, 255, 255);
-  float: none;
-  font-size: 20px;
-  padding: 8px 16px;
-  text-decoration-line: none;
+  /* width: 100%; */
 }

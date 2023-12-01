@@ -1,5 +1,7 @@
 .table-area {
   width: 100%;
+  max-height: calc(var(--contents-height) - 120px);
+  overflow-y: scroll;
 }
 
 table,
@@ -15,7 +17,7 @@ th {
 .project-table {
   text-align: center;
   border: 1px solid #f1f5f923;
-  width: 70%;
+  width: 80%;
   margin: auto;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -24,8 +26,8 @@ th {
 tr.protr {
   background-color: rgba(255, 255, 255, 0.849);
   border: 1px solid rgb(172, 172, 172);
-  height: 42px;
-  font-size: 20px;
+  height: 40px;
+  font-size: 15px;
   color: black;
 }
 
@@ -49,7 +51,7 @@ th.check-box-th {
   width: 10%;
   background-color: #000000;
   color: white;
-  font-size: 24px;
+  font-size: 17px;
   padding-top: 10px;
 }
 
@@ -57,14 +59,14 @@ th.project-name-th {
   width: 70%;
   background-color: #000000;
   color: white;
-  font-size: 24px;
+  font-size: 17px;
   padding-top: 10px;
 }
 
 th.date-th {
-  width: 15%;
+  width: 12%;
   background-color: #000000;
-  font-size: 24px;
+  font-size: 17px;
   padding-top: 10px;
   color: white;
 }
