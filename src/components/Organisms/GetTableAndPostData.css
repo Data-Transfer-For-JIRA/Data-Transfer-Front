@@ -17,11 +17,16 @@
   margin-top: 30px;
 }
 
-.project-code {
-  color: white;
-  margin-top: 20px;
+.select-check-container {
+  width: 20%;
 }
 
-.select-check-container {
-  width: 10%;
+.table-control-area {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 6px;
 }

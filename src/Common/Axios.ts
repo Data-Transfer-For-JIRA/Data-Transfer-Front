@@ -30,6 +30,7 @@ const UseGetAxiosSearch = async (serviceType: string, URL: string, searchKeyWord
   console.log(getUrl);
   try {
     const reponse = await axios.get(getUrl);
+    if (serviceType === 'trans-after') reponse.data = mappingViewData(reponse.data);
     if (reponse.data.content.length === 0) {
       alert("검색결과가 없습니다.");
       throw new Error('검색결과가 없습니다.');

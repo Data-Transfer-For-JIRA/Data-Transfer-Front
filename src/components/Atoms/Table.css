@@ -1,6 +1,7 @@
 .table-area {
   width: 100%;
   max-height: calc(var(--contents-height) - 120px);
+  min-height: calc(var(--contents-height) - 120px);
   overflow-y: scroll;
 }
 

@@ -7,8 +7,10 @@ import { urlType } from '../../Common/Types';
 import { UseGetAxiosSearch, UseGetAxiosPageing, UsePostAxiosCreateJiraProject } from '../../Common/Axios';
 import PageIndex from '../Atoms/PageIndex';
 import { setUrl } from '../../Common/UtilFunction';
+import ChipsStack from '../Molecules/ChipsStack';
 
 import './GetTableAndPostData.css';
+
 
 /***
  *  Outlet1) 테이블 뷰잉 
@@ -26,7 +28,7 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
   const [search, setSearch] = useState<string>('');
 
   const urlset: urlType = setUrl(serviceType);
-  const pageSize = "50";
+  const pageSize = "24";
 
   const [pageInfo, setPageInfo] = useState<pageInfoType>({ totalPage: 0, numberOfElement: 0 });
   const [pageIndex, setPageIndex] = useState(0);
@@ -63,14 +65,14 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
         <SearchForm setPageIndex={setPageIndex} setSearch={setSearch} />
         <form onSubmit={(e) => handleTableSubmit(e)}>
           <Table getViewList={getViewList} setPostProjectList={setPostProjectList} postProjectList={postProjectList} />
-          <div style={{ width: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '15%', marginRight: '15%', marginTop: '6px' }} >
+          <div className='table-control-area'>
             <PageIndex pageInfo={pageInfo} pageIndex={pageIndex} setPageIndex={setPageIndex} />
-            <BtnSubmit style={{ marginLeft: 'auto' }}>{postBtnName}</BtnSubmit>
+            {serviceType !== 'trans-end' ? (<BtnSubmit style={{ marginLeft: 'auto' }}>{postBtnName}</BtnSubmit>) : undefined}
           </div>
         </form>
       </div >
       <div className='select-check-container'>
-        <p className='project-code'>{JSON.stringify(postProjectList)}</p>
+        <ChipsStack postProjectList={postProjectList} setPostProjectList={setPostProjectList} />
       </div>
     </div>
   )
