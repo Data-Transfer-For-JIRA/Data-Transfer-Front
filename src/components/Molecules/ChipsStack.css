@@ -1,6 +1,8 @@
 .chip-stack-area {
   width: 100%;
-  height: 50px;
+  height: 100%;
+  max-height: calc(var(--contents-height) - 100px);
   color: white;
   margin-top: 20px;
+  overflow: auto;
 }

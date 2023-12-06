@@ -26,7 +26,9 @@ export default function Table({ getViewList, setPostProjectList, postProjectList
         <thead>
           <tr>
             <th scope='col' className='check-box-th'>구분</th>
-            <th scope='col' className='project-name-th'>프로젝트명</th>
+            <th scope='col' className='project-code-th'>프로젝트 코드</th>
+            <th scope='col' className='project-name-th'>프로젝트 명</th>
+            <th scope='col' className='user-name-th'>담당자 이름</th>
             <th scope='col' className='date-th'>업데이트 날짜</th>
           </tr>
         </thead>
@@ -44,7 +46,13 @@ export default function Table({ getViewList, setPostProjectList, postProjectList
                       }} />
                   </td>
                   <td className='protd'>
-                    {`(${item.projectCode}) `}{item.projectName}
+                    {item.projectCode}
+                  </td>
+                  <td className='protd'>
+                    {item.projectName}
+                  </td>
+                  <td className='protd'>
+                    김태헌
                   </td>
                   <td className='protd'>
                     {item.createdDate}

@@ -1,6 +1,6 @@
 import Chip from '../Atoms/Chip';
 
-import './ChipsStack';
+import './ChipsStack.css';
 
 type ChipsStackType = {
   postProjectList: string[];

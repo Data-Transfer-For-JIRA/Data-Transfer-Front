@@ -1,0 +1,16 @@
+.select-chip {
+  display: flex;
+  width: 90%;
+  background-color: #3A3A3A;
+  margin: 10px;
+}
+
+.project-code {
+  margin-left: 1rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.delete-button-img {
+  margin-left: auto;
+}

@@ -10,6 +10,7 @@ import { setUrl } from '../../Common/UtilFunction';
 import ChipsStack from '../Molecules/ChipsStack';
 
 import './GetTableAndPostData.css';
+// import { testJson } from '../../Common/TestGetJson';
 
 
 /***
@@ -28,7 +29,7 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
   const [search, setSearch] = useState<string>('');
 
   const urlset: urlType = setUrl(serviceType);
-  const pageSize = "24";
+  const pageSize = "27";
 
   const [pageInfo, setPageInfo] = useState<pageInfoType>({ totalPage: 0, numberOfElement: 0 });
   const [pageIndex, setPageIndex] = useState(0);
@@ -48,10 +49,12 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
       let result;
       if (search !== '') {
         result = await UseGetAxiosSearch(serviceType, urlset.getSerchURL, search, pageIndex, pageSize);
+        // result = testJson;
         setGetViewList(result);
       }
       else {
         result = await UseGetAxiosPageing(serviceType, urlset.getViewURL, pageIndex, pageSize);
+        // result = testJson;
         setGetViewList(result);
       }
       if (result !== undefined) setPageInfo({ totalPage: result.totalPages, numberOfElement: result.numberOfElements });

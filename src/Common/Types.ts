@@ -21,20 +21,48 @@ type PostJiraProjcetContent = {
   projectCode: string;
   wssProjectName: string;
 }
-
 export interface returnJsonType {
   content: Array<GetWssContent>;
-  empty: boolean
-  first: boolean
+  pageable: {
+    sort: {
+      sorted: boolean
+      unsorted: boolean
+      empty: boolean
+    }
+    pageNumber: number
+    pageSize: number
+    offset: number
+    paged: boolean
+    unpaged: boolean
+  }
   last: boolean
-  number: number
-  numberOfElements: number
-  pagealbe: object
-  size: number
-  sort: object
-  totalElements: number
   totalPages: number
+  totalElements: number
+  numberOfElements: number
+  first: boolean
+  size: number
+  number: number
+  sort: {
+    sorted: boolean
+    unsorted: boolean
+    empty: boolean
+  }
+  empty: boolean
 }
+
+// export interface returnJsonType {
+//   content: Array<GetWssContent>;
+//   empty: boolean
+//   first: boolean
+//   last: boolean
+//   number: number
+//   numberOfElements: number
+//   pagealbe: object
+//   size: number
+//   sort: object
+//   totalElements: number
+//   totalPages: number
+// }
 
 export interface PostReturnJsonType {
   content: Array<PostJiraProjcetContent>;

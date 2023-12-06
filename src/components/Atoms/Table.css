@@ -1,7 +1,7 @@
 .table-area {
   width: 100%;
   max-height: calc(var(--contents-height) - 120px);
-  min-height: calc(var(--contents-height) - 120px);
+  min-height: calc(var(--contents-height) - 140px);
   overflow-y: scroll;
 }
 
@@ -20,15 +20,15 @@ th {
   border: 1px solid #f1f5f923;
   width: 80%;
   margin: auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  /* margin-top: 15px;
+  margin-bottom: 15px; */
 }
 
 tr.protr {
   background-color: rgba(255, 255, 255, 0.849);
   border: 1px solid rgb(172, 172, 172);
-  height: 40px;
-  font-size: 15px;
+  height: 35px;
+  font-size: 0.9rem;
   color: black;
 }
 
@@ -49,10 +49,10 @@ th {
 }
 
 th.check-box-th {
-  width: 10%;
+  width: 3%;
   background-color: #000000;
   color: white;
-  font-size: 17px;
+  font-size: 1rem;
   padding-top: 10px;
 }
 
@@ -60,20 +60,24 @@ th.project-name-th {
   width: 70%;
   background-color: #000000;
   color: white;
-  font-size: 17px;
+  font-size: 1rem;
   padding-top: 10px;
 }
 
 th.date-th {
-  width: 12%;
+  width: 10%;
   background-color: #000000;
-  font-size: 17px;
+  font-size: 1rem;
   padding-top: 10px;
   color: white;
+}
+
+th.project-code-th {
+  width: 9%;
 }
 
 .inputCheckbox {
   width: 20px;
   height: 20px;
-  margin-top: 10.8px;
+  margin-top: 5px;
 }

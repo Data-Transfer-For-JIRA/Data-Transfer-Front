@@ -1,20 +1,24 @@
-import BtnImgAction from './BtnImgAction';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import BtnImgAction from './BtnImgAction';
 
+import './Chip.css';
 
 type ChipType = {
   projectCode: string;
-  handlePostList: React.Dispatch<React.SetStateAction<string[]>>;
+  setPostProjectList: React.Dispatch<React.SetStateAction<string[]>>;
 }
 export default function Chip({ projectCode, setPostProjectList }: ChipType) {
-  const handleBtnOnClick = (): React.MouseEventHandler<HTMLButtonElement> => {
-    alert('click');
+  const handleBtnOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const name = e.currentTarget.name;
+    setPostProjectList((prev) => [...prev].filter((item) => item !== name));
   }
   return (
     <div className='select-chip'>
-      <p>{projectCode}</p>
-      <BtnImgAction onClickFunction={handleBtnOnClick} >
-        <FontAwesomeIcon icon="fa-regular fa-trash" />
+      <div className='project-code'>{projectCode}</div>
+      <div className='delete-button-img'></div>
+      <BtnImgAction onClickFunction={handleBtnOnClick} projectCode={projectCode}>
+        <FontAwesomeIcon icon={faTrashCan} />
       </BtnImgAction>
     </div >
   )

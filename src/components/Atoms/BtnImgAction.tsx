@@ -1,15 +1,16 @@
 
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { ReactNode } from 'react';
 
 type BtnImgActionType = {
-  fontAwsomeIcon: IconProp;
-  onClickFunction: React.MouseEventHandler<HTMLButtonElement>;
+  children: ReactNode;
+  projectCode: string;
+  onClickFunction: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
-export default function BtnImgAction({ fontAwsomeIcon, onClickFunction }: BtnImgActionType) {
+export default function BtnImgAction({ children, onClickFunction, projectCode }: BtnImgActionType) {
   return (
-    <button type='button' onClick={onClickFunction}>
-      {fontAwsomeIcon}
+    <button type='button' onClick={onClickFunction} name={projectCode}>
+      {children}
     </button>
   )
 }
