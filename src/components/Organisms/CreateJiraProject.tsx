@@ -1,7 +1,9 @@
 import './CreateJiraProject.css'
-
-export default function CreateJiraProject() {
+type Type = {
+  code: string;
+}
+export default function CreateJiraProject({ code }: Type) {
   return (
-    <div>This is Create JiraProject Contents</div>
+    <div style={{ color: "white" }}>This is Create JiraProject Contents {code}</div>
   )
 }

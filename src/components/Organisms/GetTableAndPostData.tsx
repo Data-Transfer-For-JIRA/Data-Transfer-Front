@@ -54,7 +54,7 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
       }
       else {
         result = await UseGetAxiosPageing(serviceType, urlset.getViewURL, pageIndex, pageSize);
-        // result = testJson;
+        //result = testJson;
         setGetViewList(result);
       }
       if (result !== undefined) setPageInfo({ totalPage: result.totalPages, numberOfElement: result.numberOfElements });
