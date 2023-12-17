@@ -1,15 +1,21 @@
+//react API
 import { useEffect, useState } from 'react';
+
+//Componets
 import BtnSubmit from '../Atoms/BtnSubmit';
 import Table from '../Atoms/Table';
 import SearchForm from '../Molecules/SearchForm';
-import { returnJsonType, pageInfoType } from '../../Common/Types';
-import { urlType } from '../../Common/Types';
-import { UseGetAxiosSearch, UseGetAxiosPageing, UsePostAxiosCreateJiraProject } from '../../Common/Axios';
 import PageIndex from '../Atoms/PageIndex';
-import { setUrl } from '../../Common/UtilFunction';
 import ChipsStack from '../Molecules/ChipsStack';
+//Common Api
+import { returnJsonType, pageInfoType } from '../../Common/Types';
+import { urlType, PostResponseTyep } from '../../Common/Types';
+import { UseGetAxiosSearch, UseGetAxiosPageing, UsePostAxiosCreateJiraProject } from '../../Common/Axios';
+import { setUrl } from '../../Common/UtilFunction';
 
 import './GetTableAndPostData.css';
+import ModalPopup from '../Molecules/ModalPopup';
+//test JSON
 // import { testJson } from '../../Common/TestGetJson';
 
 
@@ -22,27 +28,38 @@ import './GetTableAndPostData.css';
  */
 
 enum serviceList { transbefore = 'trans-before', transafter = 'trans-after', transend = 'trans-end' }
-type ServicePropsType = { serviceType: serviceList }
 
-export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
+type GetTableAndPostData = { serviceType: serviceList; }
+const pageSize = "27";
+
+export default function GetTableAndPostData({ serviceType }: GetTableAndPostData) {
+  const urlset: urlType = setUrl(serviceType);
+  const postBtnName = serviceType === 'trans-before' ? '프로젝트 생성요청' : '이슈 생성 요청';
+
   const [getViewList, setGetViewList] = useState<returnJsonType | undefined>(undefined);
   const [search, setSearch] = useState<string>('');
-
-  const urlset: urlType = setUrl(serviceType);
-  const pageSize = "27";
-
   const [pageInfo, setPageInfo] = useState<pageInfoType>({ totalPage: 0, numberOfElement: 0 });
   const [pageIndex, setPageIndex] = useState(0);
-
   const [postProjectList, setPostProjectList] = useState<Array<string>>([]);
 
-  const handleTableSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [postResponse, setPostResponse] = useState<PostResponseTyep>();
+  const handleTableSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); //새로고침방지
-    const postReturnData = UsePostAxiosCreateJiraProject(postProjectList, urlset.postSubmitUrl)
-    console.log(postReturnData);
+    if (postProjectList.length > 0) {
+      setLoading(true);
+      if (serviceType === 'trans-before') {
+        setPostResponse(await UsePostAxiosCreateJiraProject(postProjectList, urlset.postSubmitUrl));
+      } else if (serviceType === 'trans-after') {
+        setPostResponse(await UsePostAxiosCreateJiraProject(postProjectList, urlset.postSubmitUrl));
+      }
+    }
+    else {
+      alert('선택된 프로젝트가 없습니다.');
+    }
   }
 
-  const postBtnName = serviceType === 'trans-before' ? '프로젝트 생성요청' : '이슈 생성 요청';
 
   useEffect(() => {
     async function axiosGetPaging() {
@@ -62,6 +79,8 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
     axiosGetPaging();
   }, [pageIndex, search, serviceType, urlset.getSerchURL, urlset.getViewURL])
 
+
+
   return (
     <div className='main-containter'>
       <div className='table-container'>
@@ -77,6 +96,8 @@ export default function GetTableAndPostData({ serviceType }: ServicePropsType) {
       <div className='select-check-container'>
         <ChipsStack postProjectList={postProjectList} setPostProjectList={setPostProjectList} />
       </div>
+
+      {loading === true ? (<ModalPopup postResponse={postResponse} />) : ""}
     </div>
   )
 }

@@ -7,6 +7,7 @@ import LoginPage from '../components/Pages/LoginPage';
 
 enum serviceList { transbefore = 'trans-before', transafter = 'trans-after', transend = 'trans-end' }
 enum createType { createProject = "project", createMaintenance = 'maintenance' }
+
 export const Router = [
   {
     path: '/',

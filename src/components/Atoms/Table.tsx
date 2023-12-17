@@ -11,6 +11,10 @@ type propsType = {
 
 export default function Table({ getViewList, setPostProjectList, postProjectList }: propsType) {
   const handleCheckBox = (projectCode: string, flag: boolean) => {
+    if (postProjectList.length > 4) {
+      alert('최대 5개까지 선택가능합니다.');
+      return;
+    }
     if (flag) {
       const newViewList = [...postProjectList, projectCode]
       setPostProjectList(newViewList)
@@ -52,7 +56,7 @@ export default function Table({ getViewList, setPostProjectList, postProjectList
                     {item.projectName}
                   </td>
                   <td className='protd'>
-                    김태헌
+                    {item.assignedEngineer}
                   </td>
                   <td className='protd'>
                     {item.createdDate}

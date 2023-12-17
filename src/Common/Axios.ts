@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { returnJsonType, PostReturnJsonType } from './Types';
+import { returnJsonType, PostResponseTyep } from './Types';
 import { mappingViewData } from './UtilFunction';
 
 const noDataError = new Error('API 호출결과가 없습니다.')
@@ -13,8 +13,9 @@ const UseGetAxiosPageing = async (serviceType: string, URL: string, startIndex: 
   try {
     const reponse = await axios.get(getUrl);
     if (reponse.data.content.length === 0) throw new Error('API호출이 정상적이지 않습니다.');
-    if (serviceType === 'trans-after') reponse.data = mappingViewData(reponse.data);
     console.log(reponse.data);
+    if (serviceType === 'trans-after') reponse.data = mappingViewData(reponse.data);
+    //console.log(reponse.data);
     return reponse.data;
   }
   catch (Error) {
@@ -49,13 +50,15 @@ const UseGetAxiosSearch = async (serviceType: string, URL: string, searchKeyWord
 */
 
 const UsePostAxiosCreateJiraProject = async (postProjectList: string[], postUrl: string)
-  : Promise<PostReturnJsonType | undefined> => {
+  : Promise<PostResponseTyep> => {
+  const timeout = postProjectList.length * 20000;
   if (postProjectList.length > 0) {
-    const data = { projectCode: postProjectList };
+    const paramData = { projectCode: postProjectList };
     console.log(postUrl);
     try {
-      const response: PostReturnJsonType = await axios.post(postUrl, data);
-      return response;
+      const { data } = await axios.post(postUrl, paramData, { timeout });
+      console.log(data);
+      return data;
     }
     catch (Error) {
       console.log(Error)
@@ -67,6 +70,32 @@ const UsePostAxiosCreateJiraProject = async (postProjectList: string[], postUrl:
   }
 }
 
+/**
+ * 지라 프로젝트의 티켓을 생성요청하는 axios
+ * 기존 was에서의 반복처리가 아닌 브라우저에서 반복 처리함.(미완성)
+ * @param postProjectList 
+ * @param postUrl 
+ * @returns 
+ */
+const UsePostAxiosCreateJiraIssue = async (postProjectList: string[], postUrl: string)
+  : Promise<PostResponseTyep> => {
+  const timeout = postProjectList.length * 200000;
 
-
-export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject };
+  if (postProjectList.length > 0) {
+    postProjectList.forEach(async (item) => {
+      try {
+        const { data } = await axios.post(postUrl, item, { timeout });
+        console.log(data);
+      }
+      catch (Error) {
+        console.log(Error)
+        throw Error;
+      }
+    });
+    return data;
+  }
+  else {
+    throw noDataError;
+  }
+}
+export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostAxiosCreateJiraIssue };

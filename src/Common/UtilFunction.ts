@@ -10,11 +10,13 @@ export function mappingViewData(retrunJson: PostReturnJsonType | undefined): ret
   if (retrunJson === undefined) { returnArray = emptyJson; }
   else {
     retrunJson.content.map((item) => {
+      const date = item.migratedDate.substring(0, 10);
       tempArray.push({
         projectCode: item.key,
+        assignedEngineer: item.projectAssignees,
         projectName: item.jiraProjectName,
         projectFlag: item.key,    //flag API에서 넣어서 주기로함 수정예정.
-        createdDate: item.migratedDate,
+        createdDate: date,
         migrateFlag: item.wssProjectName
       })
     })

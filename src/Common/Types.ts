@@ -1,12 +1,7 @@
-// enum contentMember {
-//   projectCode = 'projectCode',
-//   projectName = 'projectName',
-//   projectFlag = 'projectFlag',
-//   createdDate = 'createdDate',
-//   migrateFlag = 'migrateFlag',
-// }
+
 
 export type GetWssContent = {
+  assignedEngineer: string;
   projectCode: string;
   projectName: string;
   projectFlag: string;
@@ -20,35 +15,8 @@ type PostJiraProjcetContent = {
   migratedDate: string;
   projectCode: string;
   wssProjectName: string;
+  projectAssignees: string
 }
-// export interface returnJsonType {
-//   content: Array<GetWssContent>;
-//   pageable: {
-//     sort: {
-//       sorted: boolean
-//       unsorted: boolean
-//       empty: boolean
-//     }
-//     pageNumber: number
-//     pageSize: number
-//     offset: number
-//     paged: boolean
-//     unpaged: boolean
-//   }
-//   last: boolean
-//   totalPages: number
-//   totalElements: number
-//   numberOfElements: number
-//   first: boolean
-//   size: number
-//   number: number
-//   sort: {
-//     sorted: boolean
-//     unsorted: boolean
-//     empty: boolean
-//   }
-//   empty: boolean
-// }
 
 export interface returnJsonType {
   content: Array<GetWssContent>;
@@ -95,6 +63,13 @@ export interface urlType {
   getViewURL: string;
   getSerchURL: string;
   postSubmitUrl: string;
+}
+
+export interface PostResponseTyep {
+  allready: string[];
+  fail: string[];
+  searchFail: string[];
+  success: string[];
 }
 
 export interface pageInfoType { totalPage: number; numberOfElement: number; }

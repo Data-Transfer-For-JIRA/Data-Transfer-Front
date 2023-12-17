@@ -7,7 +7,5 @@ import "./App.css"
 const router = createBrowserRouter(Router);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  <RouterProvider router={router} />
 )
