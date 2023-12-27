@@ -1,7 +1,9 @@
 .side-navigator {
-  background-color: #141414;
-  border-right: 1px solid #9ca3af;
+  background-color: #a3b1c5;
+  border-right: 1px solid white;
   width: 230px;
   flex-shrink: 0;
-  height: calc(100vh - var(--header-height) - var(--footer-height) - var(--line-border));
+  height: calc(
+    100vh - var(--header-height) - var(--footer-height) - var(--line-border)
+  );
 }

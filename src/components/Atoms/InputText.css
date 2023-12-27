@@ -1,10 +1,10 @@
 input[type="text"] {
   /* margin: 0 auto; */
-  width: 500px;
-  height: 40px;
+  width: 550px;
+  height: 50px; /*20231220 - smlee: 40px → 50px 수정*/
   font-size: 15px;
   border: 0;
   border-radius: 3px;
   margin: 0 auto;
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(255, 255, 255);
 }

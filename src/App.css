@@ -115,7 +115,7 @@ section {
 body {
   line-height: 1;
   height: 100vh;
-  background-color: black;
+  background-color: #a3b1c5;
 }
 
 ol,
@@ -142,18 +142,22 @@ table {
 }
 
 th {
-  color: white;
+  color: #eff1f5;
 }
 
 button {
-  font-family: "KNPSKkomi";
+  font-family: "Noto Sans KR", sans-serif;
+  border: none; /* 20231221 - smlee: 버튼 테두리 없애는 CSS 추가 */
+  /* 20231219 - smlee: font-family: "KNPSKkomi"; */
 }
 
 :root {
   --header-height: 64px;
   --footer-height: 64px;
   --line-border: 2px;
-  --contents-height: calc(100vh - var(--header-height) - var(--footer-height) - var(--line-border));
-  /* font-family: "KNPSKkomi"; 폰트 적용 */
+  --contents-height: calc(
+    100vh - var(--header-height) - var(--footer-height) - var(--line-border)
+  );
+  /* 20231219 - smlee: font-family: "KNPSKkomi"; 폰트 적용 */
   font-family: "Noto Sans KR", sans-serif;
 }
