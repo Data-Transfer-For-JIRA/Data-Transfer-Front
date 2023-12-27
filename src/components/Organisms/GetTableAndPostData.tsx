@@ -45,6 +45,7 @@ export default function GetTableAndPostData({ serviceType }: GetTableAndPostData
   const [loading, setLoading] = useState<boolean>(false);
 
   const [postResponse, setPostResponse] = useState<PostResponseTyep>();
+
   const handleTableSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); //새로고침방지
     if (postProjectList.length > 0) {

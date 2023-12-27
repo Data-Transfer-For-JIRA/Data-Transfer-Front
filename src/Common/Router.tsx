@@ -3,10 +3,11 @@ import CreateJiraProject from '../components/Organisms/CreateJiraProject';
 import GetTableAndPostData from '../components/Organisms/GetTableAndPostData';
 import InfoText from '../components/Organisms/InfoText';
 import ErrorPage from '../components/Pages/ErrorPage';
+import JiraManageMentPage from '../components/Pages/JiraManageMentPage';
 import LoginPage from '../components/Pages/LoginPage';
 
 enum serviceList { transbefore = 'trans-before', transafter = 'trans-after', transend = 'trans-end' }
-enum createType { createProject = "project", createMaintenance = 'maintenance' }
+enum projectFlag { createProject = "P", createMaintenance = 'M' }
 
 export const Router = [
   {
@@ -19,9 +20,9 @@ export const Router = [
       { path: "transfer-state-list", element: <GetTableAndPostData serviceType={serviceList.transafter} /> },
       { path: "view-transfer-endlist", element: <GetTableAndPostData serviceType={serviceList.transend} /> },
       {
-        path: "/create-jira-project", element: <InfoText />, children: [
-          { path: "project", element: <CreateJiraProject code={createType.createProject} /> },
-          { path: "maintenance", element: <CreateJiraProject code={createType.createMaintenance} /> },
+        path: "/create-jira-project", element: <JiraManageMentPage />, children: [
+          { path: "project", element: <CreateJiraProject projectFlag={projectFlag.createProject} /> },
+          { path: "maintenance", element: <CreateJiraProject projectFlag={projectFlag.createMaintenance} /> },
         ]
       },
       { path: "load-jira-list", element: <GetTableAndPostData serviceType={serviceList.transend} /> },

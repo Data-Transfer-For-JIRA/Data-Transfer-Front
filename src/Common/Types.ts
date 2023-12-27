@@ -72,4 +72,26 @@ export interface PostResponseTyep {
   success: string[];
 }
 
+enum ResponseState { allready = 'allready', fail = 'fail', searchFail = 'searchFail', success = 'success' }
+export interface CreateIssueResponse {
+  state: ResponseState;
+  projectCode: string;
+}
+
+//신규 지라 프로젝트 생성에 보낼 데이터 정의 및 Json타입
+export interface PostCreateNewProjectJson {
+  projectFlag: string;
+  projectName: string;
+  projectCode: string;
+}
+
+export interface PostCreateNewMaintenance {
+  projectFlag: string;
+  projectName: string;
+  projectCode: string;
+}
+
+
+
+
 export interface pageInfoType { totalPage: number; numberOfElement: number; }
