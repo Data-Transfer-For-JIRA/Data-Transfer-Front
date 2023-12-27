@@ -6,6 +6,6 @@
 
 .category-title {
   color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 1.4rem; /* 20231219 - smlee: 1.2rem → 1.4rem 수정*/
   font-weight: bold;
 }

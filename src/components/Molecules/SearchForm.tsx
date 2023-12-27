@@ -12,7 +12,7 @@ type propsType = {
 export default function SearchForm({ setPageIndex, setSearch }: propsType) {
   const [input, setInput] = useState<string>('');
   const searchKeyWord = 'searchKeyWord'; //백에서 오타냄 이거 백이바꾸면 수정해야함
-  const btnValue: string = "검 색";
+  const btnValue: string = "검 색";   
 
   const handleChangeText: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setInput(e.target.value);

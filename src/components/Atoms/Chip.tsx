@@ -15,6 +15,7 @@ export default function Chip({ projectCode, setPostProjectList }: ChipType) {
   }
   return (
     <div className='select-chip'>
+      <img src="../../../images/light.png" className='light-img'></img>
       <div className='project-code'>{projectCode}</div>
       <div className='delete-button-img'></div>
       <BtnImgAction onClickFunction={handleBtnOnClick} projectCode={projectCode}>

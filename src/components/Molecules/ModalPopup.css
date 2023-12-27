@@ -17,8 +17,62 @@
   border-radius: 10px;
   width: 450px;
   max-width: 450px;
+  height: 420px; /*20231219 - smlee: 추가*/
   top: 50%;
   transform: translateY(-50%);
   margin: 0 auto;
   padding: 40px 20px;
 }
+
+/*20231219 - smlee: <hr> CSS 추가*/
+hr {
+  margin-top: 10px;
+}
+
+/*20231219 - smlee: .project-result 추가*/
+.project-result {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+/*20231219 - smlee: .process-okay 추가*/
+.process-okay {
+  background-image: linear-gradient(
+    to right,
+    #eb3941,
+    #f15e64,
+    #e14e53,
+    #e2373f
+  );
+  box-shadow: 0 5px 15px rgba(242, 97, 103, 0.4);
+
+  text-align: center;
+  padding-left: 15px; /*20231219 - smlee: 글자가 가운데로 안가져서 padding으로 글씨 이동*/
+  padding-top: 10px; /*20231219 - smlee: 글자가 가운데로 안가져서 padding으로 글씨 이동*/
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 550;
+  color: #fff;
+  cursor: pointer;
+  width: 35px;
+  height: 25px;
+  display: flex;
+  background-size: 300% 100%;
+  border-radius: 5px;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.process-okay:hover {
+  background-position: 100% 0;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.process-okay:focus {
+  outline: none;
+}
+/* 20231219 - smlee: .process-okay 추가 End */

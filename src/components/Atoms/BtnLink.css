@@ -1,17 +1,59 @@
 .btn-link {
   margin-top: 1.3rem;
-  font-size: 1rem;
-  color: #ffffff;
-  width: 90%;
+  font-size: 1.1rem; /* 20231219 - smlee: font-size: 1rem → 1.1rem 수정*/
+  color: #eff1f5;
+  width: 100%; /* 20231219 - smlee: width:90% → 100% 수정*/
   border-radius: 0.25rem;
 }
 
 .btn-link:hover {
-  background: #002c7442;
-  color: rgb(35, 138, 255);
+  background: #002c7427; /*#002c7442*/
+  color: rgba(255, 255, 255, 0.774); /*rgb(35, 138, 255)*/
   cursor: pointer;
 }
 
 a {
   text-decoration-line: none;
 }
+
+/* 20231219 - smlee: CSS 추가 Start*/
+.btn-process-okay {
+  background-image: linear-gradient(
+    to right,
+    #eb3941,
+    #f15e64,
+    #e14e53,
+    #e2373f
+  );
+  box-shadow: 0 5px 15px rgba(242, 97, 103, 0.4);
+
+  width: 200px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #eff1f5;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-process-okay:hover {
+  background-position: 100% 0;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-process-okay:focus {
+  outline: none;
+}
+/* 20231219 - smlee: CSS 추가 End*/

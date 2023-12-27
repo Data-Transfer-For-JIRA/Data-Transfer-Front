@@ -1,16 +1,26 @@
 .select-chip {
   display: flex;
-  width: 90%;
-  background-color: #3A3A3A;
+  width: 80%; /* 20231219 - smlee: width: 90% → 80% 수정 */
+  min-width: 250px; /*20231226 -smlee: chips 뭉개짐 때문에 추가*/
+  background-color: #ffffff; /* 20231221 - smlee: #3a3a3a*/
   margin: 10px;
+  border-radius: 30px;
+  position: relative;
 }
 
 .project-code {
   margin-left: 1rem;
-  color: white;
+  color: #3a3a3a; /* 20231221 - smlee: #eff1f5*/
+  font-weight: 600;
   font-size: 1rem;
 }
 
 .delete-button-img {
   margin-left: auto;
+}
+
+.light-img {
+  z-index: 2;
+  width: 55px;
+  height: 50px;
 }

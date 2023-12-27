@@ -1,9 +1,9 @@
 .header-style {
-  background-color: #141414;
+  background-color: #a3b1c5;
   height: var(--header-height);
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid #bdbcbc;
+  border-bottom: 1px solid white;
 }
 
 /*상단 마크애니 로고*/

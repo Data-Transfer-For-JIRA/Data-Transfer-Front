@@ -2,13 +2,14 @@
   width: 100%;
   max-height: calc(var(--contents-height) - 120px);
   min-height: calc(var(--contents-height) - 140px);
+  overflow: auto; /*20231219 - smlee: 스크롤바 CSS 추가*/
   overflow-y: scroll;
 }
 
 table,
 td,
 th {
-  border: 1px solid #f1f5f9;
+  border: 1px solid #eff1f5;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-collapse: collapse;
   width: 50ppx;
@@ -17,7 +18,6 @@ th {
 
 .project-table {
   text-align: center;
-  border: 1px solid #f1f5f923;
   width: 80%;
   margin: auto;
   /* margin-top: 15px;
@@ -25,19 +25,19 @@ th {
 }
 
 tr.protr {
-  background-color: rgba(255, 255, 255, 0.849);
-  border: 1px solid rgb(172, 172, 172);
+  background-color: #ffffff;
   height: 35px;
-  font-size: 0.9rem;
-  color: black;
+  font-size: 1rem; /* 20231219 - smlee: 0.9 rem → 1rem 값 추가*/
+  font-weight: 500; /* 20231219 - smlee: font-weight 값 추가 */
+  /* color: black; */
 }
 
 td.protd {
-  border: 1px solid rgb(172, 172, 172);
+  border: 1px solid #ced0d4;
 }
 
 table.project-table tr.protr:hover {
-  background-color: rgba(255, 255, 255, 0.623);
+  background-color: #ffffffc7;
 }
 
 td {
@@ -50,30 +50,40 @@ th {
 
 th.check-box-th {
   width: 3%;
-  background-color: #000000;
+  background-color: #333f50a9;
   color: white;
   font-size: 1rem;
+  font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
   padding-top: 10px;
 }
 
 th.project-name-th {
   width: 70%;
-  background-color: #000000;
+  background-color: #333f50a9;
   color: white;
   font-size: 1rem;
+  font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
   padding-top: 10px;
-}
-
-th.date-th {
-  width: 10%;
-  background-color: #000000;
-  font-size: 1rem;
-  padding-top: 10px;
-  color: white;
 }
 
 th.project-code-th {
   width: 9%;
+  font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
+  background-color: #333f50a9;
+}
+
+th.user-name-th {
+  font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
+  background-color: #333f50a9;
+}
+
+th.date-th {
+  width: 10%;
+  background-color: #333f50a9;
+  font-size: 1rem;
+  font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
+  padding-top: 10px;
+  color: white;
 }
 
 .inputCheckbox {
@@ -81,3 +91,16 @@ th.project-code-th {
   height: 20px;
   margin-top: 5px;
 }
+
+/*20231219 - smlee: 스크롤바 CSS 추가 Start*/
+.table-area::-webkit-scrollbar {
+  width: 10px;
+  height: 7px;
+}
+.table-area::-webkit-scrollbar-thumb {
+  background-color: #ffffff4b;
+}
+.table-area::-webkit-scrollbar-track {
+  background-color: #ffffff2a;
+}
+/*20231219 - smlee: 스크롤바 CSS 추가 End*/

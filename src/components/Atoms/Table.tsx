@@ -32,7 +32,7 @@ export default function Table({ getViewList, setPostProjectList, postProjectList
             <th scope='col' className='check-box-th'>구분</th>
             <th scope='col' className='project-code-th'>프로젝트 코드</th>
             <th scope='col' className='project-name-th'>프로젝트 명</th>
-            <th scope='col' className='user-name-th'>담당자 이름</th>
+            <th scope='col' className='user-name-th'>담당자</th>
             <th scope='col' className='date-th'>업데이트 날짜</th>
           </tr>
         </thead>

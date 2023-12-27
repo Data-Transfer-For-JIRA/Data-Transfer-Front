@@ -8,9 +8,10 @@ type ChipsStackType = {
 }
 export default function ChipsStack({ postProjectList, setPostProjectList }: ChipsStackType) {
   return (
-    <div className='chip-stack-area'>
+    <div className='chip-stack-area'>       
       {postProjectList.map((item, index) => (
         <Chip projectCode={item} key={index + item} setPostProjectList={setPostProjectList} />
+      
       ))}
     </div>
   );

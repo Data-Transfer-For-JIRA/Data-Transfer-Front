@@ -3,7 +3,7 @@
   font-size: 14px;
   font-weight: 600;
   text-align: center;
-  color: #fff;
+  color: #eff1f5;
   cursor: pointer;
   height: 30px;
   text-align: center;
@@ -31,28 +31,43 @@
   margin-left: 15px;
   margin-right: 15px;
   font-size: 10px;
-  background-image: linear-gradient(to right,
-      #29323c,
-      #485563,
-      #2b5876,
-      #4e4376);
+  background-image: linear-gradient(
+    to right,
+    #29323c,
+    #485563,
+    #2b5876,
+    #4e4376
+  );
   box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
 }
 
-button.blueColor {
-  background-image: linear-gradient(to right,
-      #2560e1,
-      #4471eb,
-      #0479fe,
-      #3f50ed);
-  box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+.wss-submit {
+  width: 100px; /* 20231219 - smlee: 70px → 100px 수정 */
+  height: 42px; /* 20231219 - smlee: height 값 추가 */
+  font-size: 15px;
 }
 
-input+button {
+button.blueColor {
+  background-image: linear-gradient(
+    to right,
+    #333f50,
+    #333f50ea,
+    #333f50d0,
+    #333f50
+  );
+  /*#2560e1*/
+  /*#4471eb*/
+  /*#0479fe*/
+  /*#3f50ed*/
+
+  box-shadow: 0 4px 4px 0 #333f50; /*rgba(65, 132, 234, 0.75)*/
+}
+
+input + button {
   margin-left: 2rem;
   flex-shrink: 0;
 }
 
-p+button {
+p + button {
   float: right;
 }
