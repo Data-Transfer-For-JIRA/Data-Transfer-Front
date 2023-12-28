@@ -11,10 +11,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const setTabValue = (location: Location<unknown>): number => {
+const setTabValue = (location: Location<unknown>): number | undefined => {
   if (location.pathname === '/create-jira-project/project') return 0;
   else if (location.pathname === '/create-jira-project/maintenance') return 1;
-  else return 3;
+  else return undefined;
 }
 
 export default function JiraManageMentPage() {

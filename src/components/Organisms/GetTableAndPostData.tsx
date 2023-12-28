@@ -35,7 +35,7 @@ const pageSize = "27";
 export default function GetTableAndPostData({ serviceType }: GetTableAndPostData) {
   const urlset: urlType = setUrl(serviceType);
   const postBtnName = serviceType === 'trans-before' ? '프로젝트 요청' : '이슈 요청';
- 
+
   const [getViewList, setGetViewList] = useState<returnJsonType | undefined>(undefined);
   const [search, setSearch] = useState<string>('');
   const [pageInfo, setPageInfo] = useState<pageInfoType>({ totalPage: 0, numberOfElement: 0 });
@@ -81,7 +81,7 @@ export default function GetTableAndPostData({ serviceType }: GetTableAndPostData
   }, [pageIndex, search, serviceType, urlset.getSerchURL, urlset.getViewURL])
 
 
-                  
+
   return (
     <div className='main-containter'>
       <div className='table-container'>
