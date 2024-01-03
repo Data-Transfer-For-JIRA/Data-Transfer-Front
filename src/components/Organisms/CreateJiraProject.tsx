@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/styles';
-import { Box, FormControl, Grid, TextField } from '@mui/material';
+import { Box, FormControl, Grid, Select, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { PostCreateNewProjectJson, PostCreateNewMaintenance } from '../../Common/Types'
+import { PostCreateNewProjectJson, defaultPostJson } from '../../Common/Types'
+import { checkJSON } from '../../Common/UtilFunction';
 import BtnSubmit from '../Atoms/BtnSubmit';
 import './CreateJiraProject.css'
 type Type = {
@@ -21,26 +22,42 @@ const useStyles = makeStyles(() => ({
 
 export default function CreateJiraProject({ projectFlag }: Type) {
   const classes = useStyles();
-  const [postJson, setPostJson] = useState<PostCreateNewProjectJson | PostCreateNewMaintenance>({ projectFlag: projectFlag, projectName: "", projectCode: "" });
+  const [postJson, setPostJson] = useState<PostCreateNewProjectJson>(
+    { ...defaultPostJson, essential: { ...defaultPostJson.essential, projectFlag: projectFlag } });
 
   const handleInputChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setPostJson({ ...postJson, [name]: value })
+    const [subkey, key] = name.split('.');
+    if (subkey === 'essential') {
+      setPostJson((prev) => {
+        return { ...prev, essential: { ...prev.essential, [key]: value } };
+      })
+    }
+    else if (subkey === 'common') {
+      setPostJson((prev) => {
+        return { ...prev, common: { ...prev.common, [key]: value } }
+      })
+    }
+    else if (subkey === 'selected') {
+      setPostJson((prev) => {
+        return { ...prev, selected: { ...prev.selected, [key]: value } }
+      })
+    }
   }
 
   const handlePostForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     //유효성 검사
-
+    let result = checkJSON(postJson);
+    if (result === 1) { alert('여기 빈칸 에러 창띄움'); }
+    else if (result === 2) { alert('여기에 프로젝트 코드 공란이라고 경고창띄움') }
+    alert(JSON.stringify(postJson));
     //Axios 전송
-    const result = await UsePostCreateJiraProject(postJson);
+    result = await UsePostCreateJiraProject(postJson);
 
     //결과에 따른 alert창 등장로직
   }
 
-  useEffect(() => {
-    console.log(postJson)
-  }, [postJson])
   return (
     <form noValidate autoComplete="off" onSubmit={handlePostForm}>
       <FormControl>
@@ -51,7 +68,7 @@ export default function CreateJiraProject({ projectFlag }: Type) {
                 className={classes.textField}
                 disabled
                 id="projectFlag"
-                name='projectFlag'
+                name='essential.projectFlag'
                 label="타입"
                 value={projectFlag}
                 size="small"
@@ -60,7 +77,7 @@ export default function CreateJiraProject({ projectFlag }: Type) {
               <TextField
                 className={classes.textField}
                 id="projectCode"
-                name='projectCode'
+                name='common.projectCode'
                 label="PMS 프로젝트 코드"
                 size="small"
                 sx={{ width: "80%" }}
@@ -69,12 +86,26 @@ export default function CreateJiraProject({ projectFlag }: Type) {
               <TextField
                 className={classes.textField}
                 id="projectName"
-                name='projectName'
+                name='essential.projectName'
                 label="Jira 프로젝트 이름"
                 size="small"
                 sx={{ width: "100%" }}
+                inputProps={{
+                  style: {
+                    // backgroundColor: 'red',
+                    // width: "130px"
+                  }
+                }}
                 onChange={handleInputChanged}
               />
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={postJson.common.assignee}
+                label="Age"
+                onChange={handleInputChanged}
+              ></Select>
+
             </Box>
           </Grid>
           <Grid item xs={8}>

@@ -1,4 +1,4 @@
-import { returnJsonType, PostReturnJsonType, GetWssContent, emptyJson, urlType } from './Types';
+import { returnJsonType, PostReturnJsonType, GetWssContent, emptyJson, urlType, PostCreateNewProjectJson } from './Types';
 /**
  * 테이블에서 핸들링할 데이터 오브젝트와 '프로젝트 티켓생성요청' API호출 후 받은 응답 데이터를 맵핑하는 함수
  * @param retrunJson 
@@ -92,3 +92,23 @@ export function setIndexNumber(totalPage: number, pageIndex: number): number[] {
   }
   return tempArray;
 }
+
+
+/** PostJSON 유효성 검사
+ *  projectFlag, projectName, projectCode는 빈값을 받을 수 없음.
+ *  @param postJson : 검사 대상 JSON
+ *  @returns 0:정상, 1:필수값 공백 2:프로젝트 코드 공백
+ */
+export function checkJSON(postJson: PostCreateNewProjectJson): number {
+  let key: keyof typeof postJson.essential;
+  for (key in postJson.essential) {
+    if (postJson.essential[key] === undefined || postJson.essential[key] === "" || postJson.essential[key] === null) {
+      return 1;
+    }
+  }
+  if (postJson.common.projectCode === undefined || postJson.common.projectCode === "" || postJson.common.projectCode === null) {
+    return 2;
+  }
+  return 0;
+}
+

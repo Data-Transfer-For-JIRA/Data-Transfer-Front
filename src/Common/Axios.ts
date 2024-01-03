@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { returnJsonType, PostResponseTyep, CreateIssueResponse } from './Types';
+import { returnJsonType, PostResponseTyep, CreateIssueResponse, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from './Types';
 import { mappingViewData } from './UtilFunction';
 
 const noDataError = new Error('API 호출결과가 없습니다.')
@@ -100,6 +100,21 @@ const UsePostAxiosCreateJiraIssue = async (postProjectList: string[], postUrl: s
   else {
     throw noDataError;
   }
-  return responseData;
+  //return responseData;
 }
-export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostAxiosCreateJiraIssue };
+/**
+ * 
+ * @param postJson : post data
+ */
+const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson): Promise<PostResponseCreatPorjectJira> => {
+  const URL = "http://localhost:8888/platform/project";
+  try {
+    const response: PostResponseCreatPorjectJira = await axios.post(URL, postJson);
+    console.log(response);
+    return response;
+  }
+  catch (Error) {
+    console.log(Error);
+  }
+}
+export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostAxiosCreateJiraIssue, UsePostCreateJiraProject };
