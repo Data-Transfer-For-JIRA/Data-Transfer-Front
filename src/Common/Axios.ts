@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { returnJsonType, PostResponseTyep, CreateIssueResponse, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from './Types';
+import { returnJsonType, PostResponseTyep, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from './Types';
 import { mappingViewData } from './UtilFunction';
 
 const noDataError = new Error('API 호출결과가 없습니다.')

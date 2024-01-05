@@ -1,4 +1,5 @@
 import App from '../App'
+import MuitiSelectMui from '../components/Molecules/MuitiSelectMui';
 import CreateJiraProject from '../components/Organisms/CreateJiraProject';
 import GetTableAndPostData from '../components/Organisms/GetTableAndPostData';
 import InfoText from '../components/Organisms/InfoText';
@@ -36,6 +37,6 @@ export const Router = [
   },
   {
     path: '/testComponent',
-    element: <ErrorPage />
+    element: <MuitiSelectMui />
   }
 ];

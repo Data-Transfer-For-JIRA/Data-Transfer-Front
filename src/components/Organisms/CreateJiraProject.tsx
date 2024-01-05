@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 import { Box, FormControl, Grid, Select, TextField, InputLabel, SelectChangeEvent, MenuItem } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UsePostCreateJiraProject } from '../../Common/Axios';
 import { PostCreateNewProjectJson, defaultPostJson, PostResponseCreatPorjectJira } from '../../Common/Types'
 import { USER } from '../../Common/User';
@@ -35,7 +35,7 @@ export default function CreateJiraProject({ projectFlag }: Type) {
     { ...defaultPostJson, essential: { ...defaultPostJson.essential, projectFlag: projectFlag } });
   const [apiResponse, setApiResponse] = useState<PostResponseCreatPorjectJira | undefined>();
 
-  const handleInputChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChanged = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
     const { name, value } = event.target;
     const [subkey, key] = name.split('.');
     if (subkey === 'essential') {
@@ -55,23 +55,9 @@ export default function CreateJiraProject({ projectFlag }: Type) {
     }
   }
 
-  const handleSelectChanged = (event: SelectChangeEvent<string>) => {
-    const { name, value } = event.target;
-    const [subkey, key] = name.split('.');
-    if (subkey === 'common') {
-      setPostJson((prev) => {
-        return { ...prev, common: { ...prev.common, [key]: value } }
-      })
-    }
-    else if (subkey === 'selected') {
-      setPostJson((prev) => {
-        return { ...prev, selected: { ...prev.selected, [key]: value } }
-      })
-    }
-  }
-
   const handlePostForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(postJson)
     const result = checkJSON(postJson);
     if (result === 1) {
       alert('여기 빈칸 에러 창띄움');
@@ -85,6 +71,9 @@ export default function CreateJiraProject({ projectFlag }: Type) {
     //결과에 따른 alert창 등장로직
   }
 
+  useEffect(() => {
+    console.log(postJson);
+  }, [postJson])
   return (
     <form noValidate autoComplete="off" onSubmit={handlePostForm}>
       <Grid container spacing={2}>
@@ -118,6 +107,7 @@ export default function CreateJiraProject({ projectFlag }: Type) {
               sx={{ width: "100%" }}
               inputProps={{
                 style: {
+                  width: '100%',
                   // backgroundColor: 'red',
                   // width: "130px"
                 }
@@ -126,14 +116,14 @@ export default function CreateJiraProject({ projectFlag }: Type) {
             />
           </Box>
           <Box className={classes.CommonBox}>
-            <FormControl sx={{ width: "50%" }}>
+            <FormControl sx={{ width: "50%", marginTop: "15px" }}>
               <InputLabel id="select-assignee-label">담당자</InputLabel>
               <Select
                 labelId="select-assignee-label"
                 name='common.assignee'
                 value={postJson.common.assignee}
-                label="select-assignee-label"
-                onChange={handleSelectChanged}
+                label="담당자"
+                onChange={handleInputChanged}
               >
                 {
                   USER.Engineer.map((item, index) => (
@@ -142,17 +132,17 @@ export default function CreateJiraProject({ projectFlag }: Type) {
                 }
               </Select>
             </FormControl>
-            <FormControl sx={{ width: "50%" }}>
-              <InputLabel id="select-subAssignee-label">부 담당자</InputLabel>
+            <FormControl sx={{ width: "50%", marginTop: "15px" }}>
+              <InputLabel id="select-salesManager-label">영업대표</InputLabel>
               <Select
-                labelId="select-subAssignee-label"
-                name='common.subAssignee'
-                value={postJson.common.subAssignee}
-                label="select-subAssignee-label"
-                onChange={handleSelectChanged}
+                labelId="select-salesManager-label"
+                name='common.salesManager'
+                value={postJson.common.salesManager}
+                label="영업대표"
+                onChange={handleInputChanged}
               >
                 {
-                  USER.Engineer.map((item, index) => (
+                  USER.Sales.map((item, index) => (
                     <MenuItem value={item} key={index}>{item}</MenuItem>
                   ))
                 }

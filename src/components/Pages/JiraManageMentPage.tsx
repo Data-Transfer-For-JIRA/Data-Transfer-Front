@@ -1,4 +1,4 @@
-import { Box, Container, Tab, Tabs } from '@mui/material';
+import { Box, Container, Tabs } from '@mui/material';
 import { Location, Outlet, useLocation } from 'react-router-dom';
 import { makeStyles } from "@material-ui/styles";
 import LinkTab from '../Molecules/LinkTab';

@@ -91,7 +91,7 @@ export interface PostCreateNewProjectJson {
     salesManager: string;
     contractor: string;
     client: string;
-    productType: string;
+    productType: string[];
     productTypeEtc: string;
     productInfo: string;
     productInfoEtc: string;
@@ -129,7 +129,7 @@ export const defaultPostJson: PostCreateNewProjectJson = {
     salesManager: "",
     contractor: "",
     client: "",
-    productType: "",
+    productType: [],
     productTypeEtc: "",
     productInfo: "",
     productInfoEtc: "",
