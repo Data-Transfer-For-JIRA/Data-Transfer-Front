@@ -1,17 +1,17 @@
 import { makeStyles } from '@material-ui/styles';
-import { Box, FormControl, Grid, Select, TextField, InputLabel, SelectChangeEvent, MenuItem } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { UsePostCreateJiraProject } from '../../Common/Axios';
-import { PostCreateNewProjectJson, defaultPostJson, PostResponseCreatPorjectJira } from '../../Common/Types'
-import { USER } from '../../Common/User';
-import { checkJSON } from '../../Common/UtilFunction';
+import { Box, Grid } from '@mui/material';
+import { useState } from 'react';
+import { PostCreateNewProjectJson, defaultPostJson } from '../../Common/Types'
 import BtnSubmit from '../Atoms/BtnSubmit';
 import ModalPopupMui from '../Molecules/ModalPopupMui';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
 import './CreateJiraProject.css'
-type Type = {
+import CreateProjectForm from '../Molecules/CreateProjectForm';
+
+type CreateProjectFormType = {
   projectFlag: string;
 }
-
 const useStyles = makeStyles(() => ({
   EssentialBox: {
     width: "100%",
@@ -28,126 +28,24 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function CreateJiraProject({ projectFlag }: Type) {
+export default function CreateJiraProject({ projectFlag }: CreateProjectFormType) {
   const classes = useStyles();
   const [modalOpen, setModalOpen] = useState(false);
-  const [postJson, setPostJson] = useState<PostCreateNewProjectJson>(
-    { ...defaultPostJson, essential: { ...defaultPostJson.essential, projectFlag: projectFlag } });
   const [apiResponse, setApiResponse] = useState<PostResponseCreatPorjectJira | undefined>();
 
-  const handleInputChanged = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
-    const { name, value } = event.target;
-    const [subkey, key] = name.split('.');
-    if (subkey === 'essential') {
-      setPostJson((prev) => {
-        return { ...prev, essential: { ...prev.essential, [key]: value } };
-      })
-    }
-    else if (subkey === 'common') {
-      setPostJson((prev) => {
-        return { ...prev, common: { ...prev.common, [key]: value } }
-      })
-    }
-    else if (subkey === 'selected') {
-      setPostJson((prev) => {
-        return { ...prev, selected: { ...prev.selected, [key]: value } }
-      })
-    }
-  }
+  const { control, handleSubmit } = useForm<PostCreateNewProjectJson>({
+    defaultValues: { ...defaultPostJson, essential: { ...defaultPostJson.essential, projectFlag: projectFlag } }
+  });
+  const handlePostForm: SubmitHandler<PostCreateNewProjectJson> = (data) => {
+    console.log(data);
+  };
 
-  const handlePostForm = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(postJson)
-    const result = checkJSON(postJson);
-    if (result === 1) {
-      alert('여기 빈칸 에러 창띄움');
-      return;
-    }
-    else if (result === 2) { alert('여기에 프로젝트 코드 공란이라고 경고창띄움'); }
-    setModalOpen(true);
-    //Axios 전송
-    setApiResponse(await UsePostCreateJiraProject(postJson));
-
-    //결과에 따른 alert창 등장로직
-  }
-
-  useEffect(() => {
-    console.log(postJson);
-  }, [postJson])
   return (
-    <form noValidate autoComplete="off" onSubmit={handlePostForm}>
+    <form autoComplete="off" onSubmit={handleSubmit(handlePostForm)}>
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <Box className={classes.EssentialBox}>
-            <TextField
-              className={classes.textField}
-              disabled
-              id="projectFlag"
-              name='essential.projectFlag'
-              label="타입"
-              value={projectFlag}
-              size="small"
-              sx={{ width: "20%" }}
-            />
-            <TextField
-              className={classes.textField}
-              id="projectCode"
-              name='common.projectCode'
-              label="PMS 프로젝트 코드"
-              size="small"
-              sx={{ width: "80%" }}
-              onChange={handleInputChanged}
-            />
-            <TextField
-              className={classes.textField}
-              id="projectName"
-              name='essential.projectName'
-              label="Jira 프로젝트 이름"
-              size="small"
-              sx={{ width: "100%" }}
-              inputProps={{
-                style: {
-                  width: '100%',
-                  // backgroundColor: 'red',
-                  // width: "130px"
-                }
-              }}
-              onChange={handleInputChanged}
-            />
-          </Box>
           <Box className={classes.CommonBox}>
-            <FormControl sx={{ width: "50%", marginTop: "15px" }}>
-              <InputLabel id="select-assignee-label">담당자</InputLabel>
-              <Select
-                labelId="select-assignee-label"
-                name='common.assignee'
-                value={postJson.common.assignee}
-                label="담당자"
-                onChange={handleInputChanged}
-              >
-                {
-                  USER.Engineer.map((item, index) => (
-                    <MenuItem value={item} key={index}>{item}</MenuItem>
-                  ))
-                }
-              </Select>
-            </FormControl>
-            <FormControl sx={{ width: "50%", marginTop: "15px" }}>
-              <InputLabel id="select-salesManager-label">영업대표</InputLabel>
-              <Select
-                labelId="select-salesManager-label"
-                name='common.salesManager'
-                value={postJson.common.salesManager}
-                label="영업대표"
-                onChange={handleInputChanged}
-              >
-                {
-                  USER.Sales.map((item, index) => (
-                    <MenuItem value={item} key={index}>{item}</MenuItem>
-                  ))
-                }
-              </Select>
-            </FormControl>
+            <CreateProjectForm control={control} />
           </Box>
         </Grid>
         <Grid item xs={8}>
