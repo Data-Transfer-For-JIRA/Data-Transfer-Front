@@ -100,14 +100,11 @@ export function setIndexNumber(totalPage: number, pageIndex: number): number[] {
  *  @returns 0:정상, 1:필수값 공백 2:프로젝트 코드 공백
  */
 export function checkJSON(postJson: PostCreateNewProjectJson): number {
-  let key: keyof typeof postJson.essential;
-  for (key in postJson.essential) {
-    if (postJson.essential[key] === undefined || postJson.essential[key] === "" || postJson.essential[key] === null) {
+  let key: keyof typeof postJson.common;
+  for (key in postJson.common) {
+    if (postJson.common[key] === undefined || postJson.common[key] === "" || postJson.common[key] === null) {
       return 1;
     }
-  }
-  if (postJson.common.projectCode === undefined || postJson.common.projectCode === "" || postJson.common.projectCode === null) {
-    return 2;
   }
   return 0;
 }

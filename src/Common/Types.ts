@@ -91,12 +91,11 @@ export interface PostCreateNewProjectJson {
     salesManager: string;
     contractor: string;
     client: string;
-    productType: string[];
-    productTypeEtc: string;
-    productInfo: string;
-    productInfoEtc: string;
-    linkInfo: string;
-    linkInfoEtc: string;
+    productInfo1: string[];
+    productInfo2: string[];
+    productInfo3: string[];
+    productInfo4: string[];
+    productInfo5: string[];
     barcodeType: string;
     multiOsSupport: string;
     printerSupportRange: string;
@@ -129,12 +128,11 @@ export const defaultPostJson: PostCreateNewProjectJson = {
     salesManager: "",
     contractor: "",
     client: "",
-    productType: [],
-    productTypeEtc: "",
-    productInfo: "",
-    productInfoEtc: "",
-    linkInfo: "",
-    linkInfoEtc: "",
+    productInfo1: [],
+    productInfo2: [],
+    productInfo3: [],
+    productInfo4: [],
+    productInfo5: [],
     barcodeType: "",
     multiOsSupport: "",
     printerSupportRange: "",
@@ -154,13 +152,26 @@ export const defaultPostJson: PostCreateNewProjectJson = {
     inspectionCycle: ""
   }
 }
-
+//Post 리턴 데이터 타입
 export interface PostResponseCreatPorjectJira {
   result: string;
   jiraProjectCode: string;
   jiraProjectName: string;
 }
 
+export const ModalTypeList = {
+  NoneState: 'NoneState',
+  CreateInfo: 'CreateInfo',
+  Loading: 'Loading',
+  CreateResultSuccess: 'CreateResultSuccess',
+  CreateResultFail: 'CreateResultFail'
+};
+export interface ModalState {
+  isOpen: boolean;
+  modalType: typeof ModalTypeList[keyof typeof ModalTypeList];
+  postData?: PostCreateNewProjectJson;
+  responseData?: PostResponseCreatPorjectJira;
 
+}
 
 export interface pageInfoType { totalPage: number; numberOfElement: number; }

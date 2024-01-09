@@ -1,27 +1,80 @@
-import { Box, Dialog, DialogContent, DialogTitle, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import React from 'react';
-import { useState } from 'react';
-import { PostResponseCreatPorjectJira } from '../../Common/Types';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Box, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { ModalState, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from '../../Common/Types';
 
-type TypeModalPopupMui = {
-  responseData: PostResponseCreatPorjectJira | undefined;
+interface handleModalType {
+  handleModalState: React.Dispatch<React.SetStateAction<ModalState>>;
 }
+type TypeModalPopupMui = ModalState & handleModalType;
+export default function ModalPopupMui({ isOpen, modalType, postData, responseData, handleModalState }: TypeModalPopupMui) {
+  const handleClose = () => handleModalState((prev: ModalState) => {
+    return { ...prev, isOpen: false }
+  });
 
-export default function ModalPopupMui({ responseData }: TypeModalPopupMui) {
-  const [open, setOpen] = useState(true);
-  const handleClose = () => setOpen(false);
+  if (postData === undefined && responseData === undefined) {
+    return (
+      <Dialog open={isOpen} onClose={handleClose}>
+        <LoadingModalContents />
+      </Dialog>
+    )
+  }
+
+  if (postData !== undefined && responseData === undefined) {
+    return (
+      <Dialog open={isOpen} onClose={handleClose}>
+        <ShowCreateInfoCheck checkPostData={postData} />
+      </Dialog>
+    );
+  }
+
+  if (postData === undefined && responseData !== undefined) {
+    return (
+      <Dialog open={isOpen} onClose={handleClose}>
+        <FormAlertModalContents responseData={responseData} />
+      </Dialog>
+    );
+  }
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-    >
-      {
-        responseData === undefined ? (<LoadingModalContents />) : (<FormAlertModalContents responseData={responseData} />)
-        // responseData === undefined ? (<FormAlertModalContents responseData={responseData} />) : (<FormAlertModalContents responseData={responseData} />)
-      }
-    </Dialog>
+    <></>
   )
+}
+
+
+function ShowCreateInfoCheck2({ checkPostData }: { checkPostData: PostCreateNewProjectJson }) {
+  return (
+    <Paper elevation={3} style={{ padding: 20, margin: 20 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <TextField
+            disabled
+            value={checkPostData.essential.projectFlag}
+          />
+        </Grid>
+        <Grid item xs={8}>
+
+        </Grid>
+      </Grid>
+    </Paper>
+  );
+}
+//씨발 이건 진짜 처음보는 모습인데
+function ShowCreateInfoCheck({ checkPostData }: { checkPostData: PostCreateNewProjectJson }) {
+  return (
+    <Paper elevation={3} style={{ padding: 20, margin: 20 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <TextField
+            disabled
+            value={checkPostData.essential.projectFlag}
+          />
+        </Grid>
+        <Grid item xs={8}>
+          {/* 추가적인 컴포넌트 또는 내용을 넣으세요 */}
+        </Grid>
+      </Grid>
+    </Paper>
+  );
 }
 
 
@@ -38,33 +91,31 @@ function LoadingModalContents() {
   )
 }
 
-function FormAlertModalContents({ responseData }: TypeModalPopupMui) {
+
+function FormAlertModalContents({ responseData }: { responseData: PostResponseCreatPorjectJira }) {
   return (
     <Box>
       <DialogTitle id="alert-dialog-title">
-        {responseData?.result}
+        {responseData.result}
       </DialogTitle>
       <DialogContent>
-        <React.Fragment key={responseData?.jiraProjectCode}>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left">지라프로젝트 코드</TableCell>
-                  <TableCell align="left">지라 프로젝트명</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell align="left">{responseData?.jiraProjectCode}</TableCell>
-                  <TableCell align="left">{responseData?.jiraProjectName}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </React.Fragment>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell align="left">지라프로젝트 코드</TableCell>
+                <TableCell align="left">지라 프로젝트명</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell align="left">{responseData.jiraProjectCode}</TableCell>
+                <TableCell align="left">{responseData.jiraProjectName}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       </DialogContent>
     </Box>
   )
 }
-
