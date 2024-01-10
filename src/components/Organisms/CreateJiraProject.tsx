@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
 
 export default function CreateJiraProject({ projectFlag }: CreateProjectFormType) {
   const classes = useStyles();
-  const [modalState, setModatState] = useState<ModalState>({
+  const [modalState, setModaltState] = useState<ModalState>({
     isOpen: false,
     modalType: ModalTypeList.NoneState,
     postData: undefined,
@@ -45,11 +45,11 @@ export default function CreateJiraProject({ projectFlag }: CreateProjectFormType
     // 240109 : input이 다 채워지지 않아서 일단 보류.
     // const result = checkJSON(data);
     // if (result === 1) { alert('여기에 프로젝트 코드 공란이라고 경고창띄움'); }
-    setModatState({ isOpen: true, modalType: ModalTypeList.CreateInfo, postData: data, responseData: undefined });
+    setModaltState({ isOpen: true, modalType: ModalTypeList.CreateInfo, postData: data, responseData: undefined });
     //Axios 전송
     setApiResponse(await UsePostCreateJiraProject(data));
     if (!apiResponse) {
-      setModatState({ isOpen: true, modalType: ModalTypeList.CreateInfo, responseData: apiResponse, postData: undefined });
+      setModaltState({ isOpen: true, modalType: ModalTypeList.CreateInfo, responseData: apiResponse, postData: undefined });
     }
 
   }
@@ -65,7 +65,7 @@ export default function CreateJiraProject({ projectFlag }: CreateProjectFormType
           </Box>
         </Grid>
         <Grid item xs={8}>
-
+          {/*여기에는 Jira에서 쓸 에디터를 추가할예정 */}
         </Grid>
       </Grid>
       <BtnSubmit style={{ width: "200px", marginTop: "10px" }}>프로젝트 생성</BtnSubmit>
@@ -75,7 +75,7 @@ export default function CreateJiraProject({ projectFlag }: CreateProjectFormType
           modalType={modalState.modalType}
           postData={modalState.postData}
           responseData={modalState.responseData}
-          handleModalState={setModatState} />)
+          handleModalState={setModaltState} />)
         : <></>}
     </form >
   )

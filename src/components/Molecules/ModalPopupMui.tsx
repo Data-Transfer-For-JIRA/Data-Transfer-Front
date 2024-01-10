@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Box, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { Box, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
 import { ModalState, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from '../../Common/Types';
 
 interface handleModalType {
@@ -21,7 +20,7 @@ export default function ModalPopupMui({ isOpen, modalType, postData, responseDat
 
   if (postData !== undefined && responseData === undefined) {
     return (
-      <Dialog open={isOpen} onClose={handleClose}>
+      <Dialog open={isOpen} onClose={handleClose} fullScreen={false}>
         <ShowCreateInfoCheck checkPostData={postData} />
       </Dialog>
     );
@@ -40,43 +39,62 @@ export default function ModalPopupMui({ isOpen, modalType, postData, responseDat
   )
 }
 
-
-function ShowCreateInfoCheck2({ checkPostData }: { checkPostData: PostCreateNewProjectJson }) {
-  return (
-    <Paper elevation={3} style={{ padding: 20, margin: 20 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <TextField
-            disabled
-            value={checkPostData.essential.projectFlag}
-          />
-        </Grid>
-        <Grid item xs={8}>
-
-        </Grid>
-      </Grid>
-    </Paper>
-  );
-}
 //씨발 이건 진짜 처음보는 모습인데
 function ShowCreateInfoCheck({ checkPostData }: { checkPostData: PostCreateNewProjectJson }) {
+  const renderKeyValue = (obj: object) => {
+    return Object.entries(obj).map(([key, value]) => {
+      if (typeof value === 'object') {
+        // 객체인 경우 재귀 호출
+        return (
+          <Box key={key}>
+            {renderKeyValue(value)}
+          </Box>
+        );
+      } else {
+        // 값인 경우 그대로 렌더링
+        return (
+          <Box key={key} sx={{ marginTop: '15px' }}>
+            <TextField
+              disabled
+              value={value === "" ? "설정안함" : value}
+              style={{ width: '50%' }}
+              size="small"
+              label={key}
+              InputLabelProps={{
+                color: 'success',
+                width: '50%'
+              }}
+              InputProps={{
+                width: '50%'
+              }}
+            />
+          </Box>
+        );
+      }
+    });
+  };
   return (
-    <Paper elevation={3} style={{ padding: 20, margin: 20 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <TextField
-            disabled
-            value={checkPostData.essential.projectFlag}
-          />
+    <Paper elevation={3}>
+      <Typography variant="h5" gutterBottom>입력된 데이터 확인</Typography>
+      <Grid container style={{ width: '100%' }}>
+        <Grid item xs={6}>
+          <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap' }}>
+            {
+              renderKeyValue(checkPostData)
+            }
+          </Box>
         </Grid>
-        <Grid item xs={8}>
-          {/* 추가적인 컴포넌트 또는 내용을 넣으세요 */}
+        <Grid item xs={6}>
+          <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap' }}>
+            {
+              renderKeyValue(checkPostData)
+            }
+          </Box>
         </Grid>
       </Grid>
     </Paper>
   );
 }
-
 
 function LoadingModalContents() {
   return (
