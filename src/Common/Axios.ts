@@ -107,8 +107,8 @@ const UsePostAxiosCreateJiraProject = async (postProjectList: string[], postUrl:
  * @param postJson : post data
  */
 const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
-  Promise<PostResponseCreatPorjectJira> => {
-  const URL = "http://localhost:8888/platform/project";
+  Promise<PostResponseCreatPorjectJira | undefined> => {
+  const URL = "http://localhost:8888/platform/service";
   try {
     const response = await axios.post(URL, postJson);
     console.log(response);
@@ -116,7 +116,7 @@ const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
   }
   catch (Error) {
     console.log(Error);
-    throw Error;
+    return undefined;
   }
 }
 export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject };

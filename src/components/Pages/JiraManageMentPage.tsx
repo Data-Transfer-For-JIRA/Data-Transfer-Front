@@ -2,6 +2,7 @@ import { Box, Container, Tabs } from '@mui/material';
 import { Location, Outlet, useLocation } from 'react-router-dom';
 import { makeStyles } from "@material-ui/styles";
 import LinkTab from '../Molecules/LinkTab';
+import ModalContentsProvider from '../Context/ModalContentsProvider';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -23,14 +24,16 @@ export default function JiraManageMentPage() {
   const tabValue = setTabValue(location);
 
   return (
-    <Container maxWidth={false} className={classes.container}>
-      <Box sx={{ borderColor: '#9e9e9e' }}>
-        <Tabs value={tabValue} role="navigation">
-          <LinkTab label="프로젝트" link="/create-jira-project/project" />
-          <LinkTab label="유지보수" link="/create-jira-project/maintenance" />
-        </Tabs>
-      </Box>
-      <Outlet />
-    </Container>
+    <ModalContentsProvider>
+      <Container maxWidth={false} className={classes.container}>
+        <Box sx={{ borderColor: '#9e9e9e' }}>
+          <Tabs value={tabValue} role="navigation">
+            <LinkTab label="프로젝트" link="/create-jira-project/project" />
+            <LinkTab label="유지보수" link="/create-jira-project/maintenance" />
+          </Tabs>
+        </Box>
+        <Outlet />
+      </Container>
+    </ModalContentsProvider>
   )
 }

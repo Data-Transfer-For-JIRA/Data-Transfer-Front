@@ -160,18 +160,18 @@ export interface PostResponseCreatPorjectJira {
 }
 
 export const ModalTypeList = {
-  NoneState: 'NoneState',
-  CreateInfo: 'CreateInfo',
-  Loading: 'Loading',
-  CreateResultSuccess: 'CreateResultSuccess',
-  CreateResultFail: 'CreateResultFail'
+  NoneState: 'NONE_STATE',
+  CreateInfo: 'CREATE_INFO_CHECK',
+  Loading: 'LOADING',
+  CreateResultSuccess: 'RESULT_CREATE_SUCCESS',
+  CreateResultFail: 'RESULT_CREATE_FAIL',
+  ErrApiCall: 'ERR_API_CALL'
 };
 export interface ModalState {
   isOpen: boolean;
-  modalType: typeof ModalTypeList[keyof typeof ModalTypeList];
   postData?: PostCreateNewProjectJson;
   responseData?: PostResponseCreatPorjectJira;
-
+  modalType: typeof ModalTypeList[keyof typeof ModalTypeList];
 }
 
 export interface pageInfoType { totalPage: number; numberOfElement: number; }

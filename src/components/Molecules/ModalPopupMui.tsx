@@ -1,47 +1,41 @@
-import { Box, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
-import { ModalState, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from '../../Common/Types';
+import { Box, Button, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
+import { ReactNode } from 'react';
+import { UsePostCreateJiraProject } from '../../Common/Axios';
+import { ModalTypeList, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from '../../Common/Types';
+import { useModalState } from '../Context/ModalContentsProvider';
 
-interface handleModalType {
-  handleModalState: React.Dispatch<React.SetStateAction<ModalState>>;
-}
-type TypeModalPopupMui = ModalState & handleModalType;
-export default function ModalPopupMui({ isOpen, modalType, postData, responseData, handleModalState }: TypeModalPopupMui) {
-  const handleClose = () => handleModalState((prev: ModalState) => {
-    return { ...prev, isOpen: false }
-  });
 
-  if (postData === undefined && responseData === undefined) {
-    return (
-      <Dialog open={isOpen} onClose={handleClose}>
-        <LoadingModalContents />
-      </Dialog>
-    )
-  }
-
-  if (postData !== undefined && responseData === undefined) {
-    return (
-      <Dialog open={isOpen} onClose={handleClose} fullScreen={false}>
-        <ShowCreateInfoCheck checkPostData={postData} />
-      </Dialog>
-    );
-  }
-
-  if (postData === undefined && responseData !== undefined) {
-    return (
-      <Dialog open={isOpen} onClose={handleClose}>
-        <FormAlertModalContents responseData={responseData} />
-      </Dialog>
-    );
-  }
+export default function ModalPopupMui() {
+  const { state } = useModalState();
 
   return (
-    <></>
+    <ModalBase modalOpen={state.isOpen}>
+      {state.modalType === ModalTypeList.CreateInfo && (<ShowCreateInfoCheck checkPostData={state.postData} />)}
+      {state.modalType === ModalTypeList.Loading && (<LoadingModalContents />)}
+      {state.modalType === ModalTypeList.CreateResultSuccess && (<FormAlertModalContents responseData={state.responseData} />)}
+      {state.modalType === ModalTypeList.ErrApiCall && (<Typography variant="h5" gutterBottom>통신실패</Typography>)}
+    </ModalBase>
   )
 }
 
-//씨발 이건 진짜 처음보는 모습인데
-function ShowCreateInfoCheck({ checkPostData }: { checkPostData: PostCreateNewProjectJson }) {
-  const renderKeyValue = (obj: object) => {
+
+type ModalBaseType = {
+  children: ReactNode;
+  modalOpen: boolean;
+}
+function ModalBase({ children, modalOpen }: ModalBaseType) {
+  return (
+    <Dialog open={modalOpen} sx={{ p: 3 }}>
+      {children}
+    </Dialog>
+  )
+}
+
+
+
+function ShowCreateInfoCheck({ checkPostData }: { checkPostData?: PostCreateNewProjectJson }) {
+  const { modalDispatch } = useModalState();
+  const renderKeyValue = (obj: PostCreateNewProjectJson) => {
     return Object.entries(obj).map(([key, value]) => {
       if (typeof value === 'object') {
         // 객체인 경우 재귀 호출
@@ -62,10 +56,9 @@ function ShowCreateInfoCheck({ checkPostData }: { checkPostData: PostCreateNewPr
               label={key}
               InputLabelProps={{
                 color: 'success',
-                width: '50%'
               }}
               InputProps={{
-                width: '50%'
+
               }}
             />
           </Box>
@@ -73,27 +66,48 @@ function ShowCreateInfoCheck({ checkPostData }: { checkPostData: PostCreateNewPr
       }
     });
   };
-  return (
-    <Paper elevation={3}>
-      <Typography variant="h5" gutterBottom>입력된 데이터 확인</Typography>
-      <Grid container style={{ width: '100%' }}>
-        <Grid item xs={6}>
-          <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap' }}>
-            {
-              renderKeyValue(checkPostData)
-            }
-          </Box>
+  if (checkPostData !== undefined) {
+    console.log('in here if?')
+    const handleConfirm = async () => {
+      modalDispatch({ type: 'LOADING' })
+
+      const result = await UsePostCreateJiraProject(checkPostData);
+      if (result !== undefined) {
+        modalDispatch({ type: 'RESULT_CREATE_SUCCESS', result: result })
+      }
+      else {
+        console.log('in here?')
+        modalDispatch({ type: 'ERR_API_CALL' });
+      }
+
+    }
+    return (
+      <Paper elevation={3}>
+        <Typography variant="h5" gutterBottom>입력된 데이터 확인</Typography>
+        <Button variant="contained" color='primary' onClick={handleConfirm}>확인완료</Button>
+        <Button variant="contained" color='error' onClick={() => modalDispatch({ type: 'NONE_STATE' })} >취소</Button>
+        <Grid container style={{ width: '100%' }}>
+          <Grid item xs={6}>
+            <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap' }}>
+              {
+                renderKeyValue(checkPostData)
+              }
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap' }}>
+              {
+
+              }
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap' }}>
-            {
-              renderKeyValue(checkPostData)
-            }
-          </Box>
-        </Grid>
-      </Grid>
-    </Paper>
-  );
+      </Paper>
+    );
+  }
+  else {
+    return <></>;
+  }
 }
 
 function LoadingModalContents() {
@@ -110,30 +124,34 @@ function LoadingModalContents() {
 }
 
 
-function FormAlertModalContents({ responseData }: { responseData: PostResponseCreatPorjectJira }) {
-  return (
-    <Box>
-      <DialogTitle id="alert-dialog-title">
-        {responseData.result}
-      </DialogTitle>
-      <DialogContent>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell align="left">지라프로젝트 코드</TableCell>
-                <TableCell align="left">지라 프로젝트명</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell align="left">{responseData.jiraProjectCode}</TableCell>
-                <TableCell align="left">{responseData.jiraProjectName}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </DialogContent>
-    </Box>
-  )
+function FormAlertModalContents({ responseData }: { responseData?: PostResponseCreatPorjectJira }) {
+  if (responseData !== undefined)
+    return (
+      <Box>
+        <DialogTitle id="alert-dialog-title">
+          {responseData.result}
+        </DialogTitle>
+        <DialogContent>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">지라 프로젝트 코드</TableCell>
+                  <TableCell align="left">지라 프로젝트명</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell align="left">{responseData.jiraProjectCode}</TableCell>
+                  <TableCell align="left">{responseData.jiraProjectName}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </DialogContent>
+      </Box>
+    )
+  else {
+    return <></>
+  }
 }

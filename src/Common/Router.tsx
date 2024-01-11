@@ -1,5 +1,4 @@
 import App from '../App'
-import CreateProjectForm from '../components/Molecules/CreateProjectForm';
 import CreateJiraProject from '../components/Organisms/CreateJiraProject';
 import GetTableAndPostData from '../components/Organisms/GetTableAndPostData';
 import InfoText from '../components/Organisms/InfoText';
@@ -35,8 +34,8 @@ export const Router = [
     element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
-  {
-    path: '/testComponent',
-    element: <CreateProjectForm projectFlag='M' />
-  }
+  // {
+  //   path: '/testComponent',
+  //   element: <CreateProjectForm projectFlag='M' />
+  // }
 ];
