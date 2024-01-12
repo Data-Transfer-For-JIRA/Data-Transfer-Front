@@ -10,14 +10,13 @@ export default function SideNavigator() {
   // ]
   const seconditem = [
     { value: "신규 프로젝트 생성요청", link: "/create-jira-project" },
-    { value: "지라 프로젝트 백업요청", link: "/load-jira-list" },
-    { value: "백업상태 확인", link: "/check-backup" },
+    { value: "지라 프로젝트 연결", link: "/create-weblink" },
   ]
   return (
     <div className='side-navigator'>
       {/* <SectionSideCategory title='WSS to Jira' item={firstitem} /> */}
-      <div className='division-line' />
       <SectionSideCategory title='Jira Management' item={seconditem} />
+      <div className='division-line' />
     </div>
   )
 }

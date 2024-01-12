@@ -125,7 +125,8 @@ function LoadingModalContents() {
 
 
 function FormAlertModalContents({ responseData }: { responseData?: PostResponseCreatPorjectJira }) {
-  if (responseData !== undefined)
+  if (responseData !== undefined) {
+    // const jiraProjectURL = `https://markany.atlassian.net/jira/core/projects/${responseData.jiraProjectCode}/board`;
     return (
       <Box>
         <DialogTitle id="alert-dialog-title">
@@ -151,7 +152,7 @@ function FormAlertModalContents({ responseData }: { responseData?: PostResponseC
         </DialogContent>
       </Box>
     )
-  else {
+  } else {
     return <></>
   }
 }
