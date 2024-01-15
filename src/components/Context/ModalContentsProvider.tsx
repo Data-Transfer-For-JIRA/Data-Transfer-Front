@@ -57,6 +57,7 @@ export default function ModalContentsProvider({ children }: ModalContentsProvide
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useModalState = () => {
   return useContext(ModalContext)
 }

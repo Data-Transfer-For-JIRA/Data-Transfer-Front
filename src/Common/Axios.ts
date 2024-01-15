@@ -2,6 +2,7 @@ import axios from 'axios';
 import { returnJsonType, PostResponseTyep, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from './Types';
 import { mappingViewData } from './UtilFunction';
 
+
 const noDataError = new Error('API 호출결과가 없습니다.')
 
 
@@ -108,7 +109,7 @@ const UsePostAxiosCreateJiraProject = async (postProjectList: string[], postUrl:
  */
 const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
   Promise<PostResponseCreatPorjectJira | undefined> => {
-  const URL = "http://localhost:8888/platform/service";
+  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/platform/service`;
   try {
     const response = await axios.post(URL, postJson);
     console.log(response);

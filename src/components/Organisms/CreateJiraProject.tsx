@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 // import { checkJSON } from '../../Common/UtilFunction';
 import { Box, Grid } from '@mui/material';
 import CreateProjectForm from '../Molecules/CreateProjectForm';
-import ModalPopupMui from '../Molecules/ModalPopupMui';
+import MuiModalPopup from '../Molecules/MuiModalPopup';
 import { useModalState } from '../Context/ModalContentsProvider';
 
 type CreateProjectFormType = {
@@ -54,7 +54,7 @@ export default function CreateJiraProject({ projectFlag }: CreateProjectFormType
         </Grid>
       </Grid>
       <BtnSubmit style={{ width: "200px", marginTop: "10px" }}>프로젝트 생성</BtnSubmit>
-      {state.isOpen === true && (<ModalPopupMui />)}
+      {state.isOpen === true && (<MuiModalPopup />)}
     </form >
   )
 }

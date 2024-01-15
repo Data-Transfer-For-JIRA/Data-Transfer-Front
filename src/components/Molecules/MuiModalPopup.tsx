@@ -5,7 +5,7 @@ import { ModalTypeList, PostCreateNewProjectJson, PostResponseCreatPorjectJira }
 import { useModalState } from '../Context/ModalContentsProvider';
 
 
-export default function ModalPopupMui() {
+export default function MuiModalPopup() {
   const { state } = useModalState();
 
   return (

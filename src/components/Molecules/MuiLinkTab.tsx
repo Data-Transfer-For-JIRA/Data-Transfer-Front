@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 });
 
 
-export default function LinkTab(props: LinkTabType) {
+export default function MuiLinkTab(props: LinkTabType) {
   const classes = useStyles();
 
   const navigator = useNavigate();
