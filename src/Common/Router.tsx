@@ -1,4 +1,5 @@
 import App from '../App'
+import { FormAlertModalContents } from '../components/Molecules/MuiModalPopup';
 import CreateJiraProject from '../components/Organisms/CreateJiraProject';
 import GetTableAndPostData from '../components/Organisms/GetTableAndPostData';
 import InfoText from '../components/Organisms/InfoText';
@@ -9,6 +10,13 @@ import LoginPage from '../components/Pages/LoginPage';
 
 enum serviceList { transbefore = 'trans-before', transafter = 'trans-after', transend = 'trans-end' }
 enum projectFlag { createProject = "P", createMaintenance = 'M' }
+
+const data =
+{
+  result: "프로젝트 생성 성공",
+  jiraProjectCode: 'TED-01',
+  jiraProjectName: '전자문서 테스트 더미데이터 프로젝트'
+}
 
 export const Router = [
   {
@@ -36,8 +44,8 @@ export const Router = [
     element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
-  // {
-  //   path: '/testComponent',
-  //   element: <CreateProjectForm projectFlag='M' />
-  // }
+  {
+    path: '/testComponent',
+    element: <FormAlertModalContents responseData={data} />
+  }
 ];

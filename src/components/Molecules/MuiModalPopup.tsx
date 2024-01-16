@@ -1,5 +1,6 @@
 import { Box, Button, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
 import { ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UsePostCreateJiraProject } from '../../Common/Axios';
 import { ModalTypeList, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from '../../Common/Types';
 import { useModalState } from '../Context/ModalContentsProvider';
@@ -122,9 +123,15 @@ function LoadingModalContents() {
 }
 
 
-function FormAlertModalContents({ responseData }: { responseData?: PostResponseCreatPorjectJira }) {
+export function FormAlertModalContents({ responseData }: { responseData?: PostResponseCreatPorjectJira }) {
+  const navigator = useNavigate();
+
+  const handleBtnMoveLingkpage = (jiraProjectCode: string) => {
+    console.log(jiraProjectCode)
+    navigator('/create-weblink', { state: { jiraPorjectCode: jiraProjectCode } })
+  }
   if (responseData !== undefined) {
-    // const jiraProjectURL = `https://markany.atlassian.net/jira/core/projects/${responseData.jiraProjectCode}/board`;
+    const jiraProjectURL = `https://markany.atlassian.net/jira/core/projects/${responseData.jiraProjectCode}/board`;
     return (
       <Box>
         <DialogTitle id="alert-dialog-title">
@@ -147,8 +154,10 @@ function FormAlertModalContents({ responseData }: { responseData?: PostResponseC
               </TableBody>
             </Table>
           </TableContainer>
-        </DialogContent>
-      </Box>
+          <Button target="_blank" variant='contained' sx={{ margin: 3 }} href={`${jiraProjectURL}`} >Jira 프로젝트 보드 이동</Button>
+          <Button variant='contained' sx={{ margin: 3 }} onClick={() => handleBtnMoveLingkpage(responseData.jiraProjectCode)}>프로젝트 연결 페이지로 이동</Button>
+        </DialogContent >
+      </Box >
     )
   } else {
     return <></>

@@ -112,7 +112,6 @@ const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
   const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/platform/service`;
   console.log(import.meta.env.VITE_API_ADDRESS);
   try {
-    console.log("😀😀😀", URL)
     const response = await axios({
       url: URL,
       method: 'post',

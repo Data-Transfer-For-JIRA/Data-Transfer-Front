@@ -1,10 +1,7 @@
-import { Outlet } from 'react-router-dom';
-import './InfoText.css';
 export default function InfoText() {
   return (
     <div className='info-text-box'>
-      <p style={{ color: "white" }}>Jira to WSS & Jira Data Backup site</p>
-      <Outlet />
+      <h1 style={{ color: "white" }}>전자문서 사업부 Jira 관리 페이지입니다.</h1>
     </div>
   )
 }
