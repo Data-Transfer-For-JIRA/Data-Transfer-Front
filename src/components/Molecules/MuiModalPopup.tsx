@@ -67,7 +67,6 @@ function ShowCreateInfoCheck({ checkPostData }: { checkPostData?: PostCreateNewP
     });
   };
   if (checkPostData !== undefined) {
-    console.log('in here if?')
     const handleConfirm = async () => {
       modalDispatch({ type: 'LOADING' })
 
@@ -76,7 +75,6 @@ function ShowCreateInfoCheck({ checkPostData }: { checkPostData?: PostCreateNewP
         modalDispatch({ type: 'RESULT_CREATE_SUCCESS', result: result })
       }
       else {
-        console.log('in here?')
         modalDispatch({ type: 'ERR_API_CALL' });
       }
 

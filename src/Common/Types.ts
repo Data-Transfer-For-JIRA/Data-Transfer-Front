@@ -152,13 +152,14 @@ export const defaultPostJson: PostCreateNewProjectJson = {
     inspectionCycle: ""
   }
 }
-//Post 리턴 데이터 타입
+//Jira Project 생성 Post 리턴 데이터 타입
 export interface PostResponseCreatPorjectJira {
   result: string;
   jiraProjectCode: string;
   jiraProjectName: string;
 }
-
+//  ModalContentsProvider.tsx values
+// Context Api action type
 export const ModalTypeList = {
   NoneState: 'NONE_STATE',
   CreateInfo: 'CREATE_INFO_CHECK',
@@ -167,6 +168,7 @@ export const ModalTypeList = {
   CreateResultFail: 'RESULT_CREATE_FAIL',
   ErrApiCall: 'ERR_API_CALL'
 };
+// Context State
 export interface ModalState {
   isOpen: boolean;
   postData?: PostCreateNewProjectJson;
