@@ -103,6 +103,7 @@ const UsePostAxiosCreateJiraProject = async (postProjectList: string[], postUrl:
 //   }
 //   //return responseData;
 // }
+
 /**
  * Jira 신규프로젝트 생성 요청 api
  * @param postJson : post data
@@ -110,7 +111,6 @@ const UsePostAxiosCreateJiraProject = async (postProjectList: string[], postUrl:
 const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
   Promise<PostResponseCreatPorjectJira | undefined> => {
   const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/platform/service`;
-  console.log(import.meta.env.VITE_API_ADDRESS);
   try {
     const response = await axios({
       url: URL,
@@ -119,7 +119,6 @@ const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
         ...postJson
       }
     })
-    console.log(response);
     return response.data;
   }
   catch (Error) {
@@ -127,4 +126,22 @@ const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
     return undefined;
   }
 }
-export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject };
+
+const PostLogin = async (userLoginInfo: { id: string, pwd: string; }):
+  Promise<boolean | undefined> => {
+  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/login/temp`;
+  try {
+    const { data } = await axios({
+      url: URL,
+      method: 'post',
+      data: { ...userLoginInfo }
+    })
+    return data;
+  }
+  catch (Error) {
+    console.log(Error);
+    return undefined;
+  }
+}
+
+export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject, PostLogin };

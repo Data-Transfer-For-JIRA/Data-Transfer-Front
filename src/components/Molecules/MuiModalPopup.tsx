@@ -127,7 +127,6 @@ export function FormAlertModalContents({ responseData }: { responseData?: PostRe
   const navigator = useNavigate();
 
   const handleBtnMoveLingkpage = (jiraProjectCode: string) => {
-    console.log(jiraProjectCode)
     navigator('/create-weblink', { state: { jiraPorjectCode: jiraProjectCode } })
   }
   if (responseData !== undefined) {
