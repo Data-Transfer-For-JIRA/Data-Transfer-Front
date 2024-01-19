@@ -9,7 +9,7 @@
 table,
 td,
 th {
-  border: 1px solid #eff1f5;
+  border: 1px solid #686868;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-collapse: collapse;
   width: 50ppx;
@@ -17,6 +17,7 @@ th {
 }
 
 .project-table {
+  border: 1px solid #686868;
   text-align: center;
   width: 80%;
   margin: auto;
@@ -25,7 +26,8 @@ th {
 }
 
 tr.protr {
-  background-color: #ffffff;
+  border: 1px solid #686868;
+  background-color: #101418;
   height: 35px;
   font-size: 1rem; /* 20231219 - smlee: 0.9 rem → 1rem 값 추가*/
   font-weight: 500; /* 20231219 - smlee: font-weight 값 추가 */
@@ -33,15 +35,15 @@ tr.protr {
 }
 
 td.protd {
-  border: 1px solid #ced0d4;
+  border: 1px solid #686868;
 }
 
 table.project-table tr.protr:hover {
-  background-color: #ffffffc7;
+  background-color: rgba(90, 90, 90, 0.227);
 }
 
 td {
-  color: black;
+  color: #eff1f5;
 }
 
 th {
@@ -50,8 +52,8 @@ th {
 
 th.check-box-th {
   width: 3%;
-  background-color: #333f50a9;
-  color: white;
+  background-color: #101418;
+  color: #eff1f5;
   font-size: 1rem;
   font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
   padding-top: 10px;
@@ -59,8 +61,8 @@ th.check-box-th {
 
 th.project-name-th {
   width: 70%;
-  background-color: #333f50a9;
-  color: white;
+  background-color: #101418;
+  color: #eff1f5;
   font-size: 1rem;
   font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
   padding-top: 10px;
@@ -69,21 +71,21 @@ th.project-name-th {
 th.project-code-th {
   width: 9%;
   font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
-  background-color: #333f50a9;
+  background-color: #101418;
 }
 
 th.user-name-th {
   font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
-  background-color: #333f50a9;
+  background-color: #101418;
 }
 
 th.date-th {
   width: 10%;
-  background-color: #333f50a9;
+  background-color: #101418;
   font-size: 1rem;
   font-weight: 600; /* 20231219 - smlee: font-weight 값 추가*/
   padding-top: 10px;
-  color: white;
+  color: #eff1f5;
 }
 
 .inputCheckbox {

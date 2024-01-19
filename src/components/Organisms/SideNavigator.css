@@ -1,6 +1,6 @@
 .side-navigator {
-  background-color: #a3b1c5;
-  border-right: 1px solid white;
+  background-color: rgba(20, 26, 31, 0.842);
+  border-right: 1px solid rgb(157, 168, 183);
   width: 230px;
   flex-shrink: 0;
   height: calc(

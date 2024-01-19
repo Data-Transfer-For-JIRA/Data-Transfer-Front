@@ -3,10 +3,9 @@
 }
 
 .table-container {
-  width: 85%;
+  width: 1500px; /* 20240117 smlee: 85% → 1500 수정*/
   height: 100%;
-  background-color: #a3b1c5;
-  color: white;
+  color: #eff1f5;
 }
 
 .submit-container {
@@ -19,9 +18,9 @@
   width: 15%;
   /* test overflow 1206 */
   display: flex;
-  background-color: #a3b1c5;
 }
 
+/*
 .table-control-area {
   width: 70%;
   display: flex;
@@ -29,5 +28,5 @@
   align-items: center;
   margin-left: 15%;
   margin-right: 15%;
-  /* margin-top: 5px; */ /* 20231220 - smlee: 주석처리*/
-}
+  margin-top: 5px;   
+} 20240117 smlee: 주석처리*/
