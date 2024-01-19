@@ -16,7 +16,7 @@ import { setUrl } from '../../Common/UtilFunction';
 import './GetTableAndPostData.css';
 import ModalPopup from '../Molecules/ModalPopup';
 //test JSON
-// import { testJson } from '../../Common/TestGetJson';
+import { testJson } from '../../Common/TestGetJson';
 
 
 /***
@@ -26,6 +26,21 @@ import ModalPopup from '../Molecules/ModalPopup';
  *  컴포넌트 호출시 기본적으로 GET API호출을함
  *  생성요청 페이지랑 티켓생성요청 페이지의 API 결과 JSON이 달라서 맵핑 함수를 추가 및 호출 분기를 만듬.
  */
+
+/* 2024 smlee: 수정사항
+  [as-is]
+  <div className='table-control-area'>
+  <PageIndex pageInfo={pageInfo} pageIndex={pageIndex} setPageIndex={setPageIndex} />
+  {serviceType !== 'trans-end' ? (<BtnSubmit style={{ marginLeft: 'auto' }}>{postBtnName}</BtnSubmit>) : undefined}
+  </div>
+
+  [to-be]
+  <PageIndex pageInfo={pageInfo} pageIndex={pageIndex} setPageIndex={setPageIndex} />
+  <div className='table-control-area'>
+  {serviceType !== 'trans-end' ? (<BtnSubmit style={{ marginLeft: 'auto' }}>{postBtnName}</BtnSubmit>) : undefined}
+  </div>
+
+*/
 
 enum serviceList { transbefore = 'trans-before', transafter = 'trans-after', transend = 'trans-end' }
 
@@ -66,13 +81,13 @@ export default function GetTableAndPostData({ serviceType }: GetTableAndPostData
     async function axiosGetPaging() {
       let result;
       if (search !== '') {
-        result = await UseGetAxiosSearch(serviceType, urlset.getSerchURL, search, pageIndex, pageSize);
-        // result = testJson;
+        //result = await UseGetAxiosSearch(serviceType, urlset.getSerchURL, search, pageIndex, pageSize);
+        result = testJson;
         setGetViewList(result);
       }
       else {
-        result = await UseGetAxiosPageing(serviceType, urlset.getViewURL, pageIndex, pageSize);
-        //result = testJson;
+        // result = await UseGetAxiosPageing(serviceType, urlset.getViewURL, pageIndex, pageSize);
+        result = testJson;
         setGetViewList(result);
       }
       if (result !== undefined) setPageInfo({ totalPage: result.totalPages, numberOfElement: result.numberOfElements });
@@ -88,10 +103,11 @@ export default function GetTableAndPostData({ serviceType }: GetTableAndPostData
         <SearchForm setPageIndex={setPageIndex} setSearch={setSearch} />
         <form onSubmit={(e) => handleTableSubmit(e)}>
           <Table getViewList={getViewList} setPostProjectList={setPostProjectList} postProjectList={postProjectList} />
-          <div className='table-control-area'>
-            <PageIndex pageInfo={pageInfo} pageIndex={pageIndex} setPageIndex={setPageIndex} />
-            {serviceType !== 'trans-end' ? (<BtnSubmit style={{ marginLeft: 'auto' }}>{postBtnName}</BtnSubmit>) : undefined}
-          </div>
+          
+          <PageIndex pageInfo={pageInfo} pageIndex={pageIndex} setPageIndex={setPageIndex} />
+
+          {serviceType !== 'trans-end' ? (<BtnSubmit style={{ marginLeft: 'auto' }}>{postBtnName}</BtnSubmit>) : undefined}
+          
         </form>
       </div >
       <div className='select-check-container'>

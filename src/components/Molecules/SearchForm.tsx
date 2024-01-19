@@ -28,8 +28,8 @@ export default function SearchForm({ setPageIndex, setSearch }: propsType) {
       <form onSubmit={handleFormSubmit}>
         <InputLabel inputId={searchKeyWord} />
         <InputText inputid={searchKeyWord} value={input} changeHandle={handleChangeText} />
-        <BtnSubmit>{btnValue}</ BtnSubmit>
       </form>
+      <BtnSubmit>{btnValue}</ BtnSubmit>
     </div>
   )
 }

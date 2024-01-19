@@ -5,6 +5,9 @@ input[type="text"] {
   font-size: 15px;
   border: 0;
   border-radius: 3px;
+  border: px solid #686868;
   margin: 0 auto;
-  background-color: rgb(255, 255, 255);
+  color: #eff1f5;
+  margin-right: 20px; /*20240116 - smlee: 신규 추가 */
+  background-color: rgba(104, 104, 104, 0.459);
 }

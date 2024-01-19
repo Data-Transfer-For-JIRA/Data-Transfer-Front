@@ -3,7 +3,7 @@
   height: 100%;
   position: relative;
   max-height: calc(var(--contents-height) - 100px);
-  color: white;
+  color: #eff1f5;
   margin-top: 70px; /*20231219 - smlee: 20px → 70px수정*/
   overflow: auto;
 

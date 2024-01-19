@@ -1,7 +1,7 @@
 .btnHover {
   /* width: 78px; */
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 550;
   text-align: center;
   color: #eff1f5;
   cursor: pointer;
@@ -33,10 +33,10 @@
   font-size: 10px;
   background-image: linear-gradient(
     to right,
-    #29323c,
-    #485563,
-    #2b5876,
-    #4e4376
+    rgba(0, 0, 0, 0.89),
+    rgba(0, 0, 0, 0.829),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.8)
   );
   box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
 }
@@ -50,17 +50,29 @@
 button.blueColor {
   background-image: linear-gradient(
     to right,
-    #333f50,
-    #333f50ea,
-    #333f50d0,
-    #333f50
+    rgb(0, 99, 204),
+    rgb(0, 99, 204),
+    rgb(50, 122, 199),
+    rgb(0, 99, 204)
   );
   /*#2560e1*/
   /*#4471eb*/
   /*#0479fe*/
   /*#3f50ed*/
 
-  box-shadow: 0 4px 4px 0 #333f50; /*rgba(65, 132, 234, 0.75)*/
+  /*
+    #333f50,
+    #333f50ea,
+    #333f50d0,
+    #333f50
+*/
+
+  /*
+    rgba(0, 114, 221, 0.8),
+    rgba(0, 114, 221, 0.8),
+    rgba(69, 161, 247, 0.8),
+    rgba(0, 114, 221, 0.8)
+*/
 }
 
 input + button {

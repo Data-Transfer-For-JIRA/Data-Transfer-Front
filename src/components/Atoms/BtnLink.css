@@ -3,12 +3,13 @@
   font-size: 1.1rem; /* 20231219 - smlee: font-size: 1rem → 1.1rem 수정*/
   color: #eff1f5;
   width: 100%; /* 20231219 - smlee: width:90% → 100% 수정*/
+  font-weight: 600;
   border-radius: 0.25rem;
 }
 
 .btn-link:hover {
-  background: #002c7427; /*#002c7442*/
-  color: rgba(255, 255, 255, 0.774); /*rgb(35, 138, 255)*/
+  background-color: rgba(0, 0, 0, 0); /*#002c7442*/
+  color: rgb(87, 146, 209); /*rgb(35, 138, 255)*/
   cursor: pointer;
 }
 
