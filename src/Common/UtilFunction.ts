@@ -1,4 +1,4 @@
-import { returnJsonType, PostReturnJsonType, GetWssContent, emptyJson, urlType } from './Types';
+import { returnJsonType, PostReturnJsonType, GetWssContent, emptyJson, urlType, PostCreateNewProjectJson } from './Types';
 /**
  * 테이블에서 핸들링할 데이터 오브젝트와 '프로젝트 티켓생성요청' API호출 후 받은 응답 데이터를 맵핑하는 함수
  * @param retrunJson 
@@ -41,18 +41,18 @@ export const setUrl = (serviceType: string) => {
   };
   switch (serviceType) {
     case 'trans-before':
-      urlObject.getViewURL = 'http://localhost:8080/transfer/project/before/list';
-      urlObject.getSerchURL = 'http://localhost:8080/transfer/project/before/list/search';
-      urlObject.postSubmitUrl = 'http://localhost:8080/transfer/project/1/create/bulk';
+      urlObject.getViewURL = 'http://localhost:8888/transfer/project/before/list';
+      urlObject.getSerchURL = 'http://localhost:8888/transfer/project/before/list/search';
+      urlObject.postSubmitUrl = 'http://localhost:8888/transfer/project/1/create/bulk';
       return urlObject;
     case 'trans-after':
-      urlObject.getViewURL = 'http://localhost:8080/transfer/project/after/list';
-      urlObject.getSerchURL = 'http://localhost:8080/transfer/project/after/list/search';
-      urlObject.postSubmitUrl = 'http://localhost:8080/transfer/issue';
+      urlObject.getViewURL = 'http://localhost:8888/transfer/project/after/list';
+      urlObject.getSerchURL = 'http://localhost:8888/transfer/project/after/list/search';
+      urlObject.postSubmitUrl = 'http://localhost:8888/transfer/issue';
       return urlObject;
     case 'trans-end':
-      urlObject.getViewURL = 'http://localhost:8080/transfer/issu/before/list';
-      urlObject.getSerchURL = 'http://localhost:8080/transfer/issu/after/list';
+      urlObject.getViewURL = 'http://localhost:8888/transfer/issu/before/list';
+      urlObject.getSerchURL = 'http://localhost:8888/transfer/issu/after/list';
       urlObject.postSubmitUrl = 'not';
       return urlObject;
     default:
@@ -92,3 +92,20 @@ export function setIndexNumber(totalPage: number, pageIndex: number): number[] {
   }
   return tempArray;
 }
+
+
+/** PostJSON 유효성 검사
+ *  projectFlag, projectName, projectCode는 빈값을 받을 수 없음.
+ *  @param postJson : 검사 대상 JSON
+ *  @returns 0:정상, 1:필수값 공백 2:프로젝트 코드 공백
+ */
+export function checkJSON(postJson: PostCreateNewProjectJson): number {
+  let key: keyof typeof postJson.common;
+  for (key in postJson.common) {
+    if (postJson.common[key] === undefined || postJson.common[key] === "" || postJson.common[key] === null) {
+      return 1;
+    }
+  }
+  return 0;
+}
+

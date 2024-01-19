@@ -1,89 +1,60 @@
 import { makeStyles } from '@material-ui/styles';
-import { Box, FormControl, Grid, TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { PostCreateNewProjectJson, PostCreateNewMaintenance } from '../../Common/Types'
+import { PostCreateNewProjectJson, defaultPostJson } from '../../Common/Types'
 import BtnSubmit from '../Atoms/BtnSubmit';
-import './CreateJiraProject.css'
-type Type = {
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+// import { checkJSON } from '../../Common/UtilFunction';
+import { Box, Grid } from '@mui/material';
+import CreateProjectForm from '../Molecules/CreateProjectForm';
+import MuiModalPopup from '../Molecules/MuiModalPopup';
+import { useModalState } from '../Context/ModalContentsProvider';
+
+type CreateProjectFormType = {
   projectFlag: string;
 }
-
 const useStyles = makeStyles(() => ({
-  EssentialBox: {
+  DataFieldBox: {
     width: "100%",
-    marginTop: "20px",
+    padding: '10px',
     border: '1px dashed black'
   },
   textField: {
     marginTop: "15px !important",
-  }
+  },
 }));
 
-export default function CreateJiraProject({ projectFlag }: Type) {
+export default function CreateJiraProject({ projectFlag }: CreateProjectFormType) {
   const classes = useStyles();
-  const [postJson, setPostJson] = useState<PostCreateNewProjectJson | PostCreateNewMaintenance>({ projectFlag: projectFlag, projectName: "", projectCode: "" });
+  const { state, modalDispatch } = useModalState();
 
-  const handleInputChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setPostJson({ ...postJson, [name]: value })
-  }
+  const { control, handleSubmit } = useForm<PostCreateNewProjectJson>({
+    defaultValues: { ...defaultPostJson, essential: { ...defaultPostJson.essential, projectFlag: projectFlag } }
+  });
 
-  const handlePostForm = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    //유효성 검사
+  const handlePostForm: SubmitHandler<PostCreateNewProjectJson> = async (data) => {
+    // 240109 : input이 다 채워지지 않아서 일단 보류.
+    // const result = checkJSON(data);
+    // if (result === 1) { alert('여기에 프로젝트 코드 공란이라고 경고창띄움'); }
+    modalDispatch({ type: 'CREATE_INFO_CHECK', data: data });
 
     //Axios 전송
-    const result = await UsePostCreateJiraProject(postJson);
+    //setApiResponse(await UsePostCreateJiraProject(data));
 
-    //결과에 따른 alert창 등장로직
   }
-
-  useEffect(() => {
-    console.log(postJson)
-  }, [postJson])
   return (
-    <form noValidate autoComplete="off" onSubmit={handlePostForm}>
-      <FormControl>
-        <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <Box className={classes.EssentialBox}>
-              <TextField
-                className={classes.textField}
-                disabled
-                id="projectFlag"
-                name='projectFlag'
-                label="타입"
-                value={projectFlag}
-                size="small"
-                sx={{ width: "20%" }}
-              />
-              <TextField
-                className={classes.textField}
-                id="projectCode"
-                name='projectCode'
-                label="PMS 프로젝트 코드"
-                size="small"
-                sx={{ width: "80%" }}
-                onChange={handleInputChanged}
-              />
-              <TextField
-                className={classes.textField}
-                id="projectName"
-                name='projectName'
-                label="Jira 프로젝트 이름"
-                size="small"
-                sx={{ width: "100%" }}
-                onChange={handleInputChanged}
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={8}>
-
-          </Grid>
+    <form autoComplete="off" onSubmit={handleSubmit(handlePostForm)}>
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <Box className={classes.DataFieldBox}>
+            <CreateProjectForm control={control} />
+          </Box>
         </Grid>
-        <BtnSubmit style={{ width: "200px", marginTop: "10px" }}>프로젝트 생성</BtnSubmit>
-      </FormControl>
-
+        <Grid item xs={8}>
+          {/*여기에는 Jira에서 쓸 에디터를 추가할예정 */}
+        </Grid>
+      </Grid>
+      <BtnSubmit style={{ width: "200px", marginTop: "10px" }}>프로젝트 생성</BtnSubmit>
+      {state.isOpen === true && (<MuiModalPopup />)}
     </form >
   )
 }

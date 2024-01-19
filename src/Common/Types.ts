@@ -80,18 +80,100 @@ export interface CreateIssueResponse {
 
 //신규 지라 프로젝트 생성에 보낼 데이터 정의 및 Json타입
 export interface PostCreateNewProjectJson {
-  projectFlag: string;
-  projectName: string;
-  projectCode: string;
+  essential: {
+    projectFlag: string;
+    projectName: string;
+  },
+  common: {
+    projectCode: string;
+    assignee: string;
+    subAssignee: string;
+    salesManager: string;
+    contractor: string;
+    client: string;
+    productInfo1: string[];
+    productInfo2: string[];
+    productInfo3: string[];
+    productInfo4: string[];
+    productInfo5: string[];
+    barcodeType: string;
+    multiOsSupport: string;
+    printerSupportRange: string;
+    etc: string;
+    description: string;
+  },
+  selected: {
+    //프로젝트
+    projectAssignmentDate: string;
+    projectProgressStep: string;
+    //유지보수
+    contractStatus: string;
+    maintenanceStartDate: string;
+    maintenanceEndDate: string;
+    inspectionMethod: string;
+    inspectionMethodEtc: string;
+    inspectionCycle: string;
+  }
 }
 
-export interface PostCreateNewMaintenance {
-  projectFlag: string;
-  projectName: string;
-  projectCode: string;
+export const defaultPostJson: PostCreateNewProjectJson = {
+  essential: {
+    projectFlag: "",
+    projectName: "",
+  },
+  common: {
+    projectCode: "",
+    assignee: "",
+    subAssignee: "",
+    salesManager: "",
+    contractor: "",
+    client: "",
+    productInfo1: [],
+    productInfo2: [],
+    productInfo3: [],
+    productInfo4: [],
+    productInfo5: [],
+    barcodeType: "",
+    multiOsSupport: "",
+    printerSupportRange: "",
+    etc: "",
+    description: ""
+  },
+  selected: {
+    //프로젝트
+    projectAssignmentDate: "",
+    projectProgressStep: "",
+    //유지보수
+    contractStatus: "",
+    maintenanceStartDate: "",
+    maintenanceEndDate: "",
+    inspectionMethod: "",
+    inspectionMethodEtc: "",
+    inspectionCycle: ""
+  }
 }
-
-
-
+//Jira Project 생성 Post 리턴 데이터 타입
+export interface PostResponseCreatPorjectJira {
+  result: string;
+  jiraProjectCode: string;
+  jiraProjectName: string;
+}
+//  ModalContentsProvider.tsx values
+// Context Api action type
+export const ModalTypeList = {
+  NoneState: 'NONE_STATE',
+  CreateInfo: 'CREATE_INFO_CHECK',
+  Loading: 'LOADING',
+  CreateResultSuccess: 'RESULT_CREATE_SUCCESS',
+  CreateResultFail: 'RESULT_CREATE_FAIL',
+  ErrApiCall: 'ERR_API_CALL'
+};
+// Context State
+export interface ModalState {
+  isOpen: boolean;
+  postData?: PostCreateNewProjectJson;
+  responseData?: PostResponseCreatPorjectJira;
+  modalType: typeof ModalTypeList[keyof typeof ModalTypeList];
+}
 
 export interface pageInfoType { totalPage: number; numberOfElement: number; }

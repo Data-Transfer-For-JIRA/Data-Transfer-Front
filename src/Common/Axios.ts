@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { returnJsonType, PostResponseTyep, CreateIssueResponse } from './Types';
+import { returnJsonType, PostResponseTyep, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from './Types';
 import { mappingViewData } from './UtilFunction';
+
 
 const noDataError = new Error('API 호출결과가 없습니다.')
 
@@ -70,36 +71,60 @@ const UsePostAxiosCreateJiraProject = async (postProjectList: string[], postUrl:
   }
 }
 
-/**
- * 지라 프로젝트의 티켓을 생성요청하는 axios
- * 기존 was에서의 반복처리가 아닌 브라우저에서 반복 처리함.(미완성)
- * @param postProjectList : 선택된 프로젝트 리스트
- * @param postUrl : 호출할 API url  
- * @returns {
- *  jiraProjectCode : string;
- *  flag : ResponseState( allready = 'allready', fail = 'fail', searchFail = 'searchFail', success = 'success')
- * }
- */
-const UsePostAxiosCreateJiraIssue = async (postProjectList: string[], postUrl: string)
-  : Promise<CreateIssueResponse[]> => {
-  const timeout = postProjectList.length * 200000;
-  let responseData: PostResponseTyep[];
+// /**
+//  * 지라 프로젝트의 티켓을 생성요청하는 axios
+//  * 기존 was에서의 반복처리가 아닌 브라우저에서 반복 처리함.(미완성)
+//  * @param postProjectList : 선택된 프로젝트 리스트
+//  * @param postUrl : 호출할 API url  
+//  * @returns {
+//  *  jiraProjectCode : string;
+//  *  flag : ResponseState( allready = 'allready', fail = 'fail', searchFail = 'searchFail', success = 'success')
+//  * }
+//  */
+// const UsePostAxiosCreateJiraIssue = async (postProjectList: string[], postUrl: string)
+//   : Promise<CreateIssueResponse[]> => {
+//   const timeout = postProjectList.length * 200000;
+//   let responseData: PostResponseTyep[];
 
-  if (postProjectList.length > 0) {
-    postProjectList.forEach(async (item) => {
-      try {
-        const { data } = await axios.post(postUrl, item, { timeout });
-        responseData.push(data);
+//   if (postProjectList.length > 0) {
+//     postProjectList.forEach(async (item) => {
+//       try {
+//         const { data } = await axios.post(postUrl, item, { timeout });
+//         responseData.push(data);
+//       }
+//       catch (Error) {
+//         console.log(Error)
+//         throw Error;
+//       }
+//     });
+//   }
+//   else {
+//     throw noDataError;
+//   }
+//   //return responseData;
+// }
+/**
+ * Jira 신규프로젝트 생성 요청 api
+ * @param postJson : post data
+ */
+const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
+  Promise<PostResponseCreatPorjectJira | undefined> => {
+  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/platform/service`;
+  console.log(import.meta.env.VITE_API_ADDRESS);
+  try {
+    const response = await axios({
+      url: URL,
+      method: 'post',
+      data: {
+        ...postJson
       }
-      catch (Error) {
-        console.log(Error)
-        throw Error;
-      }
-    });
+    })
+    console.log(response);
+    return response.data;
   }
-  else {
-    throw noDataError;
+  catch (Error) {
+    console.log(Error);
+    return undefined;
   }
-  return responseData;
 }
-export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostAxiosCreateJiraIssue };
+export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject };
