@@ -72,12 +72,12 @@ export default function AppLogin() {
     }
   };
   return (
-    <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
+    <Box sx={{ height: '100vh' }}>
       <Container fixed maxWidth="lg" sx={{ height: '100vh', display: 'flex', alignItems: 'center' }}>
         <Box sx={{ width: '70%', margin: '0 auto' }}>
           <FormControl sx={{ width: '100%' }} onKeyDown={onCheckEnterkey}>
-            <Typography variant="h5">
-              Markany Edoc
+            <Typography variant="h5" >
+              Markany Edoc Jira Manage Page
             </Typography>
             <TextField
               id="id"
@@ -86,12 +86,13 @@ export default function AppLogin() {
               fullWidth
               required
               type="text"
-              sx={{ marginTop: '15px' }}
+              autoComplete="false"
+              sx={{ marginTop: '13px' }}
               variant="outlined"
               onChange={handleForm}
               value={userForm.id}
               inputProps={{
-                style: { width: "100%", height: '100%', backgroundColor: "#cfe8fc", }
+                style: { width: "100%", height: '100%', margin: 0 }
               }}
             />
 
@@ -102,10 +103,14 @@ export default function AppLogin() {
               fullWidth
               required
               type="password"
-              sx={{ marginTop: '13px' }}
+              autoComplete="false"
+              sx={{ marginTop: '13px', }}
               variant="outlined"
               onChange={handleForm}
               value={userForm.pwd}
+              inputProps={{
+                style: { width: "100%", height: '100%', margin: 0, backgroundColor: 'rgba(104, 104, 104, 0.459)' },
+              }}
             />
 
             <Button type="submit" variant="contained" onClick={handleLoginData} fullWidth sx={{ marginTop: '15px' }}>Login</Button>

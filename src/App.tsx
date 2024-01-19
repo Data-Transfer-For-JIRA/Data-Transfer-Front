@@ -1,15 +1,25 @@
+import { CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginProvider, useLoginContext } from './components/Context/LoginProvider';
 import LoginPage from './components/Pages/LoginPage';
 import MainPage from './components/Pages/MainPage';
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
   return (
-    <LoginProvider>
-      <LoginApp />
-    </LoginProvider>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <LoginProvider>
+        <LoginApp />
+      </LoginProvider>
+    </ThemeProvider>
   )
 }
 

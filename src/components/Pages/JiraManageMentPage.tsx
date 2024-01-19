@@ -8,7 +8,6 @@ const useStyles = makeStyles(() => ({
   container: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#eff1f5",
   }
 }));
 
@@ -26,7 +25,7 @@ export default function JiraManageMentPage() {
   return (
     <ModalContentsProvider>
       <Container maxWidth={false} className={classes.container}>
-        <Box sx={{ borderColor: '#9e9e9e' }}>
+        <Box>
           <Tabs value={tabValue} role="navigation">
             <MuiLinkTab label="프로젝트" link="/create-jira-project/project" />
             <MuiLinkTab label="유지보수" link="/create-jira-project/maintenance" />

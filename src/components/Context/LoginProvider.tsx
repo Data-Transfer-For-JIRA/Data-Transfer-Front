@@ -25,6 +25,7 @@ export function LoginProvider({ children }: LoginProviderType) {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLoginContext = (): LoginContextType => {
   const context = useContext(LoginContext);
   return context;
