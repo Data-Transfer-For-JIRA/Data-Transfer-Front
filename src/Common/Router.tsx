@@ -25,6 +25,7 @@ export const Router = [
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <InfoText /> },
+      { path: "Login", element: <LoginPage /> },
       { path: "load-wsslist", element: <GetTableAndPostData serviceType={serviceList.transbefore} /> },
       { path: "transfer-state-list", element: <GetTableAndPostData serviceType={serviceList.transafter} /> },
       { path: "view-transfer-endlist", element: <GetTableAndPostData serviceType={serviceList.transend} /> },
@@ -38,11 +39,6 @@ export const Router = [
       { path: "/create-weblink", element: <LinkJiraProject /> },
       { path: "check-backup", element: <GetTableAndPostData serviceType={serviceList.transend} /> },
     ],
-  },
-  {
-    path: '/Login',
-    element: <LoginPage />,
-    errorElement: <ErrorPage />,
   },
   {
     path: '/testComponent',

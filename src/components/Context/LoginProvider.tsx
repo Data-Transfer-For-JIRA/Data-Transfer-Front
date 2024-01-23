@@ -2,19 +2,19 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 
 interface LoginContextType {
   loginState: boolean,
-  switchLogin: () => void
+  switchLogin: (flag: boolean) => void
 }
 
 type LoginProviderType = { children: ReactNode; }
 
-const LoginContext = createContext<LoginContextType>({ loginState: false, switchLogin: () => { } });
+const LoginContext = createContext<LoginContextType>({ loginState: true, switchLogin: () => { } });
 
 export function LoginProvider({ children }: LoginProviderType) {
-  const [loginState, setLoginState] = useState(false);
+  const [loginState, setLoginState] = useState(true);
 
-  const switchLogin = () => {
+  const switchLogin = (flag: boolean) => {
     console.log('in provider');
-    setLoginState((prev) => !prev);
+    setLoginState(flag);
   }
   const LoginProviderValue: LoginContextType = { loginState, switchLogin };
 

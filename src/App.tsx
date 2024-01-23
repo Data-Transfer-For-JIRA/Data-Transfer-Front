@@ -1,6 +1,6 @@
 import { CssBaseline } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useEffect } from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import createTheme from "@mui/material/styles/createTheme";
 import { useNavigate } from 'react-router-dom';
 import { LoginProvider, useLoginContext } from './components/Context/LoginProvider';
 import LoginPage from './components/Pages/LoginPage';
@@ -30,9 +30,6 @@ function LoginApp() {
   if (!loginState) {
     navigator("/Login")
   }
-  useEffect(() => {
-    console.log(loginState);
-  }, [loginState])
   return (
     (loginState ? <MainPage /> : <LoginPage />)
   )

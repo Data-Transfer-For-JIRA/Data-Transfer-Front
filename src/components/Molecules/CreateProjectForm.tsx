@@ -25,7 +25,7 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
             style: { width: '100%' },
             inputProps: {
               style: {
-                width: '100%'
+                width: '100%', margin: 0
               }
             }
           }} />
@@ -41,7 +41,7 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
             style: { width: '100%' },
             inputProps: {
               style: {
-                width: '100%'
+                width: '100%', margin: 0
               }
             }
           }} />
@@ -58,7 +58,7 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
             style: { width: '100%' },
             inputProps: {
               style: {
-                width: '100%'
+                width: '100%', margin: 0
               }
             }
           }} />
@@ -71,9 +71,10 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
         selectBoxProps={{
           label: "담당자",
           style: { width: '100%' },
+          size: "small",
           inputProps: {
             style: {
-              width: '100%'
+              width: '100%',
             }
           }
         }}
@@ -87,6 +88,7 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
           label: "영업대표",
           id: "assignee-select",
           style: { width: '100%' },
+          size: "small",
           inputProps: {
             style: {
               width: '100%'

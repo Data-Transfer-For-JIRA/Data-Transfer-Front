@@ -1,4 +1,3 @@
-import './InputText.css';
 type propsType = {
   inputid: string;
   value: string;

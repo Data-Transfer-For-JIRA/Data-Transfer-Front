@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   DataFieldBox: {
     width: "100%",
     padding: '10px',
-    border: '1px dashed black'
+    marginTop: '10px'
   },
   textField: {
     marginTop: "15px !important",
@@ -32,14 +32,7 @@ export default function CreateJiraProject({ projectFlag }: CreateProjectFormType
   });
 
   const handlePostForm: SubmitHandler<PostCreateNewProjectJson> = async (data) => {
-    // 240109 : input이 다 채워지지 않아서 일단 보류.
-    // const result = checkJSON(data);
-    // if (result === 1) { alert('여기에 프로젝트 코드 공란이라고 경고창띄움'); }
     modalDispatch({ type: 'CREATE_INFO_CHECK', data: data });
-
-    //Axios 전송
-    //setApiResponse(await UsePostCreateJiraProject(data));
-
   }
   return (
     <form autoComplete="off" onSubmit={handleSubmit(handlePostForm)}>

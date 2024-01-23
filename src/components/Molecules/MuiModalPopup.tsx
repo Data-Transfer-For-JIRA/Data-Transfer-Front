@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
+import { Box, Button, CssBaseline, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
 import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UsePostCreateJiraProject } from '../../Common/Axios';
@@ -11,6 +11,7 @@ export default function MuiModalPopup() {
 
   return (
     <ModalBase modalOpen={state.isOpen}>
+      <CssBaseline />
       {state.modalType === ModalTypeList.CreateInfo && (<ShowCreateInfoCheck checkPostData={state.postData} />)}
       {state.modalType === ModalTypeList.Loading && (<LoadingModalContents />)}
       {state.modalType === ModalTypeList.CreateResultSuccess && (<FormAlertModalContents responseData={state.responseData} />)}
@@ -52,14 +53,16 @@ function ShowCreateInfoCheck({ checkPostData }: { checkPostData?: PostCreateNewP
             <TextField
               disabled
               value={value === "" ? "설정안함" : value}
-              style={{ width: '50%' }}
+              style={{ width: '100%' }}
               size="small"
               label={key}
               InputLabelProps={{
                 color: 'success',
               }}
-              InputProps={{
-
+              inputProps={{
+                style: {
+                  margin: 0
+                }
               }}
             />
           </Box>
@@ -82,9 +85,9 @@ function ShowCreateInfoCheck({ checkPostData }: { checkPostData?: PostCreateNewP
     }
     return (
       <Paper elevation={3}>
-        <Typography variant="h5" gutterBottom>입력된 데이터 확인</Typography>
-        <Button variant="contained" color='primary' onClick={handleConfirm}>확인완료</Button>
-        <Button variant="contained" color='error' onClick={() => modalDispatch({ type: 'NONE_STATE' })} >취소</Button>
+        <Typography variant="h5" gutterBottom>입력 데이터 확인</Typography>
+        <Button variant="contained" color='primary' onClick={handleConfirm} sx={{ margin: "5px" }}>확인완료</Button>
+        <Button variant="contained" color='error' onClick={() => modalDispatch({ type: 'NONE_STATE' })} sx={{ margin: "5px" }}>취소</Button>
         <Grid container style={{ width: '100%' }}>
           <Grid item xs={6}>
             <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap' }}>

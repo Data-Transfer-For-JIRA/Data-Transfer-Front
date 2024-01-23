@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // MUI
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -68,9 +68,13 @@ export default function AppLogin() {
     }
     else if (resPonseLoginState === true) {
       console.log('in');
-      switchLogin();
+      switchLogin(true);
     }
   };
+
+  useEffect(() => {
+    switchLogin(true);
+  }, [])
   return (
     <Box sx={{ height: '100vh' }}>
       <Container fixed maxWidth="lg" sx={{ height: '100vh', display: 'flex', alignItems: 'center' }}>
@@ -109,7 +113,7 @@ export default function AppLogin() {
               onChange={handleForm}
               value={userForm.pwd}
               inputProps={{
-                style: { width: "100%", height: '100%', margin: 0, backgroundColor: 'rgba(104, 104, 104, 0.459)' },
+                style: { width: "100%", height: '100%', margin: 0, },
               }}
             />
 
