@@ -177,3 +177,30 @@ export interface ModalState {
 }
 
 export interface pageInfoType { totalPage: number; numberOfElement: number; }
+
+//DataGrid Row Type
+export interface GridRowType {
+  key: string,
+  id: string,
+  jiraProjectName: string,
+  migratedDate: string,
+  projectCode: string,
+  wssProjectName: string,
+  flag: string,
+  projectAssignees: string,
+  updateDate: string,
+  updateIssueFlag: boolean
+}
+
+export const defaultGridData = {
+  key: "",
+  id: "",
+  jiraProjectName: "",
+  migratedDate: "",
+  projectCode: "",
+  wssProjectName: "",
+  flag: "",
+  projectAssignees: "",
+  updateDate: "",
+  updateIssueFlag: false
+}

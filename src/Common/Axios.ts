@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { returnJsonType, PostResponseTyep, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from './Types';
+import { returnJsonType, PostResponseTyep, PostCreateNewProjectJson, PostResponseCreatPorjectJira, GridRowType } from './Types';
 import { mappingViewData } from './UtilFunction';
 
 
@@ -144,4 +144,16 @@ const PostLogin = async (userLoginInfo: { id: string, pwd: string; }):
   }
 }
 
-export { UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject, PostLogin };
+const UseGetAxiosSearcJiraList = async (searchKeyWord: string): Promise<GridRowType[] | undefined> => {
+  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/api/project/search?searchKeyword=${searchKeyWord}`;
+  try {
+    const { data } = await axios(URL);
+    return data;
+  }
+  catch (Error) {
+    console.log(Error)
+    return undefined;
+  }
+}
+
+export { UseGetAxiosSearcJiraList, UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject, PostLogin };
