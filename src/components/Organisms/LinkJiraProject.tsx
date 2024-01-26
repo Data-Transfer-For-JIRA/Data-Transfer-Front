@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
-import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import ClearIcon from '@mui/icons-material/Clear';
 import MuiDataMoreViewTable from '../Molecules/MuiDataMoreViewTable';
 import MuiSearchInput from '../Atoms/MuiSerchInput';
 import { GridRowType } from '../../Common/Types';
@@ -18,8 +18,12 @@ export default function LinkJiraProject() {
 
   const [gridData, setGridData] = useState<GridRowType[]>([]);
 
-  const handleDeleteSubProject = () => {
+  const handleDeleteSubProject = (target: number) => {
+    setSubJiraKey((prev) => [...prev].filter((item, index) => index !== target))
+  }
 
+  const handleCallAxios = () => {
+    console.log('hi')
   }
   return (
     <Grid container spacing={1} margin={"10px"}>
@@ -50,15 +54,15 @@ export default function LinkJiraProject() {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell align="left">PMS 코드</TableCell>
+                    <TableCell align="left">Jira 코드</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {subJiraKey.map((item, index) => (
                     <TableRow key={`${item}${index}`} sx={{ width: '100%' }}>
-                      <TableCell sx={{ bgcolor: 'yellow', display: "flex" }}>
-                        <p style={{ backgroundColor: 'green', width: '80%', verticalAlign: "middle" }}>{item}</p>
-                        <IconButton type='button' sx={{ bgcolor: 'red' }} onClick={handleDeleteSubProject}><ClearOutlinedIcon /></IconButton>
+                      <TableCell sx={{ display: "flex" }}>
+                        <p style={{ width: '90%', alignSelf: "center" }}>{item}</p>
+                        <IconButton type='button' sx={{ width: '10%' }} onClick={() => handleDeleteSubProject(index)}><ClearIcon /></IconButton>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -68,7 +72,8 @@ export default function LinkJiraProject() {
             <Button
               variant="contained"
               color='primary'
-              sx={{ marginTop: '20px', marginLeft: "80%" }}>연결</Button>
+              sx={{ marginTop: '20px', marginLeft: "80%" }}
+              onClick={handleCallAxios}>연결</Button>
           </Box>
         </Paper>
       </Grid>

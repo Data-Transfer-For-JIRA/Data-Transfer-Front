@@ -42,6 +42,11 @@ export default function MuiSelectedTable({ setSubJiraKey, gridData }: MuiSelecte
       onRowSelectionModelChange={(selection) => handleSelectedRow(selection)}
       onCellClick={(GridCellParams) => { handleOnClickRow(GridCellParams) }}
       getRowId={(obj) => obj.id}
+      sx={{
+        "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
+          display: "none"
+        }
+      }}
     />
   )
 }
