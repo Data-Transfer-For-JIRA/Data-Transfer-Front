@@ -4,7 +4,9 @@ import MuiInputText from '../Atoms/MuiInputText';
 import { Control } from 'react-hook-form/dist/types';
 import { PostCreateNewProjectJson } from '../../Common/Types';
 import MuiSelectBox from '../Atoms/MuiSelectBox';
-import { USER } from '../../Common/User';
+import { USER, PRODUCT } from '../../Common/SelectValue';
+import MuiMultiSelected from '../Atoms/MuiMultiSelected';
+import { useState } from 'react';
 
 
 type CreateProjectFormType = {
@@ -12,6 +14,7 @@ type CreateProjectFormType = {
 }
 
 export default function CreateProjectForm({ control }: CreateProjectFormType) {
+  const [productCount, setProductCodunt] = useState("1");
   return (
     <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "15px" }}>
       <FormControl style={{ width: '20%' }}>
@@ -96,6 +99,57 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
           }
         }}
       />
+      <FormControl style={{ width: '50%' }}>
+        <MuiInputText
+          control={control}
+          name="common.contractor"
+          textFieldProps={{
+            label: "계약사",
+            size: "small",
+            style: { width: '100%' },
+            inputProps: {
+              style: {
+                width: '100%', margin: 0
+              }
+            }
+          }} />
+      </FormControl>
+
+      <FormControl style={{ width: '50%' }}>
+        <MuiInputText
+          control={control}
+          name="common.client"
+          textFieldProps={{
+            label: "고객사",
+            size: "small",
+            style: { width: '100%' },
+            inputProps: {
+              style: {
+                width: '100%', margin: 0
+              }
+            }
+          }} />
+      </FormControl>
+
+
+      <MuiMultiSelected
+        control={control}
+        name="common.productInfo1"
+        item={PRODUCT}
+        selectBoxProps={{
+          label: "1.제품정보",
+          id: "productInfo1-select",
+          style: { width: '100%' },
+          size: "small",
+          defaultValue: "",
+          multiple: true,
+          inputProps: {
+            style: {
+              width: '100%'
+            }
+          }
+        }} />
+
     </Box >
   );
 }

@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectProps } from '@mui/material';
 import { useController, FieldValues, FieldPath, UseControllerProps } from 'react-hook-form';
-import { USER } from '../../Common/User';
+import { USER } from '../../Common/SelectValue';
 
 
 interface MuiProps {

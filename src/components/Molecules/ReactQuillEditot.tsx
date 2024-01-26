@@ -29,7 +29,6 @@ type ReactQuillEditorType = {
   control: Control<PostCreateNewProjectJson>;
 }
 export default function ReactQuillEditor({ projectFlag, control }: ReactQuillEditorType) {
-  console.log(projectFlag);
   let defaultValue: string;
   if (projectFlag === 'P') {
     defaultValue = "<p><strong>1.고객사 :</strong></p><p><strong>2. 계약 업체 :</strong></p><p><strong>3. 프로젝트 명 : </strong></p><p><strong>4. 프로젝트 코드 :</strong></p><p><strong>5. 지원 일정 :</strong></p><p><strong>6. 담당자 :</strong></p><p><strong>7. 지원 범위 :</strong></p><ul><li><strong>가. 지원 형태 :</strong></li><li><strong>나. 연동 형태 :</strong></li><li><strong>다. 사용자 지원 환경 :</strong></li><li><strong>라. 서버 수량 :</strong></li></ul><p><strong>8. 장소 :</strong></p><p><strong>9. 영업 담당 :</strong></p><p><strong>10. 기타 :</strong></p>"

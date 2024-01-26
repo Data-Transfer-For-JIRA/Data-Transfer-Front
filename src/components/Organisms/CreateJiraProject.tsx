@@ -34,6 +34,7 @@ export default function CreateJiraProject({ projectFlag }: CreateProjectFormType
   });
 
   const handlePostForm: SubmitHandler<PostCreateNewProjectJson> = async (data) => {
+    console.log(data);
     modalDispatch({ type: 'CREATE_INFO_CHECK', data: data });
   }
   return (
