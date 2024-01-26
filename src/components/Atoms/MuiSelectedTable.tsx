@@ -33,7 +33,7 @@ export default function MuiSelectedTable({ setSubJiraKey, gridData }: MuiSelecte
       columns={colums}
       initialState={{
         pagination: {
-          paginationModel: { page: 0, pageSize: 5 },
+          paginationModel: { page: 0, pageSize: 8 },
         },
       }}
       rowSelectionModel={rowSelected}
@@ -41,7 +41,7 @@ export default function MuiSelectedTable({ setSubJiraKey, gridData }: MuiSelecte
       hideFooterSelectedRowCount
       onRowSelectionModelChange={(selection) => handleSelectedRow(selection)}
       onCellClick={(GridCellParams) => { handleOnClickRow(GridCellParams) }}
-      getRowId={(obj) => obj.projectCode}
+      getRowId={(obj) => obj.id}
     />
   )
 }

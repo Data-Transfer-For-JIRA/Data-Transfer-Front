@@ -14,13 +14,14 @@ export default function MuiDataMoreViewTable({ gridData, setSubJiraKey }: MuiDat
   const handleOnClickSetSubKey = () => {
     const jiraCode = girdSelected.key;
     setSubJiraKey((prev) => {
-      return [...prev, jiraCode]
+      if (!prev.includes(jiraCode)) return [...prev, jiraCode]
+      else { return prev }
     });
     setGirdSelected(defaultGridData);
   }
   return (
     <Box>
-      <Box sx={{ width: "100%", marginTop: '30px', minHeight: '520px' }}>
+      <Box sx={{ width: "95%", marginTop: '30px', minHeight: '520px', margin: 'auto' }}>
         <MuiSelectedTable setSubJiraKey={setGirdSelected} gridData={gridData} />
       </Box>
       <Button variant="contained"

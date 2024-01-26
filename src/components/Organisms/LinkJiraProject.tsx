@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import MuiDataMoreViewTable from '../Molecules/MuiDataMoreViewTable';
 import MuiSearchInput from '../Atoms/MuiSerchInput';
 import { GridRowType } from '../../Common/Types';
@@ -16,9 +17,12 @@ export default function LinkJiraProject() {
   const [subJiraKey, setSubJiraKey] = useState<string[]>([]);
 
   const [gridData, setGridData] = useState<GridRowType[]>([]);
+
+  const handleDeleteSubProject = () => {
+
+  }
   return (
     <Grid container spacing={1} margin={"10px"}>
-
       <Grid item xs={8.8}>
         <Paper sx={{ width: '100%', height: '85vh' }} elevation={5}>
           <MuiSearchInput setGridData={setGridData} />
@@ -42,20 +46,29 @@ export default function LinkJiraProject() {
           </Box>
           <Box sx={{ marginTop: '30px' }}>
             <Typography variant="h6">연결대상 리스트</Typography>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left">PMS 코드</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {subJiraKey.map((item, index) => (
-                  <TableRow key={`${item}${index}`}>
-                    <TableCell align="left">{item}</TableCell>
+            <Box sx={{ minHeight: '450px' }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">PMS 코드</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHead>
+                <TableBody>
+                  {subJiraKey.map((item, index) => (
+                    <TableRow key={`${item}${index}`} sx={{ width: '100%' }}>
+                      <TableCell sx={{ bgcolor: 'yellow', display: "flex" }}>
+                        <p style={{ backgroundColor: 'green', width: '80%', verticalAlign: "middle" }}>{item}</p>
+                        <IconButton type='button' sx={{ bgcolor: 'red' }} onClick={handleDeleteSubProject}><ClearOutlinedIcon /></IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+            <Button
+              variant="contained"
+              color='primary'
+              sx={{ marginTop: '20px', marginLeft: "80%" }}>연결</Button>
           </Box>
         </Paper>
       </Grid>
