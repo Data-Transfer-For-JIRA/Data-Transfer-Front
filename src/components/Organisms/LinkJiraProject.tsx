@@ -11,7 +11,7 @@ import { GridRowType } from '../../Common/Types';
 
 export default function LinkJiraProject() {
   const { state } = useLocation();
-  const [mainJiraKey, setMainJiraKey] = useState();
+  const [mainJiraKey, setMainJiraKey] = useState("");
   useEffect(() => { if (state !== null) { setMainJiraKey(state.jiraPorjectCode) } }, [state])
 
   const [subJiraKey, setSubJiraKey] = useState<string[]>([]);
@@ -23,7 +23,14 @@ export default function LinkJiraProject() {
   }
 
   const handleCallAxios = () => {
-    console.log('hi')
+    if (mainJiraKey === "" || mainJiraKey === undefined) {
+      alert('Not Selected MainJiraKey')
+      return;
+    }
+    if (subJiraKey.length < 1) {
+      alert('Not Selected SubJiraKey')
+      return;
+    }
   }
   return (
     <Grid container spacing={1} margin={"10px"}>
