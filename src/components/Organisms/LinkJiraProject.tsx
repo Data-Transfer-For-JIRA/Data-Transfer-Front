@@ -33,15 +33,15 @@ export default function LinkJiraProject() {
     }
   }
   return (
-    <Grid container spacing={1} margin={"10px"}>
-      <Grid item xs={8.8}>
-        <Paper sx={{ width: '100%', height: '85vh' }} elevation={5}>
+    <Grid container spacing={1} marginLeft={"px"}>
+      <Grid item xs={9}>
+        <Paper sx={{ width: '100%', height: '90vh' }} elevation={5}>
           <MuiSearchInput setGridData={setGridData} />
           <MuiDataMoreViewTable gridData={gridData} setSubJiraKey={setSubJiraKey} />
         </Paper>
       </Grid>
       <Grid item xs={3}>
-        <Paper sx={{ width: '100%', height: '85vh' }} elevation={5}>
+        <Paper sx={{ width: '100%', height: '90vh' }} elevation={5}>
           <Box sx={{ width: "80%", margin: 'auto' }}>
             <InputBase
               sx={{

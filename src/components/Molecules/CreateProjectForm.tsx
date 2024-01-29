@@ -171,7 +171,7 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
         <MuiSelectBox
           control={control}
           name="common.subAssignee"
-          item={VARCODETYPE}
+          item={USER.Engineer}
           selectBoxProps={{
             label: "부 담당자",
             id: "assignee-select",

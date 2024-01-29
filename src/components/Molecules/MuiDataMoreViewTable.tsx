@@ -12,23 +12,25 @@ export default function MuiDataMoreViewTable({ gridData, setSubJiraKey }: MuiDat
   const [girdSelected, setGirdSelected] = useState<GridRowType>(defaultGridData);
 
   const handleOnClickSetSubKey = () => {
-    const jiraCode = girdSelected.key;
-    setSubJiraKey((prev) => {
-      if (!prev.includes(jiraCode)) return [...prev, jiraCode]
-      else { return prev }
-    });
-    setGirdSelected(defaultGridData);
+    if (girdSelected.key !== "") {
+      const jiraCode = girdSelected.key;
+      setSubJiraKey((prev) => {
+        if (!prev.includes(jiraCode)) return [...prev, jiraCode]
+        else { return prev }
+      });
+      setGirdSelected(defaultGridData);
+    }
   }
   return (
     <Box>
-      <Box sx={{ width: "95%", marginTop: '30px', minHeight: '520px', margin: 'auto' }}>
+      <Box sx={{ width: "95%", marginTop: '25px', minHeight: '520px', margin: 'auto' }}>
         <MuiSelectedTable setSubJiraKey={setGirdSelected} gridData={gridData} />
       </Box>
       <Button variant="contained"
         color='primary'
-        sx={{ marginTop: '10px', marginLeft: "95%" }}
+        sx={{ marginTop: '10px', marginLeft: "90%" }}
         onClick={handleOnClickSetSubKey}>선택</Button>
-      <Box sx={{ width: '100%', margin: "auto", marginTop: '30px' }}>
+      <Box sx={{ width: '100%', margin: "auto" }}>
         <p>추가정보</p>
         <MuiNomalTable girdSelected={girdSelected} />
       </Box>

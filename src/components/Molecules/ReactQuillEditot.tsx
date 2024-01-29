@@ -31,24 +31,24 @@ type ReactQuillEditorType = {
 export default function ReactQuillEditor({ projectFlag, control }: ReactQuillEditorType) {
   let defaultValue: string;
   if (projectFlag === 'P') {
-    defaultValue = "<p><strong>1.고객사 :</strong></p><p><strong>2. 계약 업체 :</strong></p><p><strong>3. 프로젝트 명 : </strong></p><p><strong>4. 프로젝트 코드 :</strong></p><p><strong>5. 지원 일정 :</strong></p><p><strong>6. 담당자 :</strong></p><p><strong>7. 지원 범위 :</strong></p><ul><li><strong>가. 지원 형태 :</strong></li><li><strong>나. 연동 형태 :</strong></li><li><strong>다. 사용자 지원 환경 :</strong></li><li><strong>라. 서버 수량 :</strong></li></ul><p><strong>8. 장소 :</strong></p><p><strong>9. 영업 담당 :</strong></p><p><strong>10. 기타 :</strong></p>"
+    defaultValue = "<p>1.고객사 :</p><p>2. 계약 업체 :</p><p>3. 프로젝트 명 : </p><p>4. 프로젝트 코드 :</p><p>5. 지원 일정 :</p><p>6. 담당자 :</p><p>7. 지원 범위 :</p><p>\t\t가. 지원 형태 :</p><p>나. 연동 형태 :</p><p>다. 사용자 지원 환경 :</p><p>라. 서버 수량 :<p>8. 장소 :</p><p>9. 영업 담당 :</p><p>10. 기타 :</p>"
   } else {
-    defaultValue = "<p><strong>1.고객사 :</strong> </p><p><strong>2.계약업체 :</strong></p><p><strong>3.유지보수명 :</strong></p><p><strong>4.유지보수 코드 :</strong></p><p><strong>5.제품명 :</strong></p><p><strong>6,유지보수 요율 :</strong></p><p><strong>7.유지보수 금액 :</strong></p><p><strong>8.계약기간 :</strong></p><p><strong>9.점검일정 :</strong></p><p><strong>10. 점검 컨택:</strong></p><p><strong>11. 점검 장소:</strong></p><p><strong>12. 비고:</strong></p>"
+    defaultValue = "<p>1.고객사 :< </p><p>2.계약업체 :</p><p>3.유지보수명 :</p><p>4.유지보수 코드 :</p><p>5.제품명 :</p><p>6,유지보수 요율 :</p><p>7.유지보수 금액 :</p><p>8.계약기간 :</p><p>9.점검일정 :</p><p>10. 점검 컨택:</p><p>11. 점검 장소:</p><p>12. 비고:</p>"
   }
   const modules = useMemo(() => {
     return {
       toolbar: {
         container: [
           [{ size: ['small', false, 'large', 'huge'] }],
-          [{ align: [] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          [
-            {
-              color: [],
-            },
-            { background: [] },
-          ],
+          // [{ align: [] }],
+          // ['bold', 'italic', 'underline', 'strike'],
+          // [{ list: 'ordered' }, { list: 'bullet' }],
+          // [
+          //   {
+          //     color: [],
+          //   },
+          //   { background: [] },
+          // ],
         ],
       },
     };

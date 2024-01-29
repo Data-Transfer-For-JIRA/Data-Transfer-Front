@@ -15,7 +15,7 @@ type MuiSelectedTableType = {
 export default function MuiSelectedTable({ setSubJiraKey, gridData }: MuiSelectedTableType) {
   const [rowSelected, setRowSelected] = useState<GridRowId[]>([]);
   const handleSelectedRow = (selection: GridRowSelectionModel) => {
-    if (selection.length > 1) {
+    if (selection.length > 0) {
       const selectionSet = new Set(rowSelected);
       const result = selection.filter((s) => !selectionSet.has(s));
       setRowSelected(result);
