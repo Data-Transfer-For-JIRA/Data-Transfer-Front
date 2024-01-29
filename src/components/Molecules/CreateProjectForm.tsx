@@ -4,9 +4,8 @@ import MuiInputText from '../Atoms/MuiInputText';
 import { Control } from 'react-hook-form/dist/types';
 import { PostCreateNewProjectJson } from '../../Common/Types';
 import MuiSelectBox from '../Atoms/MuiSelectBox';
-import { USER, PRODUCT } from '../../Common/SelectValue';
+import { USER, PRODUCT, VARCODETYPE, MULTIOSSUPPORT } from '../../Common/SelectValue';
 import MuiMultiSelected from '../Atoms/MuiMultiSelected';
-import { useState } from 'react';
 
 
 type CreateProjectFormType = {
@@ -14,7 +13,6 @@ type CreateProjectFormType = {
 }
 
 export default function CreateProjectForm({ control }: CreateProjectFormType) {
-  const [productCount, setProductCodunt] = useState("1");
   return (
     <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "15px" }}>
       <FormControl style={{ width: '20%' }}>
@@ -67,38 +65,41 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
           }} />
       </FormControl>
 
-      <MuiSelectBox
-        control={control}
-        name="common.assignee"
-        item={USER.Engineer}
-        selectBoxProps={{
-          label: "담당자",
-          style: { width: '100%' },
-          size: "small",
-          inputProps: {
-            style: {
-              width: '100%',
+      <Box style={{ width: '50%' }}>
+        <MuiSelectBox
+          control={control}
+          name="common.assignee"
+          item={USER.Engineer}
+          selectBoxProps={{
+            label: "담당자",
+            style: { width: '100%' },
+            size: "small",
+            inputProps: {
+              style: {
+                width: '100%',
+              }
             }
-          }
-        }}
-      />
-
-      <MuiSelectBox
-        control={control}
-        name="common.salesManager"
-        item={USER.Sales}
-        selectBoxProps={{
-          label: "영업대표",
-          id: "assignee-select",
-          style: { width: '100%' },
-          size: "small",
-          inputProps: {
-            style: {
-              width: '100%'
+          }}
+        />
+      </Box>
+      <Box style={{ width: '50%' }}>
+        <MuiSelectBox
+          control={control}
+          name="common.salesManager"
+          item={USER.Sales}
+          selectBoxProps={{
+            label: "영업대표",
+            id: "assignee-select",
+            style: { width: '100%' },
+            size: "small",
+            inputProps: {
+              style: {
+                width: '100%'
+              }
             }
-          }
-        }}
-      />
+          }}
+        />
+      </Box>
       <FormControl style={{ width: '50%' }}>
         <MuiInputText
           control={control}
@@ -131,7 +132,6 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
           }} />
       </FormControl>
 
-
       <MuiMultiSelected
         control={control}
         name="common.productInfo1"
@@ -149,7 +149,42 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
             }
           }
         }} />
-
-    </Box >
+      <Box sx={{ width: '50%' }}>
+        <MuiSelectBox
+          control={control}
+          name="common.barcodeType"
+          item={VARCODETYPE}
+          selectBoxProps={{
+            label: "바코드 타입",
+            id: "assignee-select",
+            style: { width: '100%' },
+            size: "small",
+            inputProps: {
+              style: {
+                width: '100%'
+              }
+            }
+          }}
+        />
+      </Box>
+      <Box sx={{ width: '50%' }}>
+        <MuiSelectBox
+          control={control}
+          name="common.subAssignee"
+          item={VARCODETYPE}
+          selectBoxProps={{
+            label: "부 담당자",
+            id: "assignee-select",
+            style: { width: '100%' },
+            size: "small",
+            inputProps: {
+              style: {
+                width: '100%'
+              }
+            }
+          }}
+        />
+      </Box>
+    </Box>
   );
 }

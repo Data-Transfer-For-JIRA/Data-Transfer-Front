@@ -1,11 +1,10 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectProps } from '@mui/material';
 import { useController, FieldValues, FieldPath, UseControllerProps } from 'react-hook-form';
-import { USER } from '../../Common/SelectValue';
 
 
 interface MuiProps {
   selectBoxProps?: SelectProps
-  item: typeof USER.Sales;
+  item: string[];
 }
 
 export default function MuiSelectBox<
@@ -15,7 +14,7 @@ export default function MuiSelectBox<
 
   const { field } = useController(props);
   return (
-    <FormControl style={{ width: '50%' }}>
+    <FormControl style={{ width: '100%' }}>
       <InputLabel id="assignee-select" htmlFor="assignee-select">{selectBoxProps?.label}</InputLabel>
       <Select
         {...selectBoxProps}
