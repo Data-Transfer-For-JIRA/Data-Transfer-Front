@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { returnJsonType, PostResponseTyep, PostCreateNewProjectJson, PostResponseCreatPorjectJira, GridRowType } from './Types';
+import { returnJsonType, PostResponseTyep, PostCreateNewProjectJson, PostResponseCreatPorjectJira, GridRowType, AxiosPutLinkJiraResult } from './Types';
 import { mappingViewData } from './UtilFunction';
 
 
@@ -156,4 +156,45 @@ const UseGetAxiosSearcJiraList = async (searchKeyWord: string): Promise<GridRowT
   }
 }
 
-export { UseGetAxiosSearcJiraList, UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject, PostLogin };
+// const AxiosPutProjectLink = (mainJiraKey: string, subJiraKey: string[]): AxiosPutLinkJiraResult[] | undefined => {
+//   const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/api/platform/weblink`;
+//   let result: AxiosPutLinkJiraResult[];
+//   try {
+//     subJiraKey.map(async (item: string) => {
+//       result.push(await axios.put(URL, {
+//         mainJiraKey: mainJiraKey,
+//         subJiraKey: item
+//       }))
+//     })
+//   }
+//   catch (Error) {
+//     console.log(Error)
+//     return undefined;
+//   }
+//   return result;
+// }
+
+const AxiosPutProjectLink = async (mainJiraKey: string, subJiraKey: string[]): Promise<AxiosPutLinkJiraResult[] | undefined> => {
+  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/api/platform/weblink`;
+
+  try {
+    const result = await Promise.all(subJiraKey.map(async (item: string) => {
+      const response = await axios.put(URL, null, {
+        params: {
+          mainJiraKey: mainJiraKey,
+          subJiraKey: item
+        }
+      });
+
+      return response.data;
+    }));
+    return result;
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+}
+
+
+
+export { UseGetAxiosSearcJiraList, UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject, PostLogin, AxiosPutProjectLink };

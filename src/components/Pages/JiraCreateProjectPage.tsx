@@ -17,7 +17,7 @@ const setTabValue = (location: Location<unknown>): number | undefined => {
   else return 0;
 }
 
-export default function JiraManageMentPage() {
+export default function JiraCreateProjectPage() {
   const classes = useStyles();
   const location = useLocation();
   const tabValue = setTabValue(location);

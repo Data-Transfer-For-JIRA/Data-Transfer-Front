@@ -1,8 +1,8 @@
 import { Box, Button, CssBaseline, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UsePostCreateJiraProject } from '../../Common/Axios';
-import { ModalTypeList, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from '../../Common/Types';
+import { AxiosPutProjectLink, UsePostCreateJiraProject } from '../../Common/Axios';
+import { AxiosPutLinkJiraResult, ModalState, ModalTypeList, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from '../../Common/Types';
 import { useModalState } from '../Context/ModalContentsProvider';
 
 
@@ -16,15 +16,98 @@ export default function MuiModalPopup() {
       {state.modalType === ModalTypeList.Loading && (<LoadingModalContents />)}
       {state.modalType === ModalTypeList.CreateResultSuccess && (<FormAlertModalContents responseData={state.responseData} />)}
       {state.modalType === ModalTypeList.ErrApiCall && (<Typography variant="h5" gutterBottom>통신실패</Typography>)}
+      {state.modalType === ModalTypeList.LinkInfo && (<ShowLinkInfoCheck putLinkData={state.putLinkData} />)}
+      {state.modalType === ModalTypeList.LinkResultSuccess && (<ShowLinkProjectResult putSuccessResult={state.putSuccessResult} />)}
     </ModalBase>
   )
 }
 
+//context API 값던질때 string?
+function ShowLinkProjectResult({ putSuccessResult }: { putSuccessResult?: AxiosPutLinkJiraResult[] }) {
+  // const { putSuccessResult } = state;
 
-type ModalBaseType = {
-  children: ReactNode;
-  modalOpen: boolean;
+  if (putSuccessResult !== undefined) {
+    const { modalDispatch } = useModalState();
+    const handleConfirmLink = () => {
+      modalDispatch({ type: 'NONE_STATE' })
+    }
+    return (
+      <Box>
+        <DialogTitle id="alert-dialog-title">연관 프로젝트 연결 결과</DialogTitle>
+        <DialogContent>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">결과</TableCell>
+                  <TableCell align="left">로그</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {putSuccessResult.map((item, index) => (
+                  <TableRow>
+                    <TableCell align="left" sx={{ width: '100px' }}>{putSuccessResult[index].result === true ? "성공" : "실패"}</TableCell>
+                    <TableCell align="left">{putSuccessResult[index].resultMessage}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Button variant='contained' sx={{ margin: 3 }} onClick={handleConfirmLink} >확인</Button>
+        </DialogContent >
+      </Box>
+    )
+  }
+  else {
+    return <></>
+  }
 }
+
+function ShowLinkInfoCheck({ putLinkData }: { putLinkData?: { mainJiraKey: string, subJiraKey: string[] } }) {
+  if (putLinkData !== undefined) {
+    const { modalDispatch } = useModalState();
+    const handleConfirmLink = async () => {
+      modalDispatch({ type: 'LOADING' });
+      const result = await AxiosPutProjectLink(putLinkData.mainJiraKey, putLinkData.subJiraKey);
+      if (result !== undefined) {
+        modalDispatch({ type: 'LINK_RESULT_SUCCESS', putSuccessResult: result });
+      }
+      else {
+        modalDispatch({ type: 'ERR_API_CALL' });
+      }
+
+    }
+    return (
+      <Box>
+        <DialogTitle id="alert-dialog-title">연관 프로젝트 대상 확인</DialogTitle>
+        <DialogContent>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">지라 메인 코드</TableCell>
+                  <TableCell align="left">지라 서브 코드</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell align="left">{putLinkData.mainJiraKey}</TableCell>
+                  <TableCell align="left">{putLinkData.subJiraKey}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Button variant='contained' sx={{ margin: 3 }} onClick={handleConfirmLink} >링크 진행</Button>
+          <Button variant='contained' color='error' onClick={() => modalDispatch({ type: 'NONE_STATE' })} sx={{ margin: "5px" }}>취소</Button>
+        </DialogContent >
+
+      </Box>
+    )
+  }
+  else return <></>
+}
+
+type ModalBaseType = { children: ReactNode; modalOpen: boolean; }
 function ModalBase({ children, modalOpen }: ModalBaseType) {
   return (
     <Dialog open={modalOpen} sx={{ p: 3 }}>
@@ -32,9 +115,6 @@ function ModalBase({ children, modalOpen }: ModalBaseType) {
     </Dialog>
   )
 }
-
-
-
 function ShowCreateInfoCheck({ checkPostData }: { checkPostData?: PostCreateNewProjectJson }) {
   const { modalDispatch } = useModalState();
   const renderKeyValue = (obj: PostCreateNewProjectJson) => {

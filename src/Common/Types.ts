@@ -166,7 +166,9 @@ export const ModalTypeList = {
   Loading: 'LOADING',
   CreateResultSuccess: 'RESULT_CREATE_SUCCESS',
   CreateResultFail: 'RESULT_CREATE_FAIL',
-  ErrApiCall: 'ERR_API_CALL'
+  ErrApiCall: 'ERR_API_CALL',
+  LinkInfo: 'LINK_INFO_CHECK',
+  LinkResultSuccess: 'LINK_RESULT_SUCCESS'
 };
 // Context State
 export interface ModalState {
@@ -174,6 +176,8 @@ export interface ModalState {
   postData?: PostCreateNewProjectJson;
   responseData?: PostResponseCreatPorjectJira;
   modalType: typeof ModalTypeList[keyof typeof ModalTypeList];
+  putLinkData?: { mainJiraKey: string, subJiraKey: string[] }
+  putSuccessResult?: AxiosPutLinkJiraResult[];
 }
 
 export interface pageInfoType { totalPage: number; numberOfElement: number; }
@@ -203,4 +207,16 @@ export const defaultGridData = {
   projectAssignees: "",
   updateDate: "",
   updateIssueFlag: false
+}
+
+// export type AxiosPutLinkJiraResult = {
+//   result: boolean,
+//   mainJiraKey: string,
+//   subJiraKey: string,
+// }
+
+
+export type AxiosPutLinkJiraResult = {
+  result: boolean,
+  resultMessage: string,
 }
