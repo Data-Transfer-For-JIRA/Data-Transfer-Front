@@ -10,7 +10,7 @@ const colums: GridColDef[] = [
 
 type MuiSelectedTableType = {
   setSubJiraKey: React.Dispatch<React.SetStateAction<GridRowType>>
-  gridData: Object[]
+  gridData: GridRowType[]
 }
 export default function MuiSelectedTable({ setSubJiraKey, gridData }: MuiSelectedTableType) {
   const [rowSelected, setRowSelected] = useState<GridRowId[]>([]);

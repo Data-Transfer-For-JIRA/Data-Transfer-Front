@@ -1,8 +1,8 @@
 import { Box, Button, CssBaseline, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AxiosPutProjectLink, UsePostCreateJiraProject } from '../../Common/Axios';
-import { AxiosPutLinkJiraResult, ModalState, ModalTypeList, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from '../../Common/Types';
+import { AxiosPutLinkJiraResult, ModalTypeList, PostCreateNewProjectJson, PostResponseCreatPorjectJira } from '../../Common/Types';
 import { useModalState } from '../Context/ModalContentsProvider';
 
 
@@ -24,10 +24,8 @@ export default function MuiModalPopup() {
 
 //context API 값던질때 string?
 function ShowLinkProjectResult({ putSuccessResult }: { putSuccessResult?: AxiosPutLinkJiraResult[] }) {
-  // const { putSuccessResult } = state;
-
+  const { modalDispatch } = useModalState();
   if (putSuccessResult !== undefined) {
-    const { modalDispatch } = useModalState();
     const handleConfirmLink = () => {
       modalDispatch({ type: 'NONE_STATE' })
     }
@@ -44,7 +42,7 @@ function ShowLinkProjectResult({ putSuccessResult }: { putSuccessResult?: AxiosP
                 </TableRow>
               </TableHead>
               <TableBody>
-                {putSuccessResult.map((item, index) => (
+                {putSuccessResult.map((_item, index) => (
                   <TableRow>
                     <TableCell align="left" sx={{ width: '100px' }}>{putSuccessResult[index].result === true ? "성공" : "실패"}</TableCell>
                     <TableCell align="left">{putSuccessResult[index].resultMessage}</TableCell>
@@ -64,8 +62,8 @@ function ShowLinkProjectResult({ putSuccessResult }: { putSuccessResult?: AxiosP
 }
 
 function ShowLinkInfoCheck({ putLinkData }: { putLinkData?: { mainJiraKey: string, subJiraKey: string[] } }) {
+  const { modalDispatch } = useModalState();
   if (putLinkData !== undefined) {
-    const { modalDispatch } = useModalState();
     const handleConfirmLink = async () => {
       modalDispatch({ type: 'LOADING' });
       const result = await AxiosPutProjectLink(putLinkData.mainJiraKey, putLinkData.subJiraKey);
@@ -75,7 +73,6 @@ function ShowLinkInfoCheck({ putLinkData }: { putLinkData?: { mainJiraKey: strin
       else {
         modalDispatch({ type: 'ERR_API_CALL' });
       }
-
     }
     return (
       <Box>

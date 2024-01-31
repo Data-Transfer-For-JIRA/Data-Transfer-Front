@@ -13,7 +13,7 @@ export default function MuiDatePicker<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>(
     { datePickerProps, ...props }: MuiDatePickerType & UseControllerProps<TFieldValues, TName>
   ) {
-  const { field, fieldState: { error }, field: { onChange } } = useController(props);
+  const { field, fieldState: { error } } = useController(props);
   const formatDateToString = (date: Date | null) => {
     return date ? dayjs(date).format('YYYY-MM-DD') : null;
   };

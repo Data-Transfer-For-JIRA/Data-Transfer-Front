@@ -10,7 +10,7 @@ import ChipsStack from '../Molecules/ChipsStack';
 //Common Api
 import { returnJsonType, pageInfoType } from '../../Common/Types';
 import { urlType, PostResponseTyep } from '../../Common/Types';
-import { UseGetAxiosSearch, UseGetAxiosPageing, UsePostAxiosCreateJiraProject } from '../../Common/Axios';
+import { UsePostAxiosCreateJiraProject } from '../../Common/Axios';
 import { setUrl } from '../../Common/UtilFunction';
 
 import './GetTableAndPostData.css';
@@ -45,13 +45,13 @@ import { testJson } from '../../Common/TestGetJson';
 enum serviceList { transbefore = 'trans-before', transafter = 'trans-after', transend = 'trans-end' }
 
 type GetTableAndPostData = { serviceType: serviceList; }
-const pageSize = "27";
+// const pageSize = "27";
 
 export default function GetTableAndPostData({ serviceType }: GetTableAndPostData) {
   const urlset: urlType = setUrl(serviceType);
   const postBtnName = serviceType === 'trans-before' ? '프로젝트 요청' : '이슈 요청';
 
-  const [getViewList, setGetViewList] = useState<returnJsonType | undefined>(undefined);
+  const [getViewList] = useState<returnJsonType | undefined>(undefined);
   const [search, setSearch] = useState<string>('');
   const [pageInfo, setPageInfo] = useState<pageInfoType>({ totalPage: 0, numberOfElement: 0 });
   const [pageIndex, setPageIndex] = useState(0);
@@ -83,12 +83,12 @@ export default function GetTableAndPostData({ serviceType }: GetTableAndPostData
       if (search !== '') {
         //result = await UseGetAxiosSearch(serviceType, urlset.getSerchURL, search, pageIndex, pageSize);
         result = testJson;
-        setGetViewList(result);
+        //setGetViewList(result);
       }
       else {
         // result = await UseGetAxiosPageing(serviceType, urlset.getViewURL, pageIndex, pageSize);
         result = testJson;
-        setGetViewList(result);
+        // setGetViewList(result);
       }
       if (result !== undefined) setPageInfo({ totalPage: result.totalPages, numberOfElement: result.numberOfElements });
     }
@@ -103,11 +103,11 @@ export default function GetTableAndPostData({ serviceType }: GetTableAndPostData
         <SearchForm setPageIndex={setPageIndex} setSearch={setSearch} />
         <form onSubmit={(e) => handleTableSubmit(e)}>
           <Table getViewList={getViewList} setPostProjectList={setPostProjectList} postProjectList={postProjectList} />
-          
+
           <PageIndex pageInfo={pageInfo} pageIndex={pageIndex} setPageIndex={setPageIndex} />
 
           {serviceType !== 'trans-end' ? (<BtnSubmit style={{ marginLeft: 'auto' }}>{postBtnName}</BtnSubmit>) : undefined}
-          
+
         </form>
       </div >
       <div className='select-check-container'>

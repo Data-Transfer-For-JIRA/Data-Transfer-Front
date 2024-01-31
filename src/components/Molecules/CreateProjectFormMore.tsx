@@ -4,7 +4,6 @@ import { PostCreateNewProjectJson } from '../../Common/Types';
 import MuiSelectBox from '../Atoms/MuiSelectBox';
 import { MULTIOSSUPPORT, PRINTSUPPORTRANGE, PRODUCT } from '../../Common/SelectValue';
 import MuiMultiSelected from '../Atoms/MuiMultiSelected';
-import { Typography } from '@mui/material';
 
 
 type CreateProjectFormType = {

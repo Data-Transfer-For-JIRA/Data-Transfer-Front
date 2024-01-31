@@ -73,7 +73,7 @@ export default function AppLogin() {
   };
 
   useEffect(() => {
-    switchLogin(true);
+    switchLogin(false);
   }, [])
   return (
     <Box sx={{ height: '100vh' }}>

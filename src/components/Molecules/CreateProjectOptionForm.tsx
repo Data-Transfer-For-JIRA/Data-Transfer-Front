@@ -1,6 +1,6 @@
 import { Box, FormControl } from '@mui/material';
 import { Control } from 'react-hook-form';
-import { contractStatus, inspectionCycle, projectProgressStep, USER } from '../../Common/SelectValue';
+import { contractStatus, inspectionCycle, projectProgressStep } from '../../Common/SelectValue';
 import { PostCreateNewProjectJson } from '../../Common/Types';
 import MuiDatePicker from '../Atoms/MuiDatePicker';
 import MuiInputText from '../Atoms/MuiInputText';

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/styles';
 import { PostCreateNewProjectJson, defaultPostJson } from '../../Common/Types'
 import BtnSubmit from '../Atoms/BtnSubmit';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 // import { checkJSON } from '../../Common/UtilFunction';
 import { Box, Grid } from '@mui/material';

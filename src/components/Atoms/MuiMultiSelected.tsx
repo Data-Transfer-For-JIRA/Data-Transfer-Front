@@ -11,7 +11,7 @@ interface MuiProps {
 export default function MuiMultiSelected<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({ selectBoxProps, item, ...props }: MuiProps & UseControllerProps<TFieldValues, TName>) {
+>({ selectBoxProps, ...props }: MuiProps & UseControllerProps<TFieldValues, TName>) {
 
   const { field } = useController(props);
   const Type = PRODUCT.Type;

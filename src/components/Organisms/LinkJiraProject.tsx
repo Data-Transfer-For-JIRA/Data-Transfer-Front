@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import MuiDataMoreViewTable from '../Molecules/MuiDataMoreViewTable';
 import MuiSearchInput from '../Atoms/MuiSerchInput';
-import { AxiosPutLinkJiraResult, GridRowType } from '../../Common/Types';
+import * as Types from '../../Common/Types';
 import { useModalState } from '../Context/ModalContentsProvider';
 import MuiModalPopup from '../Molecules/MuiModalPopup';
 
@@ -17,10 +17,10 @@ export default function LinkJiraProject() {
   useEffect(() => { if (location.state !== null) { setMainJiraKey(location.state.jiraPorjectCode) } }, [location.state])
 
   const [subJiraKey, setSubJiraKey] = useState<string[]>([]);
-  const [gridData, setGridData] = useState<GridRowType[]>([]);
+  const [gridData, setGridData] = useState<Types.GridRowType[]>([]);
 
   const handleDeleteSubProject = (target: number) => {
-    setSubJiraKey((prev) => [...prev].filter((item, index) => index !== target))
+    setSubJiraKey((prev) => [...prev].filter((_item, index) => index !== target))
   }
 
   const { state, modalDispatch } = useModalState();

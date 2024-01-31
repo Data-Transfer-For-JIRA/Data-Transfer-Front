@@ -4,7 +4,7 @@ import MuiInputText from '../Atoms/MuiInputText';
 import { Control } from 'react-hook-form/dist/types';
 import { PostCreateNewProjectJson } from '../../Common/Types';
 import MuiSelectBox from '../Atoms/MuiSelectBox';
-import { USER, PRODUCT, VARCODETYPE, MULTIOSSUPPORT } from '../../Common/SelectValue';
+import { USER, PRODUCT, VARCODETYPE } from '../../Common/SelectValue';
 import MuiMultiSelected from '../Atoms/MuiMultiSelected';
 
 
