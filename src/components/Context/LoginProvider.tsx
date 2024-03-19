@@ -13,7 +13,6 @@ export function LoginProvider({ children }: LoginProviderType) {
   const [loginState, setLoginState] = useState(false);
 
   const switchLogin = (flag: boolean) => {
-    console.log('in provider');
     setLoginState(flag);
   }
   const LoginProviderValue: LoginContextType = { loginState, switchLogin };

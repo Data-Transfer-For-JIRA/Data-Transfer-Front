@@ -14,7 +14,7 @@ enum projectFlag { createProject = "P", createMaintenance = 'M' }
 const data =
 {
   result: "프로젝트 생성 성공",
-  jiraProjectCode: 'TED109',
+  jiraProjectCode: 'TED150',
   jiraProjectName: '전자문서 테스트 더미데이터 프로젝트'
 }
 

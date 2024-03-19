@@ -1,6 +1,6 @@
 import { Box, FormControl } from '@mui/material';
 import { Control } from 'react-hook-form';
-import { contractStatus, inspectionCycle, projectProgressStep } from '../../Common/SelectValue';
+import { contractStatus, inspectionCycle, inspectionMethod, projectProgressStep } from '../../Common/SelectValue';
 import { PostCreateNewProjectJson } from '../../Common/Types';
 import MuiDatePicker from '../Atoms/MuiDatePicker';
 import MuiInputText from '../Atoms/MuiInputText';
@@ -120,7 +120,7 @@ function MaintainceOptionForm({ control }: { control: Control<PostCreateNewProje
         <MuiSelectBox
           control={control}
           name="selected.inspectionMethod"
-          item={contractStatus}
+          item={inspectionMethod}
           selectBoxProps={{
             label: "점검 방법",
             style: { width: '100%' },

@@ -4,8 +4,8 @@ import { GridRowType } from '../../Common/Types';
 
 const colums: GridColDef[] = [
   { field: 'key', headerName: '지라코드', width: 100, sortable: false, },
-  { field: 'jiraProjectName', headerName: '프로젝트이름', width: 900, sortable: false, },
-  { field: 'projectAssignees', headerName: '담당자', width: 100, sortable: false, },
+  { field: 'jiraProjectName', headerName: '프로젝트이름', sortable: false, flex: 1 },
+  { field: 'projectAssignees', headerName: '담당자', width: 150, sortable: false, },
 ]
 
 type MuiSelectedTableType = {

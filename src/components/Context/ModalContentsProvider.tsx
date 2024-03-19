@@ -39,7 +39,6 @@ const ModalContentsReducer = (state: ModalState, action: ModalAction) => {
     case 'LINK_INFO_CHECK': //프로젝트 링크 생성이전 체크
       return { isOpen: true, modalType: action.type, postData: undefined, responseData: undefined, putLinkData: action.putLinkData, putSuccessResult: undefined };
     case 'LINK_RESULT_SUCCESS':
-      console.log("😀😀", action);
       return { isOpen: true, modalType: action.type, postData: undefined, responseData: undefined, putLinkData: undefined, putSuccessResult: action.putSuccessResult };
     default:
       return state;

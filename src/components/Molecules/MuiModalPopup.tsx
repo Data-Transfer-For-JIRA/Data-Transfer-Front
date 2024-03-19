@@ -24,10 +24,12 @@ export default function MuiModalPopup() {
 
 //context API 값던질때 string?
 function ShowLinkProjectResult({ putSuccessResult }: { putSuccessResult?: AxiosPutLinkJiraResult[] }) {
+  const navigate = useNavigate();
   const { modalDispatch } = useModalState();
   if (putSuccessResult !== undefined) {
     const handleConfirmLink = () => {
       modalDispatch({ type: 'NONE_STATE' })
+      navigate("/");
     }
     return (
       <Box>
@@ -43,7 +45,7 @@ function ShowLinkProjectResult({ putSuccessResult }: { putSuccessResult?: AxiosP
               </TableHead>
               <TableBody>
                 {putSuccessResult.map((_item, index) => (
-                  <TableRow>
+                  <TableRow key={index}>
                     <TableCell align="left" sx={{ width: '100px' }}>{putSuccessResult[index].result === true ? "성공" : "실패"}</TableCell>
                     <TableCell align="left">{putSuccessResult[index].resultMessage}</TableCell>
                   </TableRow>
@@ -89,7 +91,7 @@ function ShowLinkInfoCheck({ putLinkData }: { putLinkData?: { mainJiraKey: strin
               <TableBody>
                 <TableRow>
                   <TableCell align="left">{putLinkData.mainJiraKey}</TableCell>
-                  <TableCell align="left">{putLinkData.subJiraKey}</TableCell>
+                  <TableCell align="left">{putLinkData.subJiraKey.join(' , ')}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>

@@ -10,13 +10,10 @@ const UseGetAxiosPageing = async (serviceType: string, URL: string, startIndex: 
   : Promise<returnJsonType | undefined> => {
   const indexingParam = `?pageIndex=${startIndex}&&pageSize=${pageSize}`;
   const getUrl = URL + indexingParam;
-  console.log(getUrl);
   try {
     const reponse = await axios.get(getUrl);
     if (reponse.data.content.length === 0) throw new Error('API호출이 정상적이지 않습니다.');
-    console.log(reponse.data);
     if (serviceType === 'trans-after') reponse.data = mappingViewData(reponse.data);
-    //console.log(reponse.data);
     return reponse.data;
   }
   catch (Error) {
@@ -29,7 +26,6 @@ const UseGetAxiosSearch = async (serviceType: string, URL: string, searchKeyWord
   : Promise<returnJsonType | undefined> => {
   const indexingParam = `?searchKeyWord=${searchKeyWord}&pageIndex=${startIndex}&pageSize=${pageSize}`;
   const getUrl = URL + indexingParam;
-  console.log(getUrl);
   try {
     const reponse = await axios.get(getUrl);
     if (serviceType === 'trans-after') reponse.data = mappingViewData(reponse.data);
@@ -38,7 +34,6 @@ const UseGetAxiosSearch = async (serviceType: string, URL: string, searchKeyWord
       throw new Error('검색결과가 없습니다.');
     }
     if (serviceType === 'trans - after') reponse.data = mappingViewData(reponse.data);
-    console.log(reponse.data);
     return reponse.data;
   }
   catch (Error) {
@@ -55,10 +50,8 @@ const UsePostAxiosCreateJiraProject = async (postProjectList: string[], postUrl:
   const timeout = postProjectList.length * 20000;
   if (postProjectList.length > 0) {
     const paramData = { projectCode: postProjectList };
-    console.log(postUrl);
     try {
       const { data } = await axios.post(postUrl, paramData, { timeout });
-      console.log(data);
       return data;
     }
     catch (Error) {
@@ -145,7 +138,7 @@ const PostLogin = async (userLoginInfo: { id: string, pwd: string; }):
 }
 
 const UseGetAxiosSearcJiraList = async (searchKeyWord: string): Promise<GridRowType[] | undefined> => {
-  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/api/project/search?searchKeyword=${searchKeyWord}`;
+  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/jira/project/search?searchKeyword=${searchKeyWord}`;
   try {
     const { data } = await axios(URL);
     return data;
@@ -156,43 +149,23 @@ const UseGetAxiosSearcJiraList = async (searchKeyWord: string): Promise<GridRowT
   }
 }
 
-// const AxiosPutProjectLink = (mainJiraKey: string, subJiraKey: string[]): AxiosPutLinkJiraResult[] | undefined => {
-//   const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/api/platform/weblink`;
-//   let result: AxiosPutLinkJiraResult[];
-//   try {
-//     subJiraKey.map(async (item: string) => {
-//       result.push(await axios.put(URL, {
-//         mainJiraKey: mainJiraKey,
-//         subJiraKey: item
-//       }))
-//     })
-//   }
-//   catch (Error) {
-//     console.log(Error)
-//     return undefined;
-//   }
-//   return result;
-// }
-
-const AxiosPutProjectLink = async (mainJiraKey: string, subJiraKey: string[]): Promise<AxiosPutLinkJiraResult[] | undefined> => {
+const AxiosPutProjectLink = async (mainJiraKey: string, subJiraKeyList: string[])
+  : Promise<AxiosPutLinkJiraResult[] | undefined> => {
   const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/api/platform/weblink`;
-
   try {
-    const result = await Promise.all(subJiraKey.map(async (item: string) => {
-      const response = await axios.put(URL, null, {
-        params: {
-          mainJiraKey: mainJiraKey,
-          subJiraKey: item
-        }
-      });
-
-      return response.data;
-    }));
-    return result;
-  } catch (error) {
-    console.error(error);
+    const response = await axios.put(URL, null, {
+      params: {
+        mainJiraKey: mainJiraKey,
+        subJiraKeyList: subJiraKeyList.join(','),
+      }
+    })
+    return response.data;
+  }
+  catch (error) {
+    console.log(error);
     return undefined;
   }
+
 }
 
 

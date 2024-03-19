@@ -101,6 +101,7 @@ export interface PostCreateNewProjectJson {
     printerSupportRange: string;
     etc: string;
     description: string;
+    allocationFlag: boolean;
   },
   selected: {
     //프로젝트
@@ -137,7 +138,8 @@ export const defaultPostJson: PostCreateNewProjectJson = {
     multiOsSupport: "",
     printerSupportRange: "",
     etc: "",
-    description: ""
+    description: "",
+    allocationFlag: false
   },
   selected: {
     //프로젝트
@@ -217,6 +219,8 @@ export const defaultGridData = {
 
 
 export type AxiosPutLinkJiraResult = {
+  errorMessages: string[],
   result: boolean,
   resultMessage: string,
+  value: string
 }

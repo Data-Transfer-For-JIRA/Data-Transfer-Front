@@ -67,7 +67,6 @@ export default function AppLogin() {
       setOpen(true);
     }
     else if (resPonseLoginState === true) {
-      console.log('in');
       switchLogin(true);
     }
   };
