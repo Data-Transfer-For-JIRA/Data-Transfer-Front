@@ -12,6 +12,7 @@ import ReactQuillEditor from '../Molecules/ReactQuillEditot';
 import Typography from '@mui/material/Typography';
 import CreateProjectFormMore from '../Molecules/CreateProjectFormMore';
 import CreateProjectOptionForm from '../Molecules/CreateProjectOptionForm';
+import MuiCehckBox from '../Atoms/MuiCheckBox';
 
 type CreateProjectFormType = {
   projectFlag: string;
@@ -51,6 +52,10 @@ export default function CreateJiraProject({ projectFlag }: CreateProjectFormType
         <Grid item xs={8}>
           <Box className={classes.DataFieldBox}>
             <Typography variant="h5" gutterBottom>계약정보 입력</Typography>
+            <MuiCehckBox
+              control={control}
+              name="common.allocationFlag"
+            />
             <ReactQuillEditor projectFlag={projectFlag} control={control} />
             <Typography variant="h5" gutterBottom style={{ marginTop: '20px' }}>추가 데이터 입력</Typography>
             <CreateProjectFormMore control={control} />
