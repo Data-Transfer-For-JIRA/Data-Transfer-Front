@@ -87,6 +87,7 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
           control={control}
           name="common.salesManager"
           item={USER.Sales}
+          rules={{ required: "영업대표는 필수 입력 값입니다." }}
           selectBoxProps={{
             label: "영업대표",
             id: "assignee-select",

@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select, SelectProps } from '@mui/material';
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectProps } from '@mui/material';
 import { useController, FieldValues, FieldPath, UseControllerProps } from 'react-hook-form';
 
 
@@ -12,13 +12,14 @@ export default function MuiSelectBox<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({ selectBoxProps, item, ...props }: MuiProps & UseControllerProps<TFieldValues, TName>) {
 
-  const { field } = useController(props);
+  const { field, fieldState: { error } } = useController(props);
   return (
     <FormControl style={{ width: '100%' }}>
-      <InputLabel id="assignee-select" htmlFor="assignee-select">{selectBoxProps?.label}</InputLabel>
+      <InputLabel id="assignee-select" htmlFor="assignee-select" error={!!error}>{selectBoxProps?.label}</InputLabel>
       <Select
         {...selectBoxProps}
         {...field}
+        error={!!error}
       >
         {
           item.map((value) => (
@@ -26,6 +27,7 @@ export default function MuiSelectBox<
           ))
         }
       </Select>
+      {!!error && (<FormHelperText sx={{ color: '#f44336' }}>{error.message}</FormHelperText>)}
     </FormControl>
   );
 }
