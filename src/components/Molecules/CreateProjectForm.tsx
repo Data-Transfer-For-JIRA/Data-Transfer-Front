@@ -10,9 +10,10 @@ import MuiMultiSelected from '../Atoms/MuiMultiSelected';
 
 type CreateProjectFormType = {
   control: Control<PostCreateNewProjectJson>;
+  projectFlag: string;
 }
-
-export default function CreateProjectForm({ control }: CreateProjectFormType) {
+//TODO :  default value 설정을 해서 수정페이지에서 재활용이 가능한지 테스트. 
+export default function CreateProjectForm({ control, projectFlag }: CreateProjectFormType) {
   return (
     <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "15px" }}>
       <FormControl style={{ width: '20%' }}>
@@ -86,7 +87,7 @@ export default function CreateProjectForm({ control }: CreateProjectFormType) {
         <MuiSelectBox
           control={control}
           name="common.salesManager"
-          item={USER.Sales}
+          item={projectFlag === 'P' ? USER.Sales_P : USER.Sales_M}
           rules={{ required: "영업대표는 필수 입력 값입니다." }}
           selectBoxProps={{
             label: "영업대표",
