@@ -15,6 +15,7 @@ export default function MuiSearchInput({ setGridData }: MuiSearchInputType) {
     const result = await UseGetAxiosSearcJiraList(searhKeyword);
     if (result !== undefined) { setGridData(result); }
   }
+
   const handleChangeKeyword = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setSearchKeyword(event.target.value);
   }

@@ -44,7 +44,7 @@ export default function CreateJiraProject({ projectFlag }: CreateProjectFormType
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <Box className={classes.DataFieldBox}>
-            <Typography variant="h5" gutterBottom>프로젝트 정보 데이터 입력</Typography>
+            <Typography variant="h5" gutterBottom>프로젝트 정보 입력</Typography>
             <CreateProjectForm projectFlag={projectFlag} control={control} />
             <CreateProjectOptionForm projectFlag={projectFlag} control={control} />
           </Box>

@@ -1,4 +1,5 @@
-import { Box, Button, CssBaseline, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
+import { Box, Button, CssBaseline, Dialog, DialogContent, DialogTitle, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AxiosPutProjectLink, UsePostCreateJiraProject } from '../../Common/Axios';
@@ -207,16 +208,29 @@ function LoadingModalContents() {
 
 export function FormAlertModalContents({ responseData }: { responseData?: PostResponseCreatPorjectJira }) {
   const navigator = useNavigate();
+  const { modalDispatch } = useModalState();
 
   const handleBtnMoveLingkpage = (jiraProjectCode: string) => {
     navigator('/create-weblink', { state: { jiraPorjectCode: jiraProjectCode } })
   }
+  const handleBtnModalClose = () =>{
+    modalDispatch({ type: 'NONE_STATE' })
+    navigator("/create-jira-project");
+  }
+
   if (responseData !== undefined) {
     const jiraProjectURL = `https://markany.atlassian.net/jira/core/projects/${responseData.jiraProjectCode}/board`;
     return (
       <Box>
         <DialogTitle id="alert-dialog-title">
           {responseData.result}
+          <IconButton
+          aria-label="modal-close"
+          onClick={handleBtnModalClose}
+          sx={{float : 'right'}}    
+          >
+            <CloseIcon />
+          </IconButton>
         </DialogTitle>
         <DialogContent>
           <TableContainer component={Paper}>
