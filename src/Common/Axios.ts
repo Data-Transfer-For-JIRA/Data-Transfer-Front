@@ -103,7 +103,7 @@ const UsePostAxiosCreateJiraProject = async (postProjectList: string[], postUrl:
  */
 const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
   Promise<PostResponseCreatPorjectJira | undefined> => {
-  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/api/platform/service`;
+  const URL = `${import.meta.env.VITE_API_ADDRESS}/api/platform/service`;
   try {
     const response = await axios({
       url: URL,
@@ -122,7 +122,7 @@ const UsePostCreateJiraProject = async (postJson: PostCreateNewProjectJson):
 
 const PostLogin = async (userLoginInfo: { id: string, pwd: string; }):
   Promise<boolean | undefined> => {
-  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/login/temp`;
+  const URL = `${import.meta.env.VITE_API_ADDRESS}/login/temp`;
   try {
     const { data } = await axios({
       url: URL,
@@ -138,7 +138,7 @@ const PostLogin = async (userLoginInfo: { id: string, pwd: string; }):
 }
 
 const UseGetAxiosSearcJiraList = async (searchKeyWord: string): Promise<GridRowType[] | undefined> => {
-  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/jira/project/search?searchKeyword=${searchKeyWord}`;
+  const URL = `${import.meta.env.VITE_API_ADDRESS}/jira/project/search?searchKeyword=${searchKeyWord}`;
   try {
     const { data } = await axios(URL);
     return data;
@@ -151,7 +151,7 @@ const UseGetAxiosSearcJiraList = async (searchKeyWord: string): Promise<GridRowT
 
 const AxiosPutProjectLink = async (mainJiraKey: string, subJiraKeyList: string[])
   : Promise<AxiosPutLinkJiraResult[] | undefined> => {
-  const URL = `${import.meta.env.VITE_API_ADDRESS}:8888/api/platform/weblink`;
+  const URL = `${import.meta.env.VITE_API_ADDRESS}/api/platform/weblink`;
   try {
     const response = await axios.put(URL, null, {
       params: {

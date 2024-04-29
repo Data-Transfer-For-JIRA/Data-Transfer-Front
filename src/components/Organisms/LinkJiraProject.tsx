@@ -9,6 +9,7 @@ import MuiSearchInput from '../Atoms/MuiSerchInput';
 import * as Types from '../../Common/Types';
 import { useModalState } from '../Context/ModalContentsProvider';
 import MuiModalPopup from '../Molecules/MuiModalPopup';
+import SearchMainProjectKey from '../Molecules/SearchMainProjectKey';
 
 
 export default function LinkJiraProject() {
@@ -36,6 +37,9 @@ export default function LinkJiraProject() {
     }
     modalDispatch({ type: 'LINK_INFO_CHECK', putLinkData: { mainJiraKey: mainJiraKey, subJiraKey: subJiraKey } })
   }
+  const handleJiraMainKey = (searchKeyword : string)=>{
+    setMainJiraKey(searchKeyword);
+  }
   return (
     <Box>
       <Grid container spacing={1} marginLeft={"px"}>
@@ -45,19 +49,11 @@ export default function LinkJiraProject() {
             <MuiDataMoreViewTable gridData={gridData} setSubJiraKey={setSubJiraKey} />
           </Paper>
         </Grid>
+        {/* 신규 프로젝트 검색 컴포넌트 */}
         <Grid item xs={3}>
           <Paper sx={{ width: '100%', height: '90vh' }} elevation={5}>
-            <Box sx={{ width: "80%", margin: 'auto' }}>
-              <InputBase
-                sx={{
-                  flex: 1, width: '80%', border: '2px solid #ccc',
-                  borderRadius: '5px',
-                }}
-                placeholder=" 신규 프로젝트 검색"
-              />
-              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                <SearchIcon />
-              </IconButton>
+            <Box sx={{ width: "80%", margin: 'auto', paddingTop : '20px' }}>
+              <SearchMainProjectKey handleJiraMainKey={handleJiraMainKey}/>
               <p style={{ marginLeft: "2" }}>신규 프로젝트: {mainJiraKey === null ? "" : mainJiraKey}</p>
             </Box>
             <Box sx={{ marginTop: '30px' }}>

@@ -3,6 +3,7 @@ import { FormAlertModalContents } from '../components/Molecules/MuiModalPopup';
 import CreateJiraProject from '../components/Organisms/CreateJiraProject';
 import GetTableAndPostData from '../components/Organisms/GetTableAndPostData';
 import InfoText from '../components/Organisms/InfoText';
+import DeleteProject from '../components/Pages/DeleteProject';
 import ErrorPage from '../components/Pages/ErrorPage';
 import JiraCreateProjectPage from '../components/Pages/JiraCreateProjectPage';
 import JiraLinkProjectPage from '../components/Pages/JiraLinkProjectPage';
@@ -37,7 +38,7 @@ export const Router = [
         ]
       },
       { path: "/create-weblink", element: <JiraLinkProjectPage /> },
-      { path: "check-backup", element: <GetTableAndPostData serviceType={serviceList.transend} /> },
+      { path: "/check-backup", element: <DeleteProject/> },
     ],
   },
   {
