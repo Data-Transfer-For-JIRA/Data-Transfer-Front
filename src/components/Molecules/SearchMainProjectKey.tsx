@@ -11,7 +11,7 @@ export default function SearchMainProjectKey({handleJiraMainKey}:SearchMainProje
   const handleOnChangedInput = (event :React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement> )=>{
     setSearchKeyword(event.target.value);
   }
-  const getMatchList = async (searhKeyword:string)=>{
+  const getMatchList = async ()=>{
     const result = await UseGetAxiosSearcJiraList(searchKeyword);
     if(result !==undefined&&result[0].key===searchKeyword){
       handleJiraMainKey(searchKeyword);
@@ -19,14 +19,14 @@ export default function SearchMainProjectKey({handleJiraMainKey}:SearchMainProje
   else {
     alert('검색어는 Jira 프로젝트 코드만 가능합니다.')
   }
-}
+ }
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement> )=>{
     if (event.key === 'Enter') {
-      getMatchList(searchKeyword);
+      getMatchList();
     }
   }
   const handleSearchBtn = ()=>{
-    getMatchList(searchKeyword);
+    getMatchList();
   }
 
   return (

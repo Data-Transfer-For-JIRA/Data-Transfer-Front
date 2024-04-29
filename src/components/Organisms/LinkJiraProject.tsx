@@ -1,8 +1,7 @@
-import { Grid, IconButton, InputBase, Paper, Button, Table, TableHead, TableRow, TableCell, TableBody, Typography } from '@mui/material';
+import { Grid, IconButton, Paper, Button, Table, TableHead, TableRow, TableCell, TableBody, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'
-import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import MuiDataMoreViewTable from '../Molecules/MuiDataMoreViewTable';
 import MuiSearchInput from '../Atoms/MuiSerchInput';

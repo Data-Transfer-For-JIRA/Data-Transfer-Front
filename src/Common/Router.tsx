@@ -38,7 +38,7 @@ export const Router = [
         ]
       },
       { path: "/create-weblink", element: <JiraLinkProjectPage /> },
-      { path: "/check-backup", element: <DeleteProject/> },
+      { path: "/delete-project", element: <DeleteProject/> },
     ],
   },
   {
