@@ -36,6 +36,10 @@ export default function MuiSelectedTable({ setSubJiraKey, gridData }: MuiSelecte
           paginationModel: { page: 0, pageSize: 8 },
         },
       }}
+      localeText={{
+        noRowsLabel: '검색 결과가 없습니다.'
+      }}
+      pageSizeOptions={[8, 10, 20]}
       rowSelectionModel={rowSelected}
       checkboxSelection
       hideFooterSelectedRowCount
@@ -45,6 +49,9 @@ export default function MuiSelectedTable({ setSubJiraKey, gridData }: MuiSelecte
       sx={{
         "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
           display: "none"
+        },
+        ".MuiDataGrid-overlayWrapper" : {
+          minHeight : '400px'
         }
       }}
     />

@@ -4,9 +4,8 @@ import SearchIcon from '@mui/icons-material/Search';
 
 /**
  * 검색어 입력 컴포넌트
- *  
- * 1. 검색결과를 저장할 배열형태의 State
- * 2. 검색에 사용될 Axios 함수
+ * @handleSearchResult : 검색결과를 저장할 배열형태의 State
+ * @requestSearchApi : 검색에 사용될 Axios 함수
  */
 type InputType<T> = {
   handleSearchResult : (searchResult : T) => void;
@@ -19,7 +18,6 @@ export default function MuiControlledTextInput<T> ({handleSearchResult,requestSe
   }
   const callSearchApi = async()=>{
     const result = await requestSearchApi(searchKeyWord);
-    console.log(result);
     if(result !==undefined) {
       handleSearchResult(result); 
     }

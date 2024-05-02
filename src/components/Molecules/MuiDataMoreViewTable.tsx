@@ -31,7 +31,7 @@ export default function MuiDataMoreViewTable({ gridData, setSubJiraKey }: MuiDat
         sx={{ marginTop: '10px', marginLeft: "90%" }}
         onClick={handleOnClickSetSubKey}>선택</Button>
       <Box sx={{ width: '100%', margin: "auto" }}>
-        <p>추가정보</p>
+        <p style={{paddingLeft: '20px'}}>추가정보</p>
         <MuiNomalTable girdSelected={girdSelected} />
       </Box>
     </Box>

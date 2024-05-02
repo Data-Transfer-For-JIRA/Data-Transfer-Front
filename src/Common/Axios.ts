@@ -141,6 +141,7 @@ const UseGetAxiosSearcJiraList = async (searchKeyWord: string): Promise<GridRowT
   const URL = `${import.meta.env.VITE_API_ADDRESS}/jira/project/search?searchKeyword=${searchKeyWord}`;
   try {
     const { data } = await axios(URL);
+    console.log(data);
     return data;
   }
   catch (Error) {

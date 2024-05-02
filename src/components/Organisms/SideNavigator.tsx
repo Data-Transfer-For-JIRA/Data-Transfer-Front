@@ -11,6 +11,7 @@ export default function SideNavigator() {
   const seconditem = [
     { value: "신규 프로젝트 생성요청", link: "/create-jira-project" },
     { value: "지라 프로젝트 연결", link: "/create-weblink" },
+    { value: "지라 프로젝트 삭제", link: "/delete-project" },
   ]
   return (
     <div className='side-navigator'>
