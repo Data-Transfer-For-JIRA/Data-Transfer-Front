@@ -23,7 +23,7 @@ export default function MuiDataMoreViewTable({ gridData, setSubJiraKey }: MuiDat
   }
   return (
     <Box>
-      <Box sx={{ width: "95%", marginTop: '25px', minHeight: '520px', margin: 'auto' }}>
+      <Box sx={{ width: "95%", marginTop: '25px', minHeight: '520px', margin: 'auto', maxHeight: '65vh', overflow: 'auto'}}>
         <MuiSelectedTable setSubJiraKey={setGirdSelected} gridData={gridData} />
       </Box>
       <Button variant="contained"

@@ -29,31 +29,37 @@ export default function MuiSelectedTable({ setSubJiraKey, gridData }: MuiSelecte
 
   return (
     <DataGrid
-      rows={gridData}
-      columns={colums}
-      initialState={{
-        pagination: {
-          paginationModel: { page: 0, pageSize: 8 },
-        },
-      }}
-      localeText={{
-        noRowsLabel: '검색 결과가 없습니다.'
-      }}
-      pageSizeOptions={[8, 10, 20]}
-      rowSelectionModel={rowSelected}
-      checkboxSelection
-      hideFooterSelectedRowCount
-      onRowSelectionModelChange={(selection) => handleSelectedRow(selection)}
-      onCellClick={(GridCellParams) => { handleOnClickRow(GridCellParams) }}
-      getRowId={(obj) => obj.id}
-      sx={{
-        "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
-          display: "none"
-        },
-        ".MuiDataGrid-overlayWrapper" : {
-          minHeight : '400px'
-        }
-      }}
-    />
+  rows={gridData}
+  columns={colums}
+  autoHeight
+  localeText={{
+    noRowsLabel: '검색 결과가 없습니다.'
+  }}
+  rowSelectionModel={rowSelected}
+  checkboxSelection
+  hideFooterSelectedRowCount
+  onRowSelectionModelChange={(selection) => handleSelectedRow(selection)}
+  onCellClick={(GridCellParams) => { handleOnClickRow(GridCellParams) }}
+  getRowId={(obj) => obj.id}
+  sx={{
+    "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
+      display: "none"
+    },
+    ".MuiDataGrid-overlayWrapper": {
+      minHeight: '400px'
+    },
+    ".MuiDataGrid-root .MuiDataGrid-colCellWrapper": {
+      position: "sticky",
+      top: 0,
+      zIndex: 1
+    },
+    ".MuiDataGrid-root .MuiDataGrid-footer": {
+      position: "sticky",
+      bottom: 0,
+      zIndex: 1
+    }
+  }}
+/>
+
   )
 }

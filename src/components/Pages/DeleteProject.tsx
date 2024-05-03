@@ -9,7 +9,7 @@ import SecondaryTextList from '../Atoms/SecondaryTextList';
 export default function DeleteProject(){
   const [searchResult, setSearchResult] = useState<GridRowType[]>([]);
   const [targetProject, setTargetProject] = useState<string[]>([]);
-  const handleTargetProject = (targetList)=>{
+  const handleTargetProject = (targetList:GridRowType[])=>{
     setSearchResult(targetList);
   }
   const handleTargetDelete = ()=>{
@@ -17,15 +17,16 @@ export default function DeleteProject(){
   }
 
   useEffect(()=>{
-    if(searchResult.length <1){
-      async function getDefaultsApi(){
-        const result = await UseGetAxiosSearcJiraList("");
-        return result;
+    const requestDefaultApi = async ()=>{
+      const result = await UseGetAxiosSearcJiraList("");
+      if(result){
+        handleTargetProject(result);
       }
-      const result = getDefaultsApi();
-      if(result!==undefined) handleTargetProject(result);
     }
-  },[targetProject,searchResult]);
+    if(searchResult.length <1){
+      requestDefaultApi();
+    } 
+  },[]);
 
   return (
     <Box sx={{ height : '100%' }}>
