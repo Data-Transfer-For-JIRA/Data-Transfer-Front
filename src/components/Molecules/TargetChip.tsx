@@ -6,13 +6,14 @@ import SecondaryTextList from '../Atoms/SecondaryTextList';
 type TargetChipType = {
   itemList : SelectedProjectType[]
   handleTargetDelete : (deleteCode : string)=>void
+  requestApiFunction : ()=>void
 }
 export default function TargetChip({itemList,handleTargetDelete}:TargetChipType){
   useEffect(()=>{
   },[])
   return (
     <Box sx={{height :'100%' ,padding :'5px',paddingTop:'30px' , display : 'flex'}}>
-      <Box sx={{height :'100%'}} style={{ overflowY:'scroll'}}>
+      <Box sx={{width : '100%', height :'100%'}} style={{ overflowY:'scroll'}}>
       <Button
         variant="contained"
         color='primary'

@@ -19,7 +19,6 @@ const setSelectProjectList = (targetProject:string[], searchResult:GridRowType[]
       });
     }
   })
-  console.log(tempArray);
   return tempArray;
 }
 
@@ -32,8 +31,19 @@ export default function DeleteProject(){
     setSearchResult(targetList);
   }
   const handleTargetDelete = (deleteCode : string)=>{
-    console.log(`${deleteCode} onClick!`);
+    setItemList((prev)=>{
+      const temp = prev.filter((item)=>{
+        return item.jiraProjectKey !== deleteCode
+      })
+      return temp;
+    });
+    setTargetProject((prev)=>{
+      return prev.filter((item)=>{
+        return item !== deleteCode
+      })
+  });
   }
+  
   useEffect(()=>{
     const requestDefaultApi = async ()=>{
       const result = await UseGetAxiosSearcJiraList("");
@@ -43,7 +53,14 @@ export default function DeleteProject(){
     }
     if(searchResult.length <1){requestDefaultApi();}
 
-    setItemList(setSelectProjectList(targetProject, searchResult))
+    //DataGrid에서 데이터 선택시 Chip에 선택된 데이터 쌓는 로직
+    setItemList((prev) => {
+      const uniqueProjects = new Set(prev.map(item => item.jiraProjectKey));
+      const filteredProjects = setSelectProjectList(targetProject, searchResult)
+        .filter(item => !uniqueProjects.has(item.jiraProjectKey));
+      return [...prev, ...filteredProjects];
+  });
+  console.log(targetProject);
   },[targetProject]);
 
   return (
