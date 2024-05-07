@@ -224,3 +224,8 @@ export type AxiosPutLinkJiraResult = {
   resultMessage: string,
   value: string
 }
+
+export type SelectedProjectType = {
+  jiraProjectKey:string;
+  jiraProjectName:string;
+}

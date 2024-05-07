@@ -166,7 +166,6 @@ const AxiosPutProjectLink = async (mainJiraKey: string, subJiraKeyList: string[]
     console.log(error);
     return undefined;
   }
-
 }
 
 
