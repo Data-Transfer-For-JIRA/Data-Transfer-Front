@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Grid,Box, Paper } from '@mui/material';
 import MuiControlledTextInput from '../Atoms/MuiControlledTextInput';
-import { UseGetAxiosSearcJiraList } from '../../Common/Axios';
+import { UseDeleteAxiosProject, UseGetAxiosSearcJiraList } from '../../Common/Axios';
 import { GridRowType, SelectedProjectType } from '../../Common/Types';
 import MuiDataMoreViewTable from '../Molecules/MuiDataMoreViewTable';
 import TargetChip from '../Molecules/TargetChip';
@@ -72,7 +72,7 @@ export default function DeleteProject(){
             <MuiDataMoreViewTable gridData={searchResult} setSubJiraKey={setTargetProject}/>      
         </Grid>
         <Grid item xs={3}>
-          <TargetChip itemList={itemList} handleTargetDelete={handleTargetDelete}/>
+          <TargetChip itemList={itemList} handleTargetDelete={handleTargetDelete} requestApiFunction={UseDeleteAxiosProject}/>
         </Grid> 
       </Grid>
       </Paper>

@@ -170,8 +170,11 @@ const AxiosPutProjectLink = async (mainJiraKey: string, subJiraKeyList: string[]
 
 const UseDeleteAxiosProject = async (projectList : string[])=>{
   const URL = `${import.meta.env.VITE_API_ADDRESS}/jira/project/delete`;
+  try{
+
+  }
 }
 
 
 
-export { UseGetAxiosSearcJiraList, UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject, PostLogin, AxiosPutProjectLink };
+export { UseGetAxiosSearcJiraList, UseGetAxiosPageing, UseGetAxiosSearch, UsePostAxiosCreateJiraProject, UsePostCreateJiraProject, PostLogin, AxiosPutProjectLink, UseDeleteAxiosProject };

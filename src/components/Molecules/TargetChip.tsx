@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import { SelectedProjectType } from '../../Common/Types';
 import SecondaryTextList from '../Atoms/SecondaryTextList';
 
-type TargetChipType = {
+type TargetChipType<T> = {
   itemList : SelectedProjectType[]
   handleTargetDelete : (deleteCode : string)=>void
-  requestApiFunction : ()=>void
+  requestApiFunction : (deleteCode:string[])=>Promise<T>
 }
-export default function TargetChip({itemList,handleTargetDelete}:TargetChipType){
+export default function TargetChip<T>({itemList,handleTargetDelete, requestApiFunction}:TargetChipType<T> ){
   useEffect(()=>{
   },[])
   return (
@@ -17,6 +17,7 @@ export default function TargetChip({itemList,handleTargetDelete}:TargetChipType)
       <Button
         variant="contained"
         color='primary'
+        onClick={()=>requestApiFunction}
         sx={{float : 'right'}}
       >삭제
       </Button >
